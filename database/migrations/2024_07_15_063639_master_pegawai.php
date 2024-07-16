@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pegawai', function (Blueprint $table) {
+        Schema::create('master_pegawai', function (Blueprint $table) {
             $table->id('id_pegawai'); // Kolom ID Pegawai
             $table->unsignedBigInteger('id_atasan'); // Kolom ID Atasan
             $table->string('NIP')->unique(); // Kolom NIP
             $table->string('Nama'); // Kolom Nama
-            $table->string('Jabatan'); // Kolom Jabatan
+            $table->string('Pangkat'); // Kolom Pangkat
             $table->string('Username')->unique(); // Kolom Username
             $table->string('Password'); // Kolom Password
             $table->timestamps(); // Kolom timestamps untuk created_at dan updated_at

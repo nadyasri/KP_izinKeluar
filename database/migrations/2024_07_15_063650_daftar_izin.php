@@ -25,7 +25,7 @@ return new class extends Migration
 
             // Jika ingin menambahkan foreign key untuk id_atasan dan id_pegawai
             $table->foreign('id_atasan')->references('id_atasan')->on('master_atasan')->onDelete('cascade');
-            $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawai')->onDelete('cascade');
+            $table->foreign('id_pegawai')->references('id_pegawai')->on('master_pegawai')->onDelete('cascade');
         });
     }
 
