@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdmStatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SesiController;
 
@@ -15,3 +16,5 @@ use App\Http\Controllers\SesiController;
 */
 
 Route::get('/',[SesiController::class, 'indexSesi']);
+
+Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
