@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SesiController;
 
@@ -15,3 +16,6 @@ use App\Http\Controllers\SesiController;
 */
 
 Route::get('/',[SesiController::class, 'indexSesi']);
+Route::post('/login',[SesiController::class, 'login']);
+
+Route::get('/admin',[adminController::class, 'index']);

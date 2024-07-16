@@ -1,13 +1,38 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Http\Controllers\SesiController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class SesiController extends Controller
 {
-    function indexSesi ()
+    function indexSesi()
     {
-        echo "Halo";
+        return view('login.login');
+    }
+
+    function login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ], [
+            'username.required' => 'Username wajib diisi',
+            'password.required' => 'Password wajib diisi',
+        ]);
+
+        $infologin = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($infologin)){
+            return redirect('admin');
+        }else{
+            return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
+        }
     }
 }
