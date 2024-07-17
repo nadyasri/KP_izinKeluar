@@ -4,7 +4,13 @@ export default {
     "./resources/js/app.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        sans: ['Nunito', 'sans-serif'],
+      }
+    },
   },
+  variants: {},
   plugins: [],
 }
