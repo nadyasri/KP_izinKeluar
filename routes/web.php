@@ -18,13 +18,14 @@ use App\Http\Controllers\SesiController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/',[SesiController::class, 'indexSesi']);
+Route::middleware(['guest'])->group(function() {
+    Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
+    Route::post('/login',[SesiController::class, 'login']);
+});
 
 
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 
-Route::post('/login',[SesiController::class, 'login']);
 
-Route::get('/admin',[adminController::class, 'index']);
+
 
