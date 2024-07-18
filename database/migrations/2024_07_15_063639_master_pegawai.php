@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id('id_pegawai'); // Kolom ID Pegawai
             $table->unsignedBigInteger('id_atasan'); // Kolom ID Atasan
             $table->string('NIP')->unique(); // Kolom NIP
-            $table->string('Nama'); // Kolom Nama
+            $table->string('Nama_Depan'); // Kolom Nama Depan
+            $table->string('Nama_Belakang'); // Kolom Nama Belakang
+            $table->string('Jabatan'); // Kolom Jabatan
             $table->string('Pangkat'); // Kolom Pangkat
             $table->string('Username')->unique(); // Kolom Username
             $table->string('Password'); // Kolom Password
