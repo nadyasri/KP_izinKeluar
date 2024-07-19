@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <style>
         body {
-            background-image: url('/bgpa.jpg'); /* Ganti dengan URL gambar latar belakang Anda */
+            background-image: url("img/bgpa.jpg"); /* Ganti dengan URL gambar latar belakang Anda */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -16,16 +16,16 @@
         }
 
         header {
-            background-color: rgba(62, 93, 61, 0.8); /* Semi-transparent background */
+            background-color: #436850; 
             color: white;
             text-align: center;
-            padding: 20px 0;
+            padding: 10px 0;
         }
 
         .login-container {
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
-            padding: 30px;
+            padding: 20px;
         }
 
         .login-title {
@@ -40,8 +40,8 @@
         <h1>SIKAN</h1>
     </header>
     <main>
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="login-container col-md-6 col-lg-4 p-4">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100  ">
+            <div class="login-container col-md-6 col-lg-4 p-4 ">
                 <div class="text-center mb-4">
                     <h1 class="h3 login-title mb-8">SIKAN</h1>
                     <p>Surat Izin Keluar Kantor</p>
