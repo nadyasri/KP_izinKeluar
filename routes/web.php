@@ -26,6 +26,7 @@ Route::middleware(['guest'])->group(function() {
 
 Route::controller(SesiController::class)->group(function () {
     Route::get('register', 'register')->name('register');
+    Route::post('register', 'registerSave')->name ('register.save');
 });
 
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
