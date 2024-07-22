@@ -1,12 +1,13 @@
 <?php
 
 
-use App\Http\Controllers\AdmStatController;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\SesiController;
 
 use App\Http\Controllers\adminController;
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SesiController;
+use App\Http\Controllers\AdmStatController;
+use App\Http\Controllers\PegStatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,13 @@ use App\Http\Controllers\SesiController;
 |
 */
 Route::middleware(['guest'])->group(function() {
-    Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
+    Route::get('/login',[SesiController::class, 'indexSesi'])->name('login');
     Route::post('/login',[SesiController::class, 'login']);
 });
 
+Route::controller(SesiController::class)->group(function () {
+    Route::get('register', 'register')->name('register');
+});
 
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 
