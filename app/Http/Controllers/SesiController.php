@@ -10,6 +10,11 @@ use App\Models\User;
 
 class SesiController extends Controller
 {
+    function register()
+    {
+        return view('register.register');
+    }
+
     function indexSesi()
     {
         return view('login.login');
