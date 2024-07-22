@@ -57,7 +57,7 @@
                     </div>
                 @endif
                 <!-- Login form -->
-                <form action="/login" method="POST">
+                <form action="{{ route('register.save)'  }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
@@ -80,7 +80,7 @@
                         <input type="text" name="password" class="form-control" id="password">
                     </div>
                     <div class="d-grid">
-                        <button name="submit" type="submit" class="btn btn-success">Login</button>
+                        <button name="submit" type="submit" class="btn btn-success">Create an account</button>
                     </div>
                 </form>
             </div>
