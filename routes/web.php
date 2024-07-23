@@ -20,14 +20,10 @@ use App\Http\Controllers\PegStatController;
 |
 */
 Route::middleware(['guest'])->group(function() {
-    Route::get('/login',[SesiController::class, 'indexSesi'])->name('login');
+    Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
     Route::post('/login',[SesiController::class, 'login']);
 });
 
-Route::controller(SesiController::class)->group(function () {
-    Route::get('register', 'register')->name('register');
-    Route::post('register', 'registerSave')->name ('register.save');
-});
 
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 
