@@ -23,6 +23,14 @@ Route::middleware(['guest'])->group(function() {
     Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
     Route::post('/login',[SesiController::class, 'login']);
 });
+Route::get('/home', function () {
+    return redirect('/');
+}); 
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('logout',[SesiController::class, 'logout']);
+});
 
 
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');

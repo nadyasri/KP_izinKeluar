@@ -57,7 +57,7 @@
                     </div>
                 @endif
                 <!-- Login form -->
-                <form action="{{ route('register.save') }}" method="POST">
+                <form action="{{ route('admin.register') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
@@ -79,8 +79,18 @@
                         <label for="Jabatan" class="form-label">Jabatan</label>
                         <input type="text" name="password" class="form-control" id="password">
                     </div>
+                    <div class="form-group">
+                        <select 
+                            name"role">
+                            <option value="Pilih"></option>
+                            <option value="Admin"></option>
+                            <option value="Superadmin"></option>
+                            <option value="Pegawai"></option>
+
+                        </select>
                     <div class="d-grid">
                         <button name="submit" type="submit" class="btn btn-success">Create an account</button>
+                    </div>
                     </div>
                 </form>
             </div>

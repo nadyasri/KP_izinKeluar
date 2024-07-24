@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Validator;
 
 class SesiController extends Controller
 {
+
+    Public function formreg()
+    {
+        return view('register.register');
+    }
+
+    public function simpanreg(Request $req)
+    {
+        $req->validate([
+            'username'=>'required|min:4',
+            'role'=>'required|in:admin,superadmin,email',
+            'password'=>'required|min:4|confirmed'
+        ]);
+    }
+
     function indexSesi()
     {
         return view('login.login');
@@ -36,4 +51,6 @@ class SesiController extends Controller
             return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
         }
     }
+
+    
 }
