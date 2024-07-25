@@ -11,18 +11,35 @@ use Illuminate\Support\Facades\Validator;
 class SesiController extends Controller
 {
 
-    Public function formreg()
+    public function showRegistrationForm()
     {
         return view('register.register');
     }
 
-    public function simpanreg(Request $req)
+    public function register(Request $request)
     {
-        $req->validate([
-            'username'=>'required|min:4',
-            'role'=>'required|in:admin,superadmin,email',
-            'password'=>'required|min:4|confirmed'
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:pegawai,admin,superadmin',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+
     }
 
     function indexSesi()
