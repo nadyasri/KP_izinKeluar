@@ -19,18 +19,14 @@ use App\Http\Controllers\PegStatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::middleware(['guest'])->group(function() {
+Route::middleware(['alreadyLoggedIn'])->group(function() {
     Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
     Route::post('/login',[SesiController::class, 'login']);
+    
 });
-Route::get('/home', function () {
-    return redirect('/');
-}); 
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('logout',[SesiController::class, 'logout']);
-});
+Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [SesiController::class, 'register'])->name('register.register');
 
 
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
