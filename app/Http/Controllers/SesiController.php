@@ -37,7 +37,7 @@ class SesiController extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
-
+        //redirect ke halaman login
         return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
     }

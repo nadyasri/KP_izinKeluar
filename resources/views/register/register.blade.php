@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <style>
         body {
-            background-image: url("img/bgpa.jpg");
+            background-image: url("img/bg.jpg");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -64,11 +64,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" required>
+                        <input type="text" name="password" class="form-control" id="password" required>
                     </div>
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                        <input type="text" name="password_confirmation" class="form-control" id="password_confirmation" required>
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>

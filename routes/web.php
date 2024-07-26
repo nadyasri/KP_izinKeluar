@@ -3,8 +3,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\SesiController;
+use App\Http\Controllers\IzinController;
 
+use App\Http\Controllers\SesiController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\AdmStatController;
 use App\Http\Controllers\PegStatController;
@@ -19,7 +20,7 @@ use App\Http\Controllers\PegStatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::middleware(['alreadyLoggedIn'])->group(function() {
+Route::middleware(['guest'])->group(function() {
     Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
     Route::post('/login',[SesiController::class, 'login']);
     
@@ -34,4 +35,8 @@ Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('a
 Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
 #match the middleware as Nadya's
 
+Route::get('/formizin', function () {
+    return view('Formizin.formizin');
+});
 
+Route::post('/submitform', [IzinController::class, 'submitForm']);
