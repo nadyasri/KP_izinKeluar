@@ -19,6 +19,13 @@
             color: white;
             text-align: center;
             padding: 10px 0;
+            position: fixed; /* Header tetap di atas */
+            top: 0; /* Posisi di bagian atas */
+            width: 100%; /* Lebar penuh */
+            z-index: 1000; /* Di atas elemen lain */
+        }
+        .main-content {
+            padding-top: 60px; /* Sesuaikan dengan tinggi header */
         }
         .login-container {
             background-color: rgba(255, 255, 255, 0.8);
@@ -36,7 +43,7 @@
     <header>
         <h1>SIKAN</h1>
     </header>
-    <main>
+    <main class="main-content"> <!-- Menambahkan kelas main-content -->
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <div class="login-container col-md-6 col-lg-4 p-4">
                 <div class="text-center mb-4">
@@ -64,11 +71,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="text" name="password" class="form-control" id="password" required>
+                        <input type="password" name="password" class="form-control" id="password" required>
                     </div>
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                        <input type="text" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
