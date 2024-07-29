@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdmStatController;
 use App\Http\Controllers\AtasanController;
@@ -9,7 +10,14 @@ use App\Http\Controllers\dataController;
 #use App\Http\Controllers\adminController;
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\IzinController;
+
+
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\AdmStatController;
+use App\Http\Controllers\PegStatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +32,7 @@ use App\Http\Controllers\SesiController;
 Route::middleware(['guest'])->group(function() {
     Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
     Route::post('/login',[SesiController::class, 'login']);
+    
 });
 
 #dashboard
@@ -53,6 +62,10 @@ Route::put('/pegawai/{id_pegawai}/edit', [PegawaiController::class, 'update']);
 Route::delete('/atasan/{id_atasan}/delete', [AtasanController::class, 'destroy']); 
 Route::delete('/pegawai/{id_pegawai}/delete', [PegawaiController::class, 'destroy']);
 
+Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [SesiController::class, 'register'])->name('register.register');
+
+
 
 #Route::get('/test-form', function () {
 #    return view('test-form');
@@ -64,4 +77,8 @@ Route::delete('/pegawai/{id_pegawai}/delete', [PegawaiController::class, 'destro
 #Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
 #match the middleware as Nadya's
 
+Route::get('/formizin', function () {
+    return view('Formizin.formizin');
+});
 
+Route::post('/submitform', [IzinController::class, 'submitForm']);
