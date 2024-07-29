@@ -6,16 +6,12 @@ use App\Http\Controllers\AtasanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\dataController;
 
-#use App\Http\Controllers\adminController;
-
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\IzinController;
-use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\PegStatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,15 +32,16 @@ Route::middleware(['guest'])->group(function() {
 });
 
 #dashboard
-Route::get('/admin', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
+
+
 
 Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [SesiController::class, 'register'])->name('register.register');
 
 // Route for logout (only for logged-in users)
 Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middleware('auth');
-#dashboard
-Route::get('/admin', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 
 #registration
 Route::post('/regist/atasan', [AtasanController::class, 'store'])->name('regist.atasan');
