@@ -62,6 +62,10 @@
                 <form action="{{ route('register.register') }}" method="POST">
                     @csrf
                     <div class="mb-3">
+                        <label for="NIP" class="form-label">NIP</label>
+                        <input type="text" name="NIP" class="form-control" id="NIP" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" value="{{ old('name') }}" name="name" class="form-control" id="name" required>
                     </div>
@@ -70,12 +74,20 @@
                         <input type="text" value="{{ old('username') }}" name="username" class="form-control" id="username" required>
                     </div>
                     <div class="mb-3">
+                        <label for="Pangkat" class="form-label">Pangkat</label>
+                        <input type="text" name="Pangkat" class="form-control" id="Pangkat" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Jabatan" class="form-label">Jabatan</label>
+                        <input type="text" name="Jabatan" class="form-control" id="Jabatan" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="password" required>
                     </div>
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                        <input type="text" name="password_confirmation" class="form-control" id="password_confirmation" required>
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
@@ -86,7 +98,7 @@
                         </select>
                     </div>
                     <div class="d-grid">
-                        <button name="submit" type="submit" class="btn btn-success">Create an account</button>
+                        <button name="submit" type="submit" value="submit" class="btn btn-success">Create an account</button>
                     </div>
                 </form>
             </div>
