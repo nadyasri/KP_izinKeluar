@@ -2,14 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class SesiController extends Controller
 {
+
+    public function showRegistrationForm()
+    {
+        return view('register.register');
+    }
+
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:pegawai,admin,superadmin',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+        //redirect ke halaman login
+        return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+
+    }
+
     function indexSesi()
     {
         return view('login.login');
@@ -36,4 +68,6 @@ class SesiController extends Controller
             return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
         }
     }
+
+    
 }
