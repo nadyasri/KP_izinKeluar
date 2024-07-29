@@ -21,7 +21,7 @@ class PegStatController extends Controller
         $akunNIP = Pegawai::select('NIP', )->get();
         
 
-        return view('pegawai.dashboard', compact('namaDepan', 'akunNama', 'akunNIP', 'ajuSetuju', 'ajuTolak'));
+        return view('/pegawai/dashboard', compact('namaDepan', 'akunNama', 'akunNIP', 'ajuSetuju', 'ajuTolak'));
 
         #tambahkan agar pengguna dapat mengunduh guide book aplikasi
 
