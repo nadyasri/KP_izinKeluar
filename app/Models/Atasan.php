@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pegawai extends Model
+class Atasan extends Model
 {
     use HasFactory;
 
-    protected $table = 'master_pegawai';
-    protected $primaryKey = 'id_pegawai';
+    protected $table = 'master_atasan';
+    protected $primaryKey = 'id_atasan';
     protected $fillable = [
         'nip',
         'namaDepan',
@@ -25,13 +25,9 @@ class Pegawai extends Model
     {
         return $this->belongsTo(User::class, 'username', 'username');
     }
-    public function atasan()
+    public function pegawai()
     {
-        return $this->belongsTo(Atasan::class, 'id_atasan', 'id_atasan');
+        return $this->hasMany(Pegawai::class, 'id_atasan', 'id_atasan');
     }
-
-   # public function izin()
-    #{
-     #   return $this->hasMany(daftarIzin::class, 'id_pegawai', 'id_pegawai');
-    #}
+    
 }
