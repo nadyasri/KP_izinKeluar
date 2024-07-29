@@ -60,7 +60,7 @@ Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middle
 
 #dashboard
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
+Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard')->middleware('auth');
 
 #show-data
 Route::get('/admin/manage-data', function(){
