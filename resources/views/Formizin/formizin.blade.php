@@ -55,11 +55,11 @@
                         </div>
                         <div>
                             <label for="nip" class="block text-sm font-medium text-gray-700">NIP</label>
-                            <input type="text" name="nip" id="nip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ auth()->user()->nip ?? '' }}" readonly>
+                            <input type="text" name="nip" id="nip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ auth()->user()->NIP ?? '' }}"" readonly>
                         </div>
                         <div>
                             <label for="pangkat" class="block text-sm font-medium text-gray-700">Pangkat/Gol/Ruang</label>
-                            <input type="text" name="pangkat" id="pangkat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ auth()->user()->pangkat ?? '' }}" readonly>
+                            <input type="text" name="pangkat" id="pangkat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ auth()->user()->Pangkat ?? '' }}"" readonly>
                         </div>
                         <div>
                             <label for="Tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>

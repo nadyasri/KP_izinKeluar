@@ -33,7 +33,7 @@
                 </ul>
             </nav>
             <div class="mt-auto">
-                <a href="#" class="text-yellow-500 font-bold block py-2.5 px-4 text-logout transition duration-200 hover:bg-black rounded">Logout</a>
+                <a href="{{ route('logout') }}" class="text-yellow-500 font-bold block py-2.5 px-4 text-logout transition duration-200 hover:bg-black rounded">Logout</a>
             </div>
         </div>
 

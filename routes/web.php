@@ -20,15 +20,40 @@ use App\Http\Controllers\PegStatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Routes for guests (not logged in)
 Route::middleware(['guest'])->group(function() {
-    Route::get('/',[SesiController::class, 'indexSesi'])->name('login');
-    Route::post('/login',[SesiController::class, 'login']);
-    
+    Route::get('/', [SesiController::class, 'indexSesi'])->name('login');
+    Route::post('/login', [SesiController::class, 'login']);
+    Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [SesiController::class, 'register'])->name('register.register');
 });
 
-Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [SesiController::class, 'register'])->name('register.register');
+// Route for logout (only for logged-in users)
+Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middleware('auth');
 
+// Routes for logged-in users
+Route::middleware(['auth'])->group(function() {
+    // Routes for superadmin
+    Route::middleware(['role:superadmin'])->group(function() {
+        Route::get('/superadmin', function() {
+            return view('superadmin.dashboard');
+        })->name('superadmin.dashboard');
+    });
+
+    // Routes for admin
+    Route::middleware(['role:admin'])->group(function() {
+        Route::get('/admin', function() {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+    });
+
+    // Routes for pegawai
+    Route::middleware(['role:pegawai'])->group(function() {
+        Route::get('/pegawai', function() {
+            return view('pegawai.dashboard');
+        })->name('pegawai.dashboard');
+    });
+});
 
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 

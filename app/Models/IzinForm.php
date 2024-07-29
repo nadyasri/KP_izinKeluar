@@ -12,4 +12,6 @@ class IzinForm extends Model
     protected $fillable = [
         'nama', 'nip', 'pangkat', 'Tanggal', 'Waktu_keluar', 'Waktu_kembali', 'Keperluan'
     ];
+
+    protected $table = 'daftar_izin';
 }

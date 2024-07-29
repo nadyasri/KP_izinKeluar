@@ -10,19 +10,26 @@ use Illuminate\Support\Facades\Validator;
 
 class SesiController extends Controller
 {
-
+    
     public function showRegistrationForm()
     {
+
         return view('register.register');
     }
 
     public function register(Request $request)
     {
+        dd($request);
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:pegawai,admin,superadmin',
+            'nip' => 'required|string|max:20|unique:users',
+            'pangkat' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+
+            
         ]);
 
         if ($validator->fails()) {
@@ -36,7 +43,11 @@ class SesiController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'nip' => $request->nip,
+            'pangkat' => $request->pangkat,
+            'jabatan' => $request->jabatan,
         ]);
+
         //redirect ke halaman login
         return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
@@ -63,11 +74,28 @@ class SesiController extends Controller
         ];
 
         if (Auth::attempt($infologin)){
-            return redirect('/admin/dashboard');
-        }else{
-            return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
-        }
+            $user = Auth::user();
+            $role = $user->role;
+
+            if ($role === 'superadmin') {
+                return redirect()->route('superadmin.dashboard');
+            } elseif ($role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($role === 'pegawai') {
+                return redirect()->route('pegawai.dashboard');
+            }
+
+            // Default redirect if no role matched
+            return redirect('/');
+            } else {
+                return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
+            }
     }
+    public function logout()
+{
+    Auth::logout();
+    return redirect('/')->with('success', 'You have been logged out.');
+}
 
     
 }
