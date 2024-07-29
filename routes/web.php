@@ -1,24 +1,16 @@
 <?php
 
-<<<<<<< HEAD
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdmStatController;
 use App\Http\Controllers\AtasanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\dataController;
-
-#use App\Http\Controllers\adminController;
-=======
->>>>>>> 14c7ebc022addbb327dd38424eac399ef3d4c2cb
-
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\IzinController;
-
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\adminController;
-use App\Http\Controllers\AdmStatController;
-use App\Http\Controllers\PegStatController;
+use App\Http\Controllers\IzinController;
+use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,14 +28,12 @@ Route::middleware(['guest'])->group(function() {
     
 });
 
-<<<<<<< HEAD
 #dashboard
 Route::get('/admin', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
-=======
+
 Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [SesiController::class, 'register'])->name('register.register');
 
->>>>>>> 14c7ebc022addbb327dd38424eac399ef3d4c2cb
 
 #registration
 Route::post('/regist/atasan', [AtasanController::class, 'store'])->name('regist.atasan');
