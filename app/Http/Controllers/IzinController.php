@@ -14,6 +14,7 @@ class IzinController extends Controller
 
     public function submitForm(Request $request)
     {
+        dd($request);
         // Validasi input
         $request->validate([
             'name' => 'required|string',
