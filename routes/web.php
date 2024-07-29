@@ -41,14 +41,14 @@ Route::middleware(['auth'])->group(function() {
 
     // Routes for admin
     Route::middleware(['role:admin'])->group(function() {
-        Route::get('/admin', function() {
+        Route::get('/admin/dashboard', function() {
             return view('admin.dashboard');
         })->name('admin.dashboard');
     });
 
     // Routes for pegawai
     Route::middleware(['role:pegawai'])->group(function() {
-        Route::get('/pegawai', function() {
+        Route::get('/pegawai/dashboard', function() {
             return view('pegawai.dashboard');
         })->name('pegawai.dashboard');
     });
@@ -56,10 +56,12 @@ Route::middleware(['auth'])->group(function() {
 
 // Route for logout (only for logged-in users)
 Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middleware('auth');
-Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
+
 
 #dashboard
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
+
 #show-data
 Route::get('/admin/manage-data', function(){
     return view('admin.manage-data');
