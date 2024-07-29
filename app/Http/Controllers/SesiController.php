@@ -90,6 +90,11 @@ class SesiController extends Controller
             } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
+=======
+            return redirect('/admin');
+        }else{
+            return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
+        }
     }
     public function logout()
 {
