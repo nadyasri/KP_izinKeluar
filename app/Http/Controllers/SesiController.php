@@ -19,9 +19,18 @@ class SesiController extends Controller
 
     public function register(Request $request)
     {
+<<<<<<< HEAD
   #      dd($request);
+=======
+
+  #      dd($request);
+
+        // dd($request);
+
+>>>>>>> eed13614e5da93b081f9650601cd38f482d45742
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'namaDepan' => 'required|string|max:255',
+            'namaBelakang' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:pegawai,admin,superadmin',
@@ -39,7 +48,8 @@ class SesiController extends Controller
         }
 
         User::create([
-            'name' => $request->name,
+            'namaDepan' => $request->namaDepan,
+            'namaBelakang' => $request->namaBelakang,
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => $request->role,
@@ -90,12 +100,22 @@ class SesiController extends Controller
             } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> eed13614e5da93b081f9650601cd38f482d45742
     }
     public function logout()
 {
     Auth::logout();
     return redirect('/')->with('success', 'You have been logged out.');
 }
+    public function showProfile()
+    {
+        $user = auth()->user();
+        return view('profile', ['user' => $user]);
+    }
+
 
     
 }
