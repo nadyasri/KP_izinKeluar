@@ -66,7 +66,7 @@
                             <tbody>
                                 @foreach ($atasan as $atas)
                                 <tr>
-                                    <td class="py-2 px-2 text-center border-r border-gray-300">{{ $atas->id_atasan }}</td>
+                                    <td class="py-2 px-2 text-center border-r border-gray-300">{{ $loop->iteration }}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->nip }}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->namaDepan }}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->namaBelakang }}</td>
@@ -104,7 +104,7 @@
                             <tbody
                                 @foreach ($pegawai as $peg)
                                 <tr>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->id_pegawai }}</td>
+                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $loop->iteration }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->id_atasan }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->nip }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->namaDepan }}</td>
@@ -113,15 +113,8 @@
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->pangkat }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->username }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->password }}</td>
-                                    <form action = "/pegawai/{{ $peg->id_pegawai }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                    <button onclick="window.location.href='/pegawai/{{ $peg->id_pegawai}}/edit'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                                    <form action = "/pegawai/{{ $peg->id_pegawai }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type = "submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
-                                    </form>
+                                    <button onclick=" " class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
+                                    <button onclick=" " class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                                 </tr>
                                 @endforeach
                             </tbody>
