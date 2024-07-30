@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User; #must change the "User" models content
 use App\Models\IzinPegawai;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 class AdmStatController extends Controller
@@ -20,5 +21,5 @@ class AdmStatController extends Controller
         #tambahkan agar pengguna dapat mengunduh guide book aplikasi
 
     }
-    
+
 }

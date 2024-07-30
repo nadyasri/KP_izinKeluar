@@ -1,17 +1,21 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\SuperAdmin;
-use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AdmStatController;
+use App\Http\Controllers\AtasanController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\dataController;
-use App\Http\Controllers\IzinController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\adminController;
-use App\Http\Controllers\AtasanController;
-use App\Http\Controllers\AdmStatController;
-use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PegStatController;
+use App\Http\Controllers\IzinController;
+
+
+use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\SuperAdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +41,9 @@ Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('a
 Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
 
 
-
 Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [SesiController::class, 'register'])->name('register.register');
-=======
+
 // Routes for logged-in users
 Route::middleware(['auth'])->group(function() {
     // Routes for superadmin
@@ -70,10 +73,21 @@ Route::middleware(['auth'])->group(function() {
 Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middleware('auth');
 
 
+#registration
+Route::post('/regist/atasan', [AtasanController::class, 'store'])->name('regist.atasan');
+Route::post('/regist/pegawai', [PegawaiController::class, 'store'])->name('regist.pegawai');
+
+
 #dashboard
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard_pegawai'])->name('pegawai.dashboard');
+
+
+#Route::get('/atasan/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard')->middleware('auth');
+
+
 Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name ('superadmin.dashboard');
+
 
 #show-data
 Route::get('/admin/manage-data', function(){
@@ -90,9 +104,10 @@ Route::put('/atasan/{id_atasan}/edit', [AtasanController::class, 'update']);
 Route::put('/pegawai/{id_pegawai}', [PegawaiController::class, 'update']); 
 Route::put('/pegawai/{id_pegawai}/edit', [PegawaiController::class, 'update']);
 
-#hapus data
+#hapus_data_atasan
 Route::delete('/atasan/{id_atasan}/delete', [AtasanController::class, 'destroy']); 
 Route::delete('/pegawai/{id_pegawai}/delete', [PegawaiController::class, 'destroy']);
+
 
 Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [SesiController::class, 'register'])->name('register.register');
@@ -123,17 +138,9 @@ Route::middleware(['auth'])->group(function() {
 });
 
 
-
-
-#Route::get('/test-form', function () {
-#    return view('test-form');
-#});
-#Route::post('/test-form', function (Illuminate\Http\Request $request) {
-#    return 'POST request received';
-#});
-
 #Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
 #match the middleware as Nadya's
+
 
 #form IZIN
 Route::get('/formizin', function () {
