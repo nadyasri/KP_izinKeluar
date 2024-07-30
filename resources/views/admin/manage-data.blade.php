@@ -23,7 +23,7 @@
             <nav class="mt-6 flex-grow">
                 <ul>
                     <li class="mb-2 text-amber-50">
-                        <a href="#" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
+                        <a href="/resources/views/admin/dashboard.blade.php" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
                     </li>
                     <li class="mb-2">
                         <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Daftar Akun Pengguna Pegawai dan Atasan</a>
@@ -43,7 +43,7 @@
             <div class="bg-white p-10 rounded-tl-3xl rounded-bl-3xl shadow-xl min-h-full">
                 <h1 class="text-green-900 text-3xl font-bold mb-6">Daftar Akun Pengguna Pegawai dan Atasan</h1>
                 <hr class="border-t-2 border-gray-200 my-6">
-                <button onclick=" " class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded top-0 right-0"> + tambah data </button>
+                <button type="button" onclick="window.location='{{ route('register') }}'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded top-0 right-0"> + tambah data </button>
                 
                 <!-- Table for Atasan -->
                 <div class="container mx-auto">
@@ -73,7 +73,7 @@
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->jabatan }}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->pangkat }}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->username }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->password }}</td>
+                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->decrypted_password}}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">
                                     <button onclick=" " class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
                                     <button onclick=" " class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
@@ -112,7 +112,8 @@
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->jabatan }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->pangkat }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->username }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->password }}</td>
+                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->decrypted_password }}</td>
+                                    <td class="py-3 px-3 text-center border-r border-gray-300">
                                     <button onclick=" " class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
                                     <button onclick=" " class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                                 </tr>

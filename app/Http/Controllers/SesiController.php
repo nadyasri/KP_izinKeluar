@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 
 class SesiController extends Controller
@@ -19,15 +19,14 @@ class SesiController extends Controller
 
     public function register(Request $request)
     {
-<<<<<<< HEAD
+
   #      dd($request);
-=======
 
   #      dd($request);
 
         // dd($request);
 
->>>>>>> eed13614e5da93b081f9650601cd38f482d45742
+
         $validator = Validator::make($request->all(), [
             'namaDepan' => 'required|string|max:255',
             'namaBelakang' => 'required|string|max:255',
@@ -51,7 +50,7 @@ class SesiController extends Controller
             'namaDepan' => $request->namaDepan,
             'namaBelakang' => $request->namaBelakang,
             'username' => $request->username,
-            'password' => Hash::make($request->password),
+            'password' => Crypt::encryptString($request->password),
             'role' => $request->role,
             'nip' => $request->nip,
             'pangkat' => $request->pangkat,
@@ -100,10 +99,6 @@ class SesiController extends Controller
             } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> eed13614e5da93b081f9650601cd38f482d45742
     }
     public function logout()
 {
