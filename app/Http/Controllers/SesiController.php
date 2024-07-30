@@ -19,7 +19,11 @@ class SesiController extends Controller
 
     public function register(Request $request)
     {
+
+  #      dd($request);
+
         // dd($request);
+
         $validator = Validator::make($request->all(), [
             'namaDepan' => 'required|string|max:255',
             'namaBelakang' => 'required|string|max:255',
@@ -92,7 +96,7 @@ class SesiController extends Controller
             } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
-        
+
     }
     public function logout()
 {
