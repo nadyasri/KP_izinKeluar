@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\SuperAdmin;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +31,16 @@ Route::middleware(['guest'])->group(function() {
     Route::post('/register', [SesiController::class, 'register'])->name('register.register');
 });
 
+
+#dashboard
+Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
+
+
+
+Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [SesiController::class, 'register'])->name('register.register');
+=======
 // Routes for logged-in users
 Route::middleware(['auth'])->group(function() {
     // Routes for superadmin
@@ -55,6 +64,7 @@ Route::middleware(['auth'])->group(function() {
         })->name('pegawai.dashboard');
     });
 });
+
 
 // Route for logout (only for logged-in users)
 Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middleware('auth');
@@ -86,6 +96,33 @@ Route::delete('/pegawai/{id_pegawai}/delete', [PegawaiController::class, 'destro
 
 Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [SesiController::class, 'register'])->name('register.register');
+
+
+// Routes for logged-in users
+Route::middleware(['auth'])->group(function() {
+    // Routes for superadmin
+    Route::middleware(['role:superadmin'])->group(function() {
+        Route::get('/superadmin', function() {
+            return view('superadmin.dashboard');
+        })->name('superadmin.dashboard');
+    });
+
+    // Routes for admin
+    Route::middleware(['role:admin'])->group(function() {
+        Route::get('/admin', function() {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+    });
+
+    // Routes for pegawai
+    Route::middleware(['role:pegawai'])->group(function() {
+        Route::get('/pegawai', function() {
+            return view('pegawai.dashboard');
+        })->name('pegawai.dashboard');
+    });
+});
+
+
 
 
 #Route::get('/test-form', function () {
