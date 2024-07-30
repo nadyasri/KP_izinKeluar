@@ -18,12 +18,16 @@
             <div class="text-white flex flex-col items-center">
                 <img src="resources/assets/ppAdm.jpg" alt="Profile Picture" class="p-10 rounded-full w-24 h-24 mb-4">
 
+                <h2 class="text-xl font-bold p-6">{{auth()->user()->namaDepan}}</</h2>
+
+
                 <h2 class="text-xl font-bold p-6">Adminum</</h2>
 
                 <h2 class="text-xl font-bold p-6"> @if(auth()->check())
             <h2 class="text-xl font-bold p-6">{{ auth()->user()->namaDepan }}</h2>
         @else
             <h2 class="text-xl font-bold p-6">Guest</h2></h2>
+
 
             </div>
             <nav class="mt-6 flex-grow">

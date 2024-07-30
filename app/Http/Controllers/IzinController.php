@@ -12,11 +12,18 @@ class IzinController extends Controller
         $this->middleware('auth');
     }
 
+    public function create()
+    {
+        $user = auth()->user(); // Ambil user yang sedang login
+        return view('formizin', compact('user'));
+    }
+
     public function submitForm(Request $request)
     {
         dd($request);
         // Validasi input
         $request->validate([
+            
             'name' => 'required|string',
             'nip' => 'required|string',
             'pangkat' => 'required|string',

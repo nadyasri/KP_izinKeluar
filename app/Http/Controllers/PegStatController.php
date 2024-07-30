@@ -10,6 +10,7 @@ class PegStatController extends Controller
 {
     public function dashboard_pegawai(Request $request)
     {
+        return 'Controller is working!';
         $ajuSetuju = IzinPegawai::where('status', 'Disetujui')
         ->where('Nama_Depan', )
         ->count();

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+
 use App\Http\Controllers\AdmStatController;
 use App\Http\Controllers\AtasanController;
 use App\Http\Controllers\PegawaiController;
@@ -10,6 +11,10 @@ use App\Http\Controllers\SesiController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\PegStatController;
 use App\Http\Controllers\IzinController;
+
+
+use App\Http\Controllers\SuperAdmin;
+use App\Http\Controllers\SuperAdminController;
 
 
 /*
@@ -77,7 +82,11 @@ Route::post('/regist/pegawai', [PegawaiController::class, 'store'])->name('regis
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard_pegawai'])->name('pegawai.dashboard');
 
+
 #Route::get('/atasan/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard')->middleware('auth');
+
+
+Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name ('superadmin.dashboard');
 
 
 #show-data
