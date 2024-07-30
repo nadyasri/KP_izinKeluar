@@ -15,24 +15,36 @@ class IzinUsersSeeders extends Seeder
     {
         $userData = [
             [
-                'name' => 'Admin 123',
+                'namaDepan' => 'Admin',
+                'namaBelakang' => 'Pertama',
                 'username' => 'ad123',
-                'role' => 'admin',
                 'password'=> bcrypt('admin1'),
+                'role' => 'admin',
+                'nip' => '0',
+                'pangkat'=>'-',
+                'jabatan' => '-',
             ],
 
             [
-                'name' => 'pegawai 123',
+                'namaDepan' => 'pegawai',
+                'namaBelakang' => '123',
                 'username' => 'peg13',
-                'role' => 'pegawai',
                 'password'=> bcrypt('pegawai1'),
+                'role' => 'pegawai',
+                'nip' => '02',
+                'pangkat'=>'III/c',
+                'jabatan' => 'Staff',
             ],
 
             [
-                'name' => 'superadmin123',
+                'namaDepan' => 'superadmin',
+                'namaBelakang'=>'123',
                 'username' => 'super123',
-                'role' => 'superadmin',
                 'password'=> bcrypt('superadmin1'),
+                'role' => 'superadmin',
+                'nip' => '03',
+                'pangkat'=>' IV/E',
+                'jabatan' => 'Ketua',
             ]
         ];
 
