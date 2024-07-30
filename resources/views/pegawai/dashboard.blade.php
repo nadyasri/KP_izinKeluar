@@ -18,7 +18,7 @@
             <div class="text-white flex flex-col items-center">
                 <img src="resources/assets/ppAdm.jpg" alt="Profile Picture" class="p-10 rounded-full w-24 h-24 mb-4">
                 <h2 class="text-xl font-bold p-6">{{auth()->user()->name}}</h2>
-                <h3 class="text-sm font-semibold p-6">{{auth()->user()->NIP}}</h3>
+                <h3 class="text-sm font-semibold p-6">{{auth()->user()->nip}}</h3>
             </div>
             </div>
             <nav class="mt-6 flex-grow">

@@ -62,24 +62,28 @@
                 <form action="{{ route('register.register') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="NIP" class="form-label">NIP</label>
-                        <input type="text" name="NIP" class="form-control" id="NIP" required>
+                        <label for="nip" class="form-label">NIP</label>
+                        <input type="text" name="nip" class="form-control" id="nip" required>
                     </div>
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" value="{{ old('name') }}" name="name" class="form-control" id="name" required>
+                        <label for="namaDepan" class="form-label">Nama Depan</label>
+                        <input type="text" value="{{ old('namaDepan') }}" name="namaDepan" class="form-control" id="namaDepan" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="namaBelakang" class="form-label">Nama Belakang</label>
+                        <input type="text" value="{{ old('namaBelakang') }}" name="namaBelakang" class="form-control" id="namaBelakang" required>
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" value="{{ old('username') }}" name="username" class="form-control" id="username" required>
                     </div>
                     <div class="mb-3">
-                        <label for="Pangkat" class="form-label">Pangkat</label>
-                        <input type="text" name="Pangkat" class="form-control" id="Pangkat" required>
+                        <label for="pangkat" class="form-label">Pangkat</label>
+                        <input type="text" name="pangkat" class="form-control" id="pangkat" required>
                     </div>
                     <div class="mb-3">
-                        <label for="Jabatan" class="form-label">Jabatan</label>
-                        <input type="text" name="Jabatan" class="form-control" id="Jabatan" required>
+                        <label for="jabatan" class="form-label">Jabatan</label>
+                        <input type="text" name="jabatan" class="form-control" id="jabatan" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
