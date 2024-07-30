@@ -68,4 +68,9 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
+
+     public function daftarIzin()
+    {
+        return $this->hasMany(DaftarIzin::class);
+    }
 }

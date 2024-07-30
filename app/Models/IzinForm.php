@@ -14,4 +14,9 @@ class IzinForm extends Model
     ];
 
     protected $table = 'daftar_izin';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
