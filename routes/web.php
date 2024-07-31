@@ -35,38 +35,30 @@ Route::middleware(['guest'])->group(function() {
     Route::post('/register', [SesiController::class, 'register'])->name('register.register');
 });
 
-
-#dashboard
-Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->middleware('auth');
-
-
-Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [SesiController::class, 'register'])->name('register.register');
-
 // Routes for logged-in users
 Route::middleware(['auth'])->group(function() {
     // Routes for superadmin
     Route::middleware(['role:superadmin'])->group(function() {
-        Route::get('/superadmin', function() {
-            return view('superadmin.dashboard');
-        })->name('superadmin.dashboard');
+        Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name('superadmin.dashboard');
     });
 
     // Routes for admin
     Route::middleware(['role:admin'])->group(function() {
-        Route::get('/admin/dashboard', function() {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
     });
 
     // Routes for pegawai
     Route::middleware(['role:pegawai'])->group(function() {
-        Route::get('/pegawai/dashboard', function() {
-            return view('pegawai.dashboard');
-        })->name('pegawai.dashboard');
+        Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard');
     });
 });
+
+#dashboard
+// Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
+// Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard');
+// Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name ('superadmin.dashboard');
+
+
 
 
 // Route for logout (only for logged-in users)
@@ -81,12 +73,12 @@ Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middle
 #dashboard
 Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard_pegawai'])->name('pegawai.dashboard');
-
+Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name ('superadmin.dashboard');
 
 #Route::get('/atasan/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard')->middleware('auth');
 
 
-Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name ('superadmin.dashboard');
+
 
 
 #show-data
