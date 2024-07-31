@@ -6,13 +6,12 @@ use App\Http\Controllers\AdmStatController;
 use App\Http\Controllers\AtasanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\dataController;
+use App\Http\Controllers\editDataController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\PegStatController;
 use App\Http\Controllers\IzinController;
-
-
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\SuperAdminController;
 
@@ -90,8 +89,8 @@ Route::get('/admin/manage-data', function(){
 Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admin.manage-data');
 
 #update data
-Route::put('/atasan/{id_atasan}', [AtasanController::class, 'update']); 
-Route::put('/atasan/{id_atasan}/edit', [AtasanController::class, 'update']);
+Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('admin.edit');
+Route::put('/admin/{nip}', [editDataController::class, 'update']); 
 
 #Route::put('/pegawai/{id_pegawai}', [PegawaiController::class, 'update']); 
 #Route::put('/pegawai/{id_pegawai}/edit', [PegawaiController::class, 'update']);
