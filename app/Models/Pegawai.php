@@ -10,7 +10,7 @@ class Pegawai extends Model
     use HasFactory;
 
     protected $table = 'master_pegawai';
-    protected $primaryKey = 'id_pegawai';
+    protected $primaryKey = 'nip';
     protected $fillable = [
         'nip',
         'namaDepan',

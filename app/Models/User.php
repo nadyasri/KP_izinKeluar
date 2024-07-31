@@ -29,9 +29,9 @@ class User extends Authenticatable
         'username',
         'password',
         'role',
-        'nip',
-        'pangkat',
-        'jabatan',
+        #'nip',
+        #'pangkat',
+        #'jabatan',
     ];
 
     public function pegawai()
