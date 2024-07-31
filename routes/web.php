@@ -74,8 +74,8 @@ Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middle
 
 
 #registration
-Route::post('/regist/atasan', [AtasanController::class, 'store'])->name('regist.atasan');
-Route::post('/regist/pegawai', [PegawaiController::class, 'store'])->name('regist.pegawai');
+#Route::post('/regist/atasan', [AtasanController::class, 'store'])->name('regist.atasan');
+#Route::post('/regist/pegawai', [PegawaiController::class, 'store'])->name('regist.pegawai');
 
 
 #dashboard
@@ -101,12 +101,12 @@ Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admi
 Route::put('/atasan/{id_atasan}', [AtasanController::class, 'update']); 
 Route::put('/atasan/{id_atasan}/edit', [AtasanController::class, 'update']);
 
-Route::put('/pegawai/{id_pegawai}', [PegawaiController::class, 'update']); 
-Route::put('/pegawai/{id_pegawai}/edit', [PegawaiController::class, 'update']);
+#Route::put('/pegawai/{id_pegawai}', [PegawaiController::class, 'update']); 
+#Route::put('/pegawai/{id_pegawai}/edit', [PegawaiController::class, 'update']);
 
 #hapus_data_atasan
-Route::delete('/atasan/{id_atasan}/delete', [AtasanController::class, 'destroy']); 
-Route::delete('/pegawai/{id_pegawai}/delete', [PegawaiController::class, 'destroy']);
+#Route::delete('/atasan/{id_atasan}/delete', [AtasanController::class, 'destroy']); 
+#Route::delete('/pegawai/{id_pegawai}/delete', [PegawaiController::class, 'destroy']);
 
 
 Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');

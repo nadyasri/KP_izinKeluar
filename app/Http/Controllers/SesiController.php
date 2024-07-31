@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pegawai;
+use App\Models\Atasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class SesiController extends Controller
@@ -36,7 +39,6 @@ class SesiController extends Controller
             'nip' => 'required|string|max:20|unique:users',
             'pangkat' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
-
             
         ]);
 
@@ -46,19 +48,55 @@ class SesiController extends Controller
                 ->withInput();
         }
 
-        User::create([
-            'namaDepan' => $request->namaDepan,
-            'namaBelakang' => $request->namaBelakang,
-            'username' => $request->username,
-            'password' => Crypt::encryptString($request->password),
-            'role' => $request->role,
-            'nip' => $request->nip,
-            'pangkat' => $request->pangkat,
-            'jabatan' => $request->jabatan,
-        ]);
+        DB::beginTransaction();
+
+        try {
+            User::create([
+                'namaDepan' => $request->namaDepan,
+                'namaBelakang' => $request->namaBelakang,
+                'username' => $request->username,
+                'password' => Crypt::encryptString($request -> password),
+                'role' => $request->role,
+                'nip' => $request->nip,
+                'pangkat' => $request->pangkat,
+                'jabatan' => $request->jabatan,
+            ]);
+
+            if ($request->role == 'superadmin') {
+                Atasan::create([
+                    'namaDepan' => $request->namaDepan,
+                    'namaBelakang' => $request->namaBelakang,
+                    'username' => $request->username,
+                    'password' => Crypt::encryptString($request -> password),
+                    'role' => $request->role,
+                    'nip' => $request->nip,
+                    'pangkat' => $request->pangkat,
+                    'jabatan' => $request->jabatan,
+                ]);
+            } else if ($request->role == 'pegawai') {
+                Pegawai::create([
+                    'namaDepan' => $request->namaDepan,
+                    'namaBelakang' => $request->namaBelakang,
+                    'username' => $request->username,
+                    'password' => Crypt::encryptString($request -> password),
+                    'role' => $request->role,
+                    'nip' => $request->nip,
+                    'pangkat' => $request->pangkat,
+                    'jabatan' => $request->jabatan,
+                ]);
+            }
+
+            DB::commit();
+
+            return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'Registration failed'], 500);
+        }
 
         //redirect ke halaman login
-        return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+        #return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
     }
 
