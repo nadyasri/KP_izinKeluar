@@ -23,10 +23,11 @@
 
                 <h2 class="text-xl font-bold p-6">Adminum</</h2>
 
-                <h2 class="text-xl font-bold p-6"> @if(auth()->check())
-            <h2 class="text-xl font-bold p-6">{{ auth()->user()->namaDepan }}</h2>
-        @else
-            <h2 class="text-xl font-bold p-6">Guest</h2></h2>
+                @if(auth()->check())
+                    <h2 class="text-xl font-bold p-6">{{ auth()->user()->namaDepan }}</h2>
+                @else
+                    <h2 class="text-xl font-bold p-6">Guest</h2>
+                @endif
 
 
             </div>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+
 
 class SesiController extends Controller
 {
@@ -19,10 +21,6 @@ class SesiController extends Controller
 
     public function register(Request $request)
     {
-
-  #      dd($request);
-
-  #      dd($request);
 
         // dd($request);
 
@@ -61,7 +59,7 @@ class SesiController extends Controller
         return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
     }
-
+    
     function indexSesi()
     {
         return view('login.login');
@@ -87,15 +85,17 @@ class SesiController extends Controller
             $role = $user->role;
 
             if ($role === 'superadmin') {
-                return redirect()->route('superadmin.dashboard');
+                return redirect('/superadmin/dashboard');
+                // yang ini
             } elseif ($role === 'admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect('/admin/dashboard');
+                // yang ini
             } elseif ($role === 'pegawai') {
-                return redirect()->route('pegawai.dashboard');
+                return redirect('/pegawai/dashboard');
+                // yang ini
             }
 
             // Default redirect if no role matched
-            return redirect('/');
             } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
@@ -105,12 +105,5 @@ class SesiController extends Controller
     Auth::logout();
     return redirect('/')->with('success', 'You have been logged out.');
 }
-    public function showProfile()
-    {
-        $user = auth()->user();
-        return view('profile', ['user' => $user]);
-    }
-
-
     
 }

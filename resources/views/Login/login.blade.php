@@ -67,14 +67,14 @@
                     @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" value="{{ old('username') }}" name="username" class="form-control" id="username">
+                        <input type="text" name="username" class="form-control" id="username">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="password">
                     </div>
                     <div class="d-grid">
-                        <button name="submit" type="submit" class="btn btn-success">Login</button>
+                        <button type="submit" class="btn btn-success">Login</button>
                     </div>
                 </form>
             </div>

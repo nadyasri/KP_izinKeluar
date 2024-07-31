@@ -32,6 +32,7 @@ class IzinController extends Controller
             'Waktu_kembali' => 'required|date_format:H:i',
             'Keperluan' => 'required|string',
         ]);
+        
 
         // Simpan data ke database
         $izin = new IzinForm();
