@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pegawai;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Log;
@@ -14,7 +15,7 @@ class dataController extends Controller
     public function index()
     {
         $atasan = User::where('role', 'superadmin')->get();
-        $pegawai = User::where('role', 'pegawai')->get();
+        $pegawai = Pegawai::all();
 
         foreach ($atasan as $atas) {
             try {

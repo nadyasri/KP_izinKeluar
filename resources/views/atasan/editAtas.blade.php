@@ -59,9 +59,9 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('$user->nip') }}" method="POST">
-                    method('PUT')
+                <form action="{{ route('admin.update', ['nip' => $user->nip]) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="nip" class="form-label">NIP</label>
                         <input type="text" value="{{$user->nip}}" name="nip" class="form-control" id="nip" required>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" value="{{Crypt::decryptString($atas->password)}}" name="password" class="form-control" id="password" required>
+                        <input type="password" value="{{Crypt::decryptString($user->password)}}" name="password" class="form-control" id="password" required>
                     </div>
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>

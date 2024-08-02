@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id('id_user');
             $table->string('nip')->unique();
+            $table->string('nipAtasan'); #untuk pegawai; kalau ketua menjadi pegawai juga, maka column ini bisa dimasukkan ke tabel user
             $table->string('namaDepan'); // Kolom Nama Depan
             $table->string('namaBelakang'); // Kolom Nama Belakang
             $table->string('jabatan'); // Kolom Jabatan
