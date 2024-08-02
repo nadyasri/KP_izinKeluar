@@ -7,21 +7,25 @@ use Barryvdh\DomPDF\Facade\Pdf; // Pastikan ini sudah diimpor
 
 class PdfController extends Controller
 {
-    public function generatepdf()
+    public function generatepdf(Request $request)
     {
-        // Debug untuk memastikan Pdf alias sudah dikenali
-
         $data = [
-            'name' => 'John Doe',
-            'nip' => '12345678',
-            'pangkat' => 'IV/a',
-            'tanggal' => '2024-08-01',
-            'waktu_keluar' => '08:00',
-            'waktu_kembali' => '16:00',
-            'keperluan' => 'Meeting external',
+            'atasan' => [
+                'nama' => 'Nama Atasan',
+                'nip' => 'NIP Atasan',
+                'pangkat' => 'Pangkat Atasan',
+                'jabatan' => 'Jabatan Atasan',
+                'unit_kerja' => 'Unit Kerja Atasan',
+            ],
+            'pegawai' => [
+                'nama' => 'Nama Pegawai',
+                'nip' => 'NIP Pegawai',
+                'pangkat' => 'Pangkat Pegawai',
+                'jabatan' => 'Jabatan Pegawai',
+                'keperluan' => 'Keperluan Pegawai',
+            ],
         ];
-
-        // Menggunakan alias Pdf yang benar
+        
         $pdf = Pdf::loadView('Formizin.Pdf', $data);
 
         return $pdf->download('Surat_Izin_Keluar.pdf');

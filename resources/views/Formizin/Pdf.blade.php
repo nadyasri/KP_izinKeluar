@@ -1,40 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Surat Izin Keluar Pegawai</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Izin Keluar Kantor</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-        }
-        .container {
-            margin: 20px;
+            margin: 50px;
         }
         .header {
             text-align: center;
             margin-bottom: 20px;
         }
-        .content {
-            margin-top: 20px;
+        .section {
+            margin-bottom: 20px;
         }
-        .content p {
+        .section p {
             margin: 5px 0;
+        }
+        .section span {
+            display: inline-block;
+            width: 200px;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .signature {
+            text-align: right;
+            margin-top: 50px;
+        }
+        .signature span {
+            display: inline-block;
+            margin-top: 70px;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>Surat Izin Keluar Pegawai</h2>
-        </div>
-        <div class="content">
-            <p><strong>Nama:</strong> {{ $name }}</p>
-            <p><strong>NIP:</strong> {{ $nip }}</p>
-            <p><strong>Pangkat/Gol/Ruang:</strong> {{ $pangkat }}</p>
-            <p><strong>Tanggal:</strong> {{ $tanggal }}</p>
-            <p><strong>Waktu Keluar:</strong> {{ $waktu_keluar }}</p>
-            <p><strong>Waktu Kembali:</strong> {{ $waktu_kembali }}</p>
-            <p><strong>Keperluan:</strong> {{ $keperluan }}</p>
-        </div>
+    <div class="header">
+        <h2>SURAT IZIN KELUAR KANTOR</h2>
+    </div>
+
+    <div class="section">
+        <p>Yang bertanda tangan di bawah ini :</p>
+        <p><span>Nama</span>: {{ $atasan['nama'] }}</p>
+        <p><span>NIP</span>: {{ $atasan['nip'] }}</p>
+        <p><span>Pangkat/Gol/Ruang</span>: {{ $atasan['pangkat'] }}</p>
+        <p><span>Jabatan</span>: {{ $atasan['jabatan'] }}</p>
+        <p><span>Unit Kerja</span>: {{ $atasan['unit_kerja'] }}</p>
+    </div>
+
+    <div class="section">
+        <p>Memberikan izin keluar kantor kepada :</p>
+        <p><span>Nama</span>: {{ $pegawai['nama'] }}</p>
+        <p><span>NIP</span>: {{ $pegawai['nip'] }}</p>
+        <p><span>Pangkat/Gol/Ruang</span>: {{ $pegawai['pangkat'] }}</p>
+        <p><span>Jabatan</span>: {{ $pegawai['jabatan'] }}</p>
+        <p><span>Untuk Keperluan</span>: {{ $pegawai['keperluan'] }}</p>
+    </div>
+
+    <div class="signature">
+        <p>Ciamis, {{ date('d-m-Y') }}</p>
+        <p>Pejabat Yang Memberikan Izin</p>
+        <span>NIP.</span>
     </div>
 </body>
 </html>
