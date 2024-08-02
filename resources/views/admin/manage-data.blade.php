@@ -43,7 +43,7 @@
             <div class="bg-white p-10 rounded-tl-3xl rounded-bl-3xl shadow-xl min-h-full">
                 <h1 class="text-green-900 text-3xl font-bold mb-6">Daftar Akun Pengguna Pegawai dan Atasan</h1>
                 <hr class="border-t-2 border-gray-200 my-6">
-                <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $user->nip]) }}'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded top-0 right-0"> + tambah data </button>
+                <button type="button" onclick="window.location='{{ route('register.register') }}'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded top-0 right-0"> + tambah data </button>
                 
                 <!-- Table for Atasan -->
                 <div class="container mx-auto">
@@ -75,8 +75,9 @@
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->username }}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->decrypted_password}}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">
-                                    <button type="button" onclick="window.location='{{ route('atasan.edit', ['nip' => $user->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                                    <button type="button" onclick="window.location='{{ route('atasan.edit', ['nip' => $user->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
+                                    
+                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -114,8 +115,8 @@
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->username }}</td>
                                     <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->decrypted_password }}</td>
                                     <td class="py-3 px-3 text-center border-r border-gray-300">
-                                    <button onclick=" " class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                                    <button onclick=" " class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
+                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                                 </tr>
                                 @endforeach
                             </tbody>

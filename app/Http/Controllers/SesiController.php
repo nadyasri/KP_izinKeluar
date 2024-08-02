@@ -35,6 +35,7 @@ class SesiController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:pegawai,admin,superadmin',
             'nip' => 'required|string|max:20|unique:users',
+        #    'nipAtasan' => 'required|string|max:20',
             'pangkat' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             
@@ -71,8 +72,20 @@ class SesiController extends Controller
                     'pangkat' => $request->pangkat,
                     'jabatan' => $request->jabatan,
                 ]);
-            } else if ($request->role == 'pegawai') {
+                #Pegawai::create([
+                #    'nipAtasan' => $request->nipAtasan,
+                #    'namaDepan' => $request->namaDepan,
+                #    'namaBelakang' => $request->namaBelakang,
+                #    'username' => $request->username,
+                #    'password' => Crypt::encryptString($request->password),
+                #    'role' => $request->role,
+                #    'nip' => $request->nip,
+                #    'pangkat' => $request->pangkat,
+                #    'jabatan' => $request->jabatan,
+                #]);
+            } else if ($request->role == 'pegawai') { #bagian pegawai tidak bisa masuk ke database kemungkinan karena tidak adanya isi pada foreign key column alias id_atasan
                 Pegawai::create([
+                #   'nipAtasan' => $request->nipAtasan,
                     'namaDepan' => $request->namaDepan,
                     'namaBelakang' => $request->namaBelakang,
                     'username' => $request->username,
