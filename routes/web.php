@@ -12,6 +12,7 @@ use App\Http\Controllers\SesiController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\PegStatController;
 use App\Http\Controllers\IzinController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\SuperAdminController;
 
@@ -139,3 +140,6 @@ Route::get('/formizin', function () {
 });
 
 Route::post('/submitform', [IzinController::class, 'submitForm']);
+
+#pdfGenerate
+Route::get('/generatePdf', [PdfController::class, 'generatepdf']);
