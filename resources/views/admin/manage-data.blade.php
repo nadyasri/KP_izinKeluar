@@ -43,168 +43,90 @@
             <div class="bg-white p-10 rounded-tl-3xl rounded-bl-3xl shadow-xl min-h-full">
                 <h1 class="text-green-900 text-3xl font-bold mb-6">Daftar Akun Pengguna Pegawai dan Atasan</h1>
                 <hr class="border-t-2 border-gray-200 my-6">
-                <button type="button" onclick="window.location='{{ route('register.register') }}'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded top-0 right-0"> + tambah data </button>
-                
+
                 <!-- Table for Atasan -->
                 <div class="container mx-auto">
                     <h2 class="text-2xl font-bold mb-2">Data Atasan</h2>
-                    <div class="overflow-x-auto mb-8">
-                        <table class="min-w-full bg-white border border-gray-300">
-                            <thead>
-                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">No</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">NIP</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Nama Depan</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Nama Belakang</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Jabatan</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Gol.</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Username</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Password</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Aksi</th>
+                    <button type="button" onclick="window.location='{{ route('register.register') }}'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded top-0 right-0"> + tambah data </button>
+                    <div class="overflow-x-auto max-h-72 overflow-y-auto mb-8 border border-gray-300">
+                        <table class="min-w-full bg-white divide-y divide-gray-200">
+                            <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <tr>
+                                    <th class="py-3 px-6 text-center">No</th>
+                                    <th class="py-3 px-6 text-center">NIP</th>
+                                    <th class="py-3 px-6 text-center">Nama Depan</th>
+                                    <th class="py-3 px-6 text-center">Nama Belakang</th>
+                                    <th class="py-3 px-6 text-center">Jabatan</th>
+                                    <th class="py-3 px-6 text-center">Gol.</th>
+                                    <th class="py-3 px-6 text-center">Username</th>
+                                    <th class="py-3 px-6 text-center">Password</th>
+                                    <th class="py-3 px-6 text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($atasan as $atas)
                                 <tr>
-                                    <td class="py-2 px-2 text-center border-r border-gray-300">{{ $loop->iteration }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->nip }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->namaDepan }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->namaBelakang }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->jabatan }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->pangkat }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->username }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">{{ $atas->decrypted_password}}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">
-                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                                    
-                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                    <td class="py-2 px-2 text-center">{{ $loop->iteration }}</td>
+                                    <td class="py-3 px-3 text-center">{{ $atas->nip }}</td>
+                                    <td class="py-3 px-3 text-center">{{ $atas->namaDepan }}</td>
+                                    <td class="py-3 px-3 text-center">{{ $atas->namaBelakang }}</td>
+                                    <td class="py-3 px-3 text-center">{{ $atas->jabatan }}</td>
+                                    <td class="py-3 px-3 text-center">{{ $atas->pangkat }}</td>
+                                    <td class="py-3 px-3 text-center">{{ $atas->username }}</td>
+                                    <td class="py-3 px-3 text-center">{{ $atas->decrypted_password}}</td>
+                                    <td class="py-3 px-3 text-center">
+                                        <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
+                                        <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                        
-                <!-- Table for Pegawai -->
+                    
+                    <!-- Table for Pegawai -->
                     <h2 class="text-2xl font-bold mb-2">Data Pegawai</h2>
-                    <div class="overflow-x-auto mb-8">
-                        <table class="min-w-full bg-white border border-gray-300">
-                            <thead>
-                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th class="py-2 px-6 text-center border-b border-gray-300">No</th>
-                                    <th class="py-2 px-6 text-center border-b border-gray-300">Atasan</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">NIP</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Nama Depan</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Nama Belakang</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Jabatan</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Gol.</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Username</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Password</th>
-                                    <th class="py-3 px-6 text-center border-b border-gray-300">Aksi</th>
+                    <button type="button" onclick="window.location='{{ route('register.register') }}'" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded top-0 right-0"> + tambah data </button> //make different view for input the pegawai's data and change the route
+                    <div class="overflow-x-auto max-h-72 overflow-y-auto mb-8 border border-gray-300">
+                        <table class="min-w-full bg-white divide-y divide-gray-200">
+                            <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <tr>
+                                    <th class="py-2 px-6 text-center">No</th>
+                                    <th class="py-2 px-6 text-center">Atasan</th>
+                                    <th class="py-3 px-6 text-center">NIP</th>
+                                    <th class="py-3 px-6 text-center">Nama Depan</th>
+                                    <th class="py-3 px-6 text-center">Nama Belakang</th>
+                                    <th class="py-3 px-6 text-center">Jabatan</th>
+                                    <th class="py-3 px-6 text-center">Gol.</th>
+                                    <th class="py-3 px-6 text-center">Username</th>
+                                    <th class="py-3 px-6 text-center">Password</th>
+                                    <th class="py-3 px-6 text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody
+                            <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($pegawai as $peg)
                                 <tr>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $loop->iteration }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->id_atasan }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->nip }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->namaDepan }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->namaBelakang }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->jabatan }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->pangkat }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->username }}</td>
-                                    <td class="py-3 px-6 text-center border-r border-gray-300">{{ $peg->decrypted_password }}</td>
-                                    <td class="py-3 px-3 text-center border-r border-gray-300">
-                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                    <td class="py-3 px-6 text-center">{{ $loop->iteration }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->id_atasan }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->nip }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->namaDepan }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->namaBelakang }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->jabatan }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->pangkat }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->username }}</td>
+                                    <td class="py-3 px-6 text-center">{{ $peg->decrypted_password }}</td>
+                                    <td class="py-3 px-3 text-center">
+                                        <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
+                                        <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>                
             </div>
         </div>
     </div>
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Fetch data from the backend
-        axios.get('/data')
-            .then(response => {
-                const atasanList = document.getElementById('atasan-list');
-                const pegawaiList = document.getElementById('pegawai-list');
-
-                // Populate atasan list
-                response.data.atasan.forEach(atasan => {
-                    const atasanElement = document.createElement('div');
-                    atasanElement.innerHTML = `
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                <h5 class="card-title">${atasan.name}</h5>
-                                <p class="card-text">Username: ${atasan.username}</p>
-                                <button class="btn btn-primary" onclick="editAtasan(${atasan.id})">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteAtasan(${atasan.id})">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                    atasanList.appendChild(atasanElement);
-                });
-
-                // Populate pegawai list
-                response.data.pegawai.forEach(pegawai => {
-                    const pegawaiElement = document.createElement('div');
-                    pegawaiElement.innerHTML = `
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                <h5 class="card-title">${pegawai.name}</h5>
-                                <p class="card-text">Username: ${pegawai.username}</p>
-                                <button class="btn btn-primary" onclick="editPegawai(${pegawai.id})">Edit</button>
-                                <button class="btn btn-danger" onclick="deletePegawai(${pegawai.id})">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                    pegawaiList.appendChild(pegawaiElement);
-                });
-            });
-
-        window.editAtasan = function (id) {
-            // Implement edit functionality
-        }
-
-        window.deleteAtasan = function (id) {
-            if (confirm('Are you sure you want to delete this atasan?')) {
-                axios.delete(`/atasan/${id}`)
-                    .then(response => {
-                        alert(response.data.message);
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        alert('An error occurred while deleting the atasan.');
-                    });
-            }
-        }
-
-        window.editPegawai = function (id) {
-            // Implement edit functionality
-        }
-
-        window.deletePegawai = function (id) {
-            if (confirm('Are you sure you want to delete this pegawai?')) {
-                axios.delete(`/pegawai/${id}`)
-                    .then(response => {
-                        alert(response.data.message);
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        alert('An error occurred while deleting the pegawai.');
-                    });
-            }
-        }
-    });
-    </script>
-
 </body>
 </html>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class editDataController extends Controller
 {
-    #UBAH DATA
+    #UBAH DATA ATASAN
     public function edit (Request $request, $nip)
     {
         $user = User::where('nip', $nip)->first();

@@ -90,8 +90,8 @@ Route::get('/admin/manage-data', function(){
 Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admin.manage-data');
 
 #update data
-Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('admin.edit');
-Route::put('/admin/{nip}/update', [editDataController::class, 'update']) -> name('admin.update');
+Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('atasan.edit');
+Route::put('/admin/{nip}/update', [editDataController::class, 'update']) -> name('atasan.update');
 
 #Route::put('/pegawai/{id_pegawai}', [PegawaiController::class, 'update']); 
 #Route::put('/pegawai/{id_pegawai}/edit', [PegawaiController::class, 'update']);
