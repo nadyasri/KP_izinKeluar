@@ -143,3 +143,5 @@ Route::post('/submitform', [IzinController::class, 'submitForm']);
 
 #pdfGenerate
 Route::get('/generatePdf', [PdfController::class, 'generatepdf']);
+#buat ngambil data dari form submison pake yang ini?
+// Route::post('/generatePdf', [PdfController::class, 'generatepdf']);
