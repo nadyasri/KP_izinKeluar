@@ -16,6 +16,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\GuidebookController;
+use App\Http\Controllers\RiwayatSuratAdmController;
 
 
 /*
@@ -76,16 +77,12 @@ Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_sup
 
 #guidebook
 Route::get('/guidebook', [GuidebookController::class, 'listGuidebook'])->name('guide.list');
-Route::get('/guidebook/download/{file}', [GuidebookController::class, 'downloadGuidebook'])->name('guide.download');
+Route::get('/guidebook-download', [GuidebookController::class, 'downloadGuidebook'])->name('download.guidebook');
 
 #Route::get('/atasan/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard')->middleware('auth');
 
-#show-data
-Route::get('/admin/manage-data', function(){
-    return view('admin.manage-data');
-});
 
-#fetch-data
+#show-data
 Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admin.manage-data');
 
 #update-data
@@ -97,6 +94,9 @@ Route::put('/admin/{nip}/update', [editDataController::class, 'update']) -> name
 
 #hapus_data_atasan
 Route::delete('/admin/{nip}/delete', [AtasanController::class, 'destroy']) -> name('all.delete'); 
+
+#master-izinAdm
+Route::get('/admin/master-izin', [RiwayatSuratAdmController::class, 'riwayatSurat']) -> name('admin.master-izin');
 
 #register
 Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');

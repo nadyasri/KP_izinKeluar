@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai; #maybe change the "User" models content
-use App\Models\IzinPegawai;
+use App\Models\IzinForm;
 use Illuminate\Http\Request;
 #please make the model for permission data
 
@@ -12,10 +12,10 @@ class StatAtasController extends Controller
     public function dashboard_pegawai(Request $request, $nip)
     {
         #return 'Controller is working!';
-        $menunggu = IzinPegawai::where('status', 'Pending')
+        $menunggu = IzinForm::where('status', 'Pending')
         ->where('nip', $nip)
         ->count();
-        $konfirmasi = IzinPegawai::where('status', 'Ditolak')
+        $konfirmasi = IzinForm::where('status', 'Ditolak')
         ->where('nip', $nip)
         ->count();
         #$akunNama = Pegawai::where('id', Authenticate::user()->id)->value('Nama_Depan, Nama_Belakang')->get();
@@ -24,8 +24,6 @@ class StatAtasController extends Controller
         
 
         return view('atasan.dashboard', compact('menunggu', 'konfirmasi'));
-
-        #tambahkan agar pengguna dapat mengunduh guide book aplikasi
 
     }
     

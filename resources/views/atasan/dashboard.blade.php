@@ -76,7 +76,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold">User Guide</h3>
-                        <a href="#"class="text-gray-600 font-bold">Download</a>
+                        <a href="{{ route('download.guidebook') }}"class="text-gray-600 font-bold">Download</a>
                     </div>
                 </div>
             </div>
