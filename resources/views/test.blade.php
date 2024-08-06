@@ -26,10 +26,10 @@
             <nav class="mt-6 flex-grow">
                 <ul>
                     <li class="mb-2 text-amber-50">
-                        <a href="{{ route('admin.dashboard') }}" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
+                        <a href="#" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
                     </li>
                     <li class="mb-2">
-                        <a href="{{ route('admin.manage-data') }}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Daftar Akun Pengguna Pegawai dan Atasan</a>
+                        <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Daftar Akun Pengguna Pegawai dan Atasan</a>
                     </li>
                     <li class="mb-2">
                         <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Riwayat Pengajuan Izin Keluar Kantor Pegawai</a>
@@ -71,15 +71,17 @@
                 </div>
                 
                 <!-- Card 3 -->
+                @foreach($files as $file)
                 <div class="bg-green-700 bg-opacity-30 p-6 rounded-lg shadow-md flex items-center">
                     <div class="w-16 h-16 flex-shrink-0 flex items-center justify-center bg-white rounded-full mr-4">
                         <img src="{{ asset('resources/assets/Document.png') }}" alt="Icon" class="w-8 h-8">
                     </div>
                     <div>
                         <h3 class="text-xl font-bold">User Guide</h3>
-                        <a href="{{ route('download.guidebook') }}" class="text-gray-600 font-bold">Download</a>
+                        <a href="{{ route('guide.download', $file->getFileName()) }}" class="text-gray-600 font-bold">Download</a>
                     </div>
                 </div>
+                @endforeach
                 
                 <!-- Card 4 -->
                 <div class="bg-green-700 bg-opacity-30 p-6 rounded-lg shadow-md flex items-center">

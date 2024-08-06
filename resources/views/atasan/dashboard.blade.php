@@ -30,6 +30,9 @@
                     <li class="mb-2">
                         <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Buat Pengajuan Surat Izin Keluar Kantor</a>
                     </li>
+                    <li class="mb-2">
+                        <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Verifikasi Pengajuan Surat Izin Keluar Kantor</a>
+                    </li>
                 </ul>
             </nav>
             <div class="mt-auto">
@@ -50,7 +53,7 @@
                         <img src="resources/assets/UserMale.jpg" alt="Icon" class="w-8 h-8">
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold">Disetujui</h3>
+                        <h3 class="text-xl font-bold">Belum Dikonfirmasi</h3>
                         <p class="text-gray-600 text-xl font-bold">{{ $ajuSetuju }}</p>
                     </div>
                 </div>
@@ -61,7 +64,7 @@
                         <img src="resources/assets/Folder.png" alt="Icon" class="w-8 h-8">
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold">Ditolak</h3>
+                        <h3 class="text-xl font-bold">Sudah Dikonfirmasi</h3>
                         <p class="text-gray-600 text-xl font-bold">{{ $ajuTolak }}</p>
                     </div>
                 </div>
@@ -73,7 +76,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold">User Guide</h3>
-                        <a href="{{ route('download.guidebook') }}" class="text-gray-600 font-bold">Download</a>
+                        <a href="{{ route('download.guidebook') }}"class="text-gray-600 font-bold">Download</a>
                     </div>
                 </div>
             </div>
