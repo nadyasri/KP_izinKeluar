@@ -71,15 +71,17 @@
                 </div>
                 
                 <!-- Card 3 -->
+                @foreach($files as $file)
                 <div class="bg-green-700 bg-opacity-30 p-6 rounded-lg shadow-md flex items-center">
                     <div class="w-16 h-16 flex-shrink-0 flex items-center justify-center bg-white rounded-full mr-4">
                         <img src="{{ asset('resources/assets/Document.png') }}" alt="Icon" class="w-8 h-8">
                     </div>
                     <div>
                         <h3 class="text-xl font-bold">User Guide</h3>
-                        <a href="{{ Storage::url('C:\xampp\htdocs\suratkeluar\KP_izinKeluar\storage\app/public/keluar_kantor.pdf') }}" download class="text-gray-600 font-bold">Download</a>
+                        <a href="{{ route('guide.download', $file->getFileName()) }}" class="text-gray-600 font-bold">Download</a>
                     </div>
                 </div>
+                @endforeach
                 
                 <!-- Card 4 -->
                 <div class="bg-green-700 bg-opacity-30 p-6 rounded-lg shadow-md flex items-center">

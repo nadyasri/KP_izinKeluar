@@ -74,7 +74,7 @@ class SesiController extends Controller
                 ]);
             } else if ($request->role == 'pegawai') { #bagian pegawai tidak bisa masuk ke database kemungkinan karena tidak adanya isi pada foreign key column alias id_atasan
                 Pegawai::create([
-                #   'nipAtasan' => $request->nipAtasan,
+                    'nipAtasan' => $request->nipAtasan,
                     'namaDepan' => $request->namaDepan,
                     'namaBelakang' => $request->namaBelakang,
                     'username' => $request->username,

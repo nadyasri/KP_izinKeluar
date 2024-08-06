@@ -76,7 +76,7 @@
                                     <td class="py-3 px-3 text-center">{{ $atas->decrypted_password}}</td>
                                     <td class="py-3 px-3 text-center">
                                         <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                                        <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                        <button type="button" onclick="window.location='{{ route('all.delete', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -117,7 +117,7 @@
                                     <td class="py-3 px-6 text-center">{{ $peg->decrypted_password }}</td>
                                     <td class="py-3 px-3 text-center">
                                         <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                                        <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                                        <button type="button" onclick="window.location='{{ route('all.delete', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                                     </td>
                                 </tr>
                                 @endforeach

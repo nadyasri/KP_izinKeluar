@@ -94,19 +94,15 @@ class editDataController extends Controller
     }
 
     #HAPUS DATA
-    public function destroy($nip)
+    public function destroy(Request $request, $nip)
     {
+        $data = User::find($nip);
 
-        $pegawai = User::findOrFail($nip);
-        $user = User::where('username', $pegawai->username)->first();
-
-        if ($pegawai) {
-            $pegawai->delete();
+        if ($data) {
+            $data->delete();
         }
 
-        $user->delete();
-
-        return response()->json(['message' => 'Pegawai deleted successfully']);
+        return redirect()->route('admin.manage-data')->with('success', 'Hapus Berhasil!');
     }
 
 }

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; #must change the "User" models content
+use App\Models\User;
 use App\Models\IzinPegawai;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
+#please make the model for permission data
 
-class AdmStatController extends Controller
+class StatAdmController extends Controller
 {
     public function dashboard()
     {
