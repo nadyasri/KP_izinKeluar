@@ -11,15 +11,22 @@ class RiwayatSuratAdmController extends Controller
     {
         $surat = IzinForm::query();
 
-        // Filter by name
-        if ($request->filled('nip')) {
-            $surat->where('nip', 'like', '%' . $request->nip . '%');
-        }
+        // Filter by nip
+        $surat->when($request->nip, function ($query) use ($request) {
+            return $query->where('nip', 'like', '%' . $request->nip . '%');
+        });
 
         // Filter by date
-        if ($request->filled('tanggal')) {
-            $surat->whereDate('tanggal', $request->tanggal);
-        }
+        #$tanggalAju=$request->tanggal;
+        #$surat = IzinForm::whereDate('tanggal', $tanggalAju)->get();
+        
+        $surat->when($request->tanggal, function ($query) use ($request) {
+            return $query->whereDate('tanggal', $request->tanggal);
+        });
+
+        #if ($request->filled('tanggal')) {
+        #    $surat->whereDate('tanggal', $request->tanggal);
+        #}
 
         $data = $surat->get();
 

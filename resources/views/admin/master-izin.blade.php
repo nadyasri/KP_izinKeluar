@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Akun Pegawai</title>
+    <title>Daftar Surat Izin Keluar Kantor</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link href="{{ asset('css/app.css')}}" rel="stylesheet">
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    .flatpickr-calendar {
+        z-index: 9999;
+    }
 </style>
 <body class="bg-gray-100 font-sans antialiased">
     <div class="flex min-h-screen">
@@ -46,17 +50,17 @@
                 
                 <!-- Filter content -->
                 <form method="GET" action="{{ route('admin.master-izin') }}">
-                    <div>
-                        <label for="nip" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIP:</label>
-                        <input type="text" name="nip" id="nip" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ request('nip') }}">
-                    </div>
-                    <div>
-                        <label for="tanggal" class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal:</label>
-                        <input type="text" name="tanggal" id="tanggal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ request('tanggal') }}">
-                    </div>
-                    <div>
-                        <button type="button" onclick="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mb-2 mt-2"> Filter </button>
-                        <button type="button" onclick="window.location='{{ route('admin.master-izin') }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded mb-2 mt-2"> Reset </a>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="flex flex-col w-1/3">
+                            <input type="text" name="nip" id="nip" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-1.5" placeholder="Masukkan NIP" value="{{ request('nip') }}">
+                        </div>
+                        <div class="flex flex-col w-1/3">
+                            <input id="date" name="date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-1.5" value="{{ request('tanggal') }}">
+                        </div>
+                        <div>
+                            <button type="button" onclick="#" class="h-10 w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Filter </button>
+                            <button type="button" onclick="window.location='{{ route('admin.master-izin') }}'" class="h-10 w-20 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Reset </a>
+                        </div>
                     </div>
                 </form>
 
