@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title> SIKAN | LOGIN </title>
+
     <style>
         body {
             background-image: url("img/bg.jpg"); 
@@ -20,10 +24,10 @@
             color: white;
             text-align: center;
             padding: 10px 0;
-            position: fixed; /* Header tetap di atas */
-            top: 0; /* Posisi di bagian atas */
-            width: 100%; /* Lebar penuh */
-            z-index: 1000; /* Di atas elemen lain */
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            z-index: 1000;
         }
         .main-content {
             padding-top: 60px; /* Sesuaikan dengan tinggi header */
@@ -39,8 +43,9 @@
             margin-bottom: 20px;
         }
     </style>
-    <title>SIKAN</title>
+
 </head>
+
 <body>
     <header>
         <h1>SIKAN</h1>
@@ -81,4 +86,5 @@
         </div>
     </main>
 </body>
+
 </html>
