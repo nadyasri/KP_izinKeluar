@@ -19,16 +19,6 @@ use App\Http\Controllers\GuidebookController;
 use App\Http\Controllers\RiwayatSuratAdmController;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 // Routes for guests (not logged in)
 Route::middleware(['guest'])->group(function() {
     Route::get('/', [SesiController::class, 'indexSesi'])->name('login');

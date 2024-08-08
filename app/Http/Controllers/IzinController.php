@@ -33,7 +33,6 @@ class IzinController extends Controller
             'Keperluan' => 'required|string',
         ]);
         
-
         // Simpan data ke database
         $izin = new IzinForm();
         $izin->name = $request->name;
