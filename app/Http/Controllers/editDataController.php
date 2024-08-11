@@ -97,10 +97,7 @@ class editDataController extends Controller
     public function destroy(Request $request, $nip)
     {
         $data = User::find($nip);
-
-        if ($data) {
-            $data->delete();
-        }
+        $data->delete();
 
         return redirect()->route('admin.manage-data')->with('success', 'Hapus Berhasil!');
     }
