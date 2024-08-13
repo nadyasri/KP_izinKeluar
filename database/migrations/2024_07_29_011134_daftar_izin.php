@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('daftar_izin', function (Blueprint $table) {
             $table->id('id_izin'); // Kolom ID Izin
             $table->date('tanggal'); // Kolom Tanggal
-            $table->string('nipAtasan'); // Kolom ID Atasan
-            $table->string('nipPegawai'); // Kolom ID Pegawai
+            $table->integer('groupId'); // Kolom ID Pegawai
+            $table->foreign('groupId')->references('groupId')->on('jabatan')->onDelete('cascade');
+        #    $table->string('parentId');
+            $table->string('nip');
             $table->string('keperluan'); // Kolom Keperluan
             $table->string('status'); // Kolom Status
             $table->text('keterangan'); // Kolom Keterangan 
@@ -24,8 +26,10 @@ return new class extends Migration
             $table->timestamps(); // Kolom timestamps untuk created_at dan updated_at
 
             // Jika ingin menambahkan foreign key untuk id_atasan dan id_pegawai
-            $table->foreign('nipAtasan')->references('nipAtasan')->on('master_pegawai')->onDelete('cascade');
-            $table->foreign('nipPegawai')->references('nip')->on('master_pegawai')->onDelete('cascade');
+        #    $table->foreign('nipAtasan')->references('nipAtasan')->on('master_pegawai')->onDelete('cascade');
+        #    $table->foreign('nipPegawai')->references('nip')->on('master_pegawai')->onDelete('cascade');
+
+            
         });
     }
 
