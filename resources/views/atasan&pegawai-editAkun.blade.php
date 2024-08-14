@@ -67,16 +67,8 @@
                         <input type="text" value="{{$user->nip}}" name="nip" class="form-control" id="nip" required>
                     </div>
                     <div class="mb-3">
-                        <label for="namaDepan" class="form-label">Nama Depan</label>
-                        <input type="text" value="{{$user->namaDepan}}" name="namaDepan" class="form-control" id="namaDepan" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="namaBelakang" class="form-label">Nama Belakang</label>
-                        <input type="text" value="{{$user->namaBelakang}}" name="namaBelakang" class="form-control" id="namaBelakang" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" value="{{$user->username}}" name="username" class="form-control" id="username" required>
+                        <label for="namaDepan" class="form-label">Nama Lengkap</label>
+                        <input type="text" value="{{$user->nama}}" name="namaDepan" class="form-control" id="namaDepan" required>
                     </div>
                     <div class="mb-3">
                         <label for="pangkat" class="form-label">Pangkat</label>
@@ -84,7 +76,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="jabatan" class="form-label">Jabatan</label>
-                        <input type="text" value="{{$user->jabatan}}" name="jabatan" class="form-control" id="jabatan" required>
+                        <select name="Users_groupId" id="jabatan" class="form-control" required>
+                            @foreach($jabatan as $jab)
+                                <option value="{{ $jab->groupId }}">{{ $jab->jabatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" value="{{$user->username}}" name="username" class="form-control" id="username" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -103,7 +103,7 @@
                         </select>
                     </div>
                     <div class="d-grid">
-                        <button name="submit" type="submit" onclick="window.location='{{ route('register') }}'" value="submit" class="btn btn-success">Create an account</button>
+                        <button name="submit" type="submit" onclick="window.location='{{ route('register') }}'" value="submit" class="btn btn-success">Change data</button>
                     </div>
                 </form>
             </div>

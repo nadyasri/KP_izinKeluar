@@ -1,8 +1,8 @@
-@extends('layouts.sidebar-pegawai')
+@extends('layouts.sidebar-atasan')
 
-@section('title', 'Dashboard Pegawai')
+@section('title', 'Dashboard Atasan')
 
-@section('pegawai-content')
+@section('atasan-content')
 <h1 class="text-green-900 text-4xl font-bold mb-6">Hi, {{auth()->user()->nama}}!</h1>
 <p class="text-gray-500 mb-12 -mt-5 tracking-wide">Mau pergi ke mana hari ini?</p>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
