@@ -12,8 +12,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('jabatan', function (Blueprint $table) {
-            $table->integer('groupId')->primary();
-            $table->Integer('parentId')->nullable();
+            $table->id('groupId');
+            $table->unsignedBigInteger('parentId');
             $table->foreign('parentId')->references('groupId')->on('jabatan');
             $table->string('jabatan');
         });

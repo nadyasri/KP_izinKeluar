@@ -66,16 +66,8 @@
                         <input type="text" name="nip" class="form-control" id="nip" required>
                     </div>
                     <div class="mb-3">
-                        <label for="namaDepan" class="form-label">Nama Depan</label>
-                        <input type="text" value="{{ old('namaDepan') }}" name="namaDepan" class="form-control" id="namaDepan" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="namaBelakang" class="form-label">Nama Belakang</label>
-                        <input type="text" value="{{ old('namaBelakang') }}" name="namaBelakang" class="form-control" id="namaBelakang" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" value="{{ old('username') }}" name="username" class="form-control" id="username" required>
+                        <label for="nama" class="form-label">Nama Lengkap</label>
+                        <input type="text" value="{{ old('nama') }}" name="nama" class="form-control" id="nama" required>
                     </div>
                     <div class="mb-3">
                         <label for="pangkat" class="form-label">Pangkat</label>
@@ -86,11 +78,16 @@
                         <input type="text" name="jabatan" class="form-control" id="jabatan" required>
                     </div>
                     <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" value="{{ old('username') }}" name="username" class="form-control" id="username" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="text" name="password" class="form-control" id="password" required>
                     </div>
                     <div class="mb-3">
-                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                        <label for="password_confirmation"
+                        class="form-label">Confirm Password</label>
                         <input type="text" name="password_confirmation" class="form-control" id="password_confirmation" required>
                     </div>
                     <div class="mb-3">

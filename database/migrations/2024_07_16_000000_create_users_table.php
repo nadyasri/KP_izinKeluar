@@ -14,16 +14,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id('id_user');
             $table->string('nip')->unique();
-         //    $table->string('nipAtasan'); #untuk pegawai; kalau ketua menjadi pegawai juga, maka column ini bisa dimasukkan ke tabel user
             $table->string('nama'); // Kolom Nama
             $table->string('pangkat'); // Kolom Pangkat
-            $table->Integer('groupId');
-            $table->foreign('groupId')->references('groupId')->on('jabatan')->onDelete('cascade');
+            $table->unsignedBigInteger('Users_groupId');
             $table->string('username')->unique();
             $table->string('password');
             $table->enum('role',['pegawai','admin','superadmin'] )-> default('admin');
+            $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            #FOREIGN KEY
+            ##groupidFromJabatan
+            $table->foreign('Users_groupId')->references('groupId')->on('jabatan');
 
         });
     }

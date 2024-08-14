@@ -24,9 +24,7 @@ class User extends Authenticatable
     
     protected $fillable = [
         'nip',
-      # 'nipAtasan', #khusus untuk pegawai; kalau ketua menjadi pegawai juga, maka column ini bisa dimasukkan ke tabel user
-        'namaDepan',
-        'namaBelakang',
+        'nama',
         'jabatan',
         'pangkat',
         'username',
@@ -37,14 +35,19 @@ class User extends Authenticatable
         #'jabatan',
     ];
 
-    public function pegawai()
-    {
-        return $this->hasOne(Pegawai::class, 'username', 'username');
-    }
+#    public function pegawai()
+#    {
+#        return $this->hasOne(Pegawai::class, 'username', 'username');
+#    }
 
-    public function atasan()
+#    public function atasan()
+#    {
+#        return $this->hasOne(Atasan::class, 'username', 'username');
+#    }
+
+    public function jabatan()
     {
-        return $this->hasOne(Atasan::class, 'username', 'username');
+        return $this->belongsTo(Jabatan::class, 'group_id', 'groupId');
     }
 
     /**
