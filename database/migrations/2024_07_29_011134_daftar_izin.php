@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('daftar_izin', function (Blueprint $table) {
             $table->id('id_izin'); // Kolom ID Izin
             $table->unsignedBigInteger('groupId_pengirim');  //pengirim
-            $table->unsignedBigInteger('groupId_penerima');
+            $table->unsignedBigInteger('groupId_penerima');  //penerima
             $table->date('tanggal'); // Kolom Tanggal
             $table->string('nip');
             $table->string('keperluan'); // Kolom Keperluan
-            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu'); // Kolom Status
+            $table->enum('status', ['Menunggu', 'disetujui', 'ditolak'])->default('menunggu'); // Kolom Status
             $table->text('keterangan'); // Kolom Keterangan 
             $table->time('waktu_keluar'); // Kolom Waktu Keluar
             $table->time('waktu_kembali'); // Kolom Waktu Masuk

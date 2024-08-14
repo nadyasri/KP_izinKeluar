@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IzinForm;
+use App\Models\SuratIzin;
 use Illuminate\Http\Request;
 
 class RiwayatSuratAdmController extends Controller
 {
     public function riwayatSurat(Request $request)
     {
-        $surat = IzinForm::query();
+        $surat = SuratIzin::query();
 
         // Filter by nip
         $surat->when($request->nip, function ($query) use ($request) {
@@ -30,6 +30,6 @@ class RiwayatSuratAdmController extends Controller
 
         $data = $surat->get();
 
-        return view('admin.master-izin', compact('data'));
+        return view('admin-manageIzin', compact('data'));
     }
 }

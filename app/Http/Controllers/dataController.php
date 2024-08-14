@@ -15,7 +15,7 @@ class dataController extends Controller
     public function index()
     {
         $atasan = User::where('role', 'superadmin')->get();
-        $pegawai = Pegawai::all();
+        $pegawai = User::where('role', 'pegawai')->get();
 
         foreach ($atasan as $atas) {
             try {
@@ -36,7 +36,7 @@ class dataController extends Controller
             }
         }
         
-        return view('admin.manage-data', ['atasan' => $atasan, 'pegawai' => $pegawai]);
+        return view('admin-manageData', ['atasan' => $atasan, 'pegawai' => $pegawai]);
     }
 
 }
