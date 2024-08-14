@@ -20,4 +20,5 @@ class Jabatan extends Model
     {
         return $this->hasMany(User::class, 'group_id', 'groupId');
     }
+
 }

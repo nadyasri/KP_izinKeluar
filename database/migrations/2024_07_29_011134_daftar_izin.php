@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal'); // Kolom Tanggal
             $table->string('nip');
             $table->string('keperluan'); // Kolom Keperluan
-            $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending'); // Kolom Status
+            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu'); // Kolom Status
             $table->text('keterangan'); // Kolom Keterangan 
             $table->time('waktu_keluar'); // Kolom Waktu Keluar
             $table->time('waktu_kembali'); // Kolom Waktu Masuk

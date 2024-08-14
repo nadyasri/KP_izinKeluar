@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('jabatan', function (Blueprint $table) {
             $table->id('groupId');
-            $table->unsignedBigInteger('parentId');
-            $table->foreign('parentId')->references('groupId')->on('jabatan');
+            $table->integer('parentId')->nullable();
             $table->string('jabatan');
         });
     }
