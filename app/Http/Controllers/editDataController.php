@@ -26,14 +26,13 @@ class editDataController extends Controller
     {
         
         $validator = Validator::make($request->all(), [
-            'namaDepan' => 'required|string|max:255',
-            'namaBelakang' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username,' . $nip . ',nip',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:pegawai,admin,superadmin',
             'nip' => 'required|string|max:20|unique:users,nip,' . $nip . ',nip',
             'pangkat' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
+        #    'jabatan' => 'required|string|max:255', //bikin pilihan yang diambil dari 'jabatan' user
         ]);
 
         if($validator->fails()){
@@ -44,8 +43,7 @@ class editDataController extends Controller
 
         try {
             $user = User::where('nip', $nip)->firstOrFail();
-            $user->namaDepan = $request->namaDepan;
-            $user->namaBelakang = $request->namaBelakang;
+            $user->nama = $request->nama;
             $user->username = $request->username;
             $user->password = Crypt::encryptString($request -> password);
             $user->role = $request->role;
@@ -58,8 +56,7 @@ class editDataController extends Controller
                 Atasan::updateOrCreate(
                     ['nip' => $nip],
                     [
-                        'namaDepan' => $request->namaDepan,
-                        'namaBelakang' => $request->namaBelakang,
+                        'nama' => $request->nama,
                         'username' => $request->username,
                         'password' => Crypt::encryptString($request -> password),
                         'role' => $request->role,
@@ -71,8 +68,7 @@ class editDataController extends Controller
                 Pegawai::updateOrCreate(
                     ['nip' => $nip],
                     [
-                        'namaDepan' => $request->namaDepan,
-                        'namaBelakang' => $request->namaBelakang,
+                        'nama' => $request->nama,
                         'username' => $request->username,
                         'password' => Crypt::encryptString($request -> password),
                         'role' => $request->role,

@@ -29,15 +29,13 @@ class SesiController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'namaDepan' => 'required|string|max:255',
-            'namaBelakang' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:pegawai,admin,superadmin',
             'nip' => 'required|string|max:20|unique:users',
-        #    'nipAtasan' => 'required|string|max:20',
             'pangkat' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
+        #    'jabatan' => 'required|string|max:255', //bikin pilihan yang diambil dari 'jabatan' user
             
         ]);
 
@@ -49,40 +47,36 @@ class SesiController extends Controller
 
         DB::beginTransaction();
 
-        try {
+        #try {
             User::create([
-                'namaDepan' => $request->namaDepan,
-                'namaBelakang' => $request->namaBelakang,
+                'nama' => $request->nama,
                 'username' => $request->username,
                 'password' => Crypt::encryptString($request -> password),
                 'role' => $request->role,
                 'nip' => $request->nip,
                 'pangkat' => $request->pangkat,
-                'jabatan' => $request->jabatan,
+            #    'jabatan' => $request->jabatan,
             ]);
 
             if ($request->role == 'superadmin') {
                 Atasan::create([
-                    'namaDepan' => $request->namaDepan,
-                    'namaBelakang' => $request->namaBelakang,
+                    'nama' => $request->nama,
                     'username' => $request->username,
                     'password' => Crypt::encryptString($request -> password),
                     'role' => $request->role,
                     'nip' => $request->nip,
                     'pangkat' => $request->pangkat,
-                    'jabatan' => $request->jabatan,
+                #    'jabatan' => $request->jabatan,
                 ]);
             } else if ($request->role == 'pegawai') { #bagian pegawai tidak bisa masuk ke database kemungkinan karena tidak adanya isi pada foreign key column alias id_atasan
                 Pegawai::create([
-                    'nipAtasan' => $request->nipAtasan,
-                    'namaDepan' => $request->namaDepan,
-                    'namaBelakang' => $request->namaBelakang,
+                    'nama' => $request->nama,
                     'username' => $request->username,
                     'password' => Crypt::encryptString($request -> password),
                     'role' => $request->role,
                     'nip' => $request->nip,
                     'pangkat' => $request->pangkat,
-                    'jabatan' => $request->jabatan,
+                #    'jabatan' => $request->jabatan,
                 ]);
             }
 
@@ -90,10 +84,10 @@ class SesiController extends Controller
 
             return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(['message' => 'Registration failed'], 500);
-        }
+        #} catch (\Exception $e) {
+        #    DB::rollback();
+        #    return response()->json(['message' => 'Registration failed'], 500);
+        #}
 
         //redirect ke halaman login
         #return redirect()->route('login')->with('success', 'Registration successful! Please login.');
@@ -105,6 +99,8 @@ class SesiController extends Controller
         return view('login.login');
     }
 
+
+    // bikin session
     function login(Request $request)
     {
         $request->validate([
@@ -119,6 +115,8 @@ class SesiController extends Controller
             'username' => $request->username,
             'password' => $request->password,
         ];
+
+        // bikin choices, mau ke aplikasi surat keluar kantor atau ambil cuti
 
         if (Auth::attempt($infologin)){
             $user = Auth::user();

@@ -20,7 +20,7 @@ class IzinController extends Controller
 
     public function submitForm(Request $request)
     {
-        dd($request);
+        #dd($request);
         // Validasi input
         $request->validate([
             

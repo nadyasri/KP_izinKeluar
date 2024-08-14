@@ -17,14 +17,12 @@ return new class extends Migration
             #FK NIP ATASAN
             $table->foreign('nipAtasan')->references('nip')->on('master_atasan')->onDelete('set null');
             $table->string('nip')->unique(); // Kolom NIP
-            //FK NIP PEGAWAI
             $table->foreign('nip')->references('nip')->on('users')->onDelete('cascade');
             $table->string('namaDepan'); // Kolom Nama Depan
             $table->string('namaBelakang'); // Kolom Nama Belakang
-            $table->string('jabatan'); // Kolom Jabatan
+            $table->string('groupId'); // Kolom Jabatan
             $table->string('pangkat'); // Kolom Pangkat
             $table->string('username')->unique(); // Kolom Username
-            //FK USERNAME
             $table->foreign('username')->references('username')->on('users')->onDelete('cascade');
             $table->string('password'); // Kolom Password
             $table->timestamps(); // Kolom timestamps untuk created_at dan updated_at

@@ -13,19 +13,24 @@ return new class extends Migration
     {
         Schema::create('daftar_izin', function (Blueprint $table) {
             $table->id('id_izin'); // Kolom ID Izin
+            $table->unsignedBigInteger('groupId_pengirim');  //pengirim
+            $table->unsignedBigInteger('groupId_penerima');
             $table->date('tanggal'); // Kolom Tanggal
-            $table->string('nipAtasan'); // Kolom ID Atasan
-            $table->string('nipPegawai'); // Kolom ID Pegawai
+            $table->string('nip');
             $table->string('keperluan'); // Kolom Keperluan
-            $table->string('status'); // Kolom Status
+            $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending'); // Kolom Status
             $table->text('keterangan'); // Kolom Keterangan 
             $table->time('waktu_keluar'); // Kolom Waktu Keluar
-            $table->time('waktu_masuk'); // Kolom Waktu Masuk
+            $table->time('waktu_kembali'); // Kolom Waktu Masuk
             $table->timestamps(); // Kolom timestamps untuk created_at dan updated_at
 
-            // Jika ingin menambahkan foreign key untuk id_atasan dan id_pegawai
-            $table->foreign('nipAtasan')->references('nipAtasan')->on('master_pegawai')->onDelete('cascade');
-            $table->foreign('nipPegawai')->references('nip')->on('master_pegawai')->onDelete('cascade');
+            #FOREIGN KEY
+            ##idPengirimFromUsers
+            $table->foreign('groupId_pengirim')->references('Users_groupId')->on('users')->onDelete('cascade');
+            
+            ##idPenerimaFromJabatan
+            $table->foreign('groupId_penerima')->references('groupId')->on('jabatan');
+
         });
     }
 
