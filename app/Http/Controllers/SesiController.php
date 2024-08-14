@@ -3,25 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Pegawai;
 use App\Models\Atasan;
 use App\Models\Jabatan;
+use App\Models\Pegawai;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
 
 
 class SesiController extends Controller
 {
     
     public function showRegistrationForm()
+
     {
         $jabatan = Jabatan::all(); // Fetch all jabatan
         return view('register.register', compact('jabatan'));
+
+    { 
+        return view('register.register');
+
     }
 
     public function register(Request $request)
@@ -124,6 +130,13 @@ class SesiController extends Controller
             $user = Auth::user();
             $role = $user->role;
 
+            // Menyimpan informasi user ke session
+            Session([
+                'user_id' => $user->id,
+                'username' => $user->username,
+                'user_role' => $role,
+            ]);
+
             if ($role === 'superadmin') {
                 return redirect('/superadmin/dashboard');
                 // yang ini
@@ -143,6 +156,7 @@ class SesiController extends Controller
     public function logout()
 {
     Auth::logout();
+    Session::flush(); // Menghapus semua data dari session
     return redirect('/')->with('success', 'You have been logged out.');
 }
     
