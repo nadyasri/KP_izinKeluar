@@ -43,22 +43,9 @@ Route::middleware(['auth'])->group(function() {
     Route::middleware(['role:pegawai'])->group(function() {
         Route::get('/pegawai/dashboard', [StatPegController::class, 'dashboard'])->name('pegawai.dashboard');
     });
+
+    Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
-
-#dashboard
-// Route::get('/admin/dashboard', [AdmStatController::class, 'dashboard'])->name('admin.dashboard');
-// Route::get('/pegawai/dashboard', [PegStatController::class, 'dashboard'])->name('pegawai.dashboard');
-// Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name ('superadmin.dashboard');
-
-
-// Route for logout (only for logged-in users)
-Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middleware('auth');
-
-
-#registration
-#Route::post('/regist/atasan', [AtasanController::class, 'store'])->name('regist.atasan');
-#Route::post('/regist/pegawai', [PegawaiController::class, 'store'])->name('regist.pegawai');
-
 
 #dashboard
 Route::get('/admin/dashboard', [StatAdmController::class, 'dashboard'])->name('admin.dashboard');
@@ -97,9 +84,12 @@ Route::post('/register', [SesiController::class, 'register'])->name('register.re
 
 
 #form IZIN
-Route::get('/formizin', function () {
-    return view('Formizin.formizin');
-});
+// Route::middleware(['auth', 'role:superadmin,pegawai'])->group(function() {
+    Route::get('/formizin', function () {
+        return view('Formizin.formizin');
+    })->name('formizin');
+// });
+
 
 Route::post('/submitform', [IzinController::class, 'submitForm']);
 
