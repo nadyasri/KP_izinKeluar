@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Pegawai;
 use App\Models\Atasan;
+use App\Models\Jabatan;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -18,8 +20,8 @@ class SesiController extends Controller
     
     public function showRegistrationForm()
     {
-
-        return view('register.register');
+        $jabatan = Jabatan::all(); // Fetch all jabatan
+        return view('register.register', compact('jabatan'));
     }
 
     public function register(Request $request)
@@ -47,7 +49,7 @@ class SesiController extends Controller
 
         DB::beginTransaction();
 
-        try {
+        #try {
             User::create([
                 'nama' => $request->nama,
                 'username' => $request->username,
@@ -58,36 +60,36 @@ class SesiController extends Controller
                 'Users_groupId' => $request->Users_groupId,
             ]);
 
-            if ($request->role == 'superadmin') {
-                Atasan::create([
-                    'nama' => $request->nama,
-                    'username' => $request->username,
-                    'password' => Crypt::encryptString($request -> password),
-                    'role' => $request->role,
-                    'nip' => $request->nip,
-                    'pangkat' => $request->pangkat,
-                    'Users_groupId' => $request->Users_groupId,
-                ]);
-            } else if ($request->role == 'pegawai') { #bagian pegawai tidak bisa masuk ke database kemungkinan karena tidak adanya isi pada foreign key column alias id_atasan
-                Pegawai::create([
-                    'nama' => $request->nama,
-                    'username' => $request->username,
-                    'password' => Crypt::encryptString($request -> password),
-                    'role' => $request->role,
-                    'nip' => $request->nip,
-                    'pangkat' => $request->pangkat,
-                    'Users_groupId' => $request->Users_groupId,
-                ]);
-            }
+            #if ($request->role == 'superadmin') {
+            #    Atasan::create([
+            #        'nama' => $request->nama,
+            #        'username' => $request->username,
+            #        'password' => Crypt::encryptString($request -> password),
+            #        'role' => $request->role,
+            #        'nip' => $request->nip,
+            #        'pangkat' => $request->pangkat,
+            #        'Users_groupId' => $request->Users_groupId,
+            #    ]);
+            #} else if ($request->role == 'pegawai') { #bagian pegawai tidak bisa masuk ke database kemungkinan karena tidak adanya isi pada foreign key column alias id_atasan
+            #    Pegawai::create([
+            #        'nama' => $request->nama,
+            #        'username' => $request->username,
+            #        'password' => Crypt::encryptString($request -> password),
+            #        'role' => $request->role,
+            #        'nip' => $request->nip,
+            #        'pangkat' => $request->pangkat,
+            #        'Users_groupId' => $request->Users_groupId,
+            #    ]);
+            #}
 
             DB::commit();
 
             return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
-        } catch (\Exception $e) {
+        #tch (\Exception $e) {
         #    DB::rollback();
-            return response()->json(['message' => 'Registration failed'], 500);
-        }
+        #s    return response()->json(['message' => 'Registration failed'], 500);
+       # }
 
         //redirect ke halaman login
         #return redirect()->route('login')->with('success', 'Registration successful! Please login.');
