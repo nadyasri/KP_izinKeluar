@@ -1,50 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Surat Izin Keluar Kantor</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link href="{{ asset('css/app.css')}}" rel="stylesheet">
-</head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-    .flatpickr-calendar {
-        z-index: 9999;
-    }
-</style>
-<body class="bg-gray-100 font-sans antialiased">
-    <div class="flex min-h-screen">
+@extends('layouts.sidebar-admin')
 
-        <!-- Sidebar -->
-        <div class="bg-green-700 text-white w-64 min-h-screen flex flex-col p-4">
-            <div class="text-white flex flex-col items-center">
-                <img src="resources/assets/ppAdm.jpg" alt="Profile Picture" class="p-10 rounded-full w-24 h-24 mb-4">
-                <h2 class="text-xl font-bold p-6">Adminum</h2>
-            </div>
-            <nav class="mt-6 flex-grow">
-                <ul>
-                    <li class="mb-2 text-amber-50">
-                        <a href="/resources/views/admin/dashboard.blade.php" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Daftar Akun Pengguna Pegawai dan Atasan</a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Riwayat Pengajuan Izin Keluar Kantor Pegawai</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="mt-auto">
-                <a href="#" class="text-yellow-500 font-bold block py-2.5 px-4 text-logout transition duration-200 hover:bg-black rounded">Logout</a>
-            </div>
-        </div>
+@section('title', 'Kelola Data Perizinan')
 
-        <!-- Main content -->
-        <div class="flex-grow bg-green-700">
-            <div class="bg-white p-10 rounded-tl-3xl rounded-bl-3xl shadow-xl min-h-full">
+@section('admin-content')
+
                 <h1 class="text-green-900 text-3xl font-bold mb-6">Riwayat Pengajuan Surat Izin Keluar Kantor</h1>
                 <hr class="border-t-2 border-gray-200 my-6">
                 
@@ -98,9 +57,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>                
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+                </div>
+
+@endsection

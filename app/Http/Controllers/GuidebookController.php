@@ -12,7 +12,7 @@ class GuidebookController extends Controller
     public function listGuidebook()
     {
         $files = ["keluar_kantor.pdf"];
-        return view('admin.dashboard', compact('files'));
+        return view('admin-dashboard', compact('files'));
     }
     public function downloadGuidebook()
     {

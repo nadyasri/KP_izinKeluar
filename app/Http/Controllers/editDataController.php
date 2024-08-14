@@ -20,7 +20,7 @@ class editDataController extends Controller
             $user->decrypted_password = Crypt::decryptString($user->password);
         }
 
-        return view('admin.edit', compact ('user'));
+        return view('admin-manageData', compact ('user'));
     }
     public function update(Request $request, $nip)
     {
@@ -41,7 +41,7 @@ class editDataController extends Controller
 
         DB::beginTransaction();
 
-        try {
+        #try {
             $user = User::where('nip', $nip)->firstOrFail();
             $user->nama = $request->nama;
             $user->username = $request->username;
@@ -52,41 +52,41 @@ class editDataController extends Controller
             $user->jabatan = $request->jabatan;
             $user->save();
 
-            if ($request->role == 'superadmin') {
-                Atasan::updateOrCreate(
-                    ['nip' => $nip],
-                    [
-                        'nama' => $request->nama,
-                        'username' => $request->username,
-                        'password' => Crypt::encryptString($request -> password),
-                        'role' => $request->role,
-                        'nip' => $request->nip,
-                        'pangkat' => $request->pangkat,
-                        'jabatan' => $request->jabatan,
-                    ]); 
-            } else if ($request->role == 'pegawai') {
-                Pegawai::updateOrCreate(
-                    ['nip' => $nip],
-                    [
-                        'nama' => $request->nama,
-                        'username' => $request->username,
-                        'password' => Crypt::encryptString($request -> password),
-                        'role' => $request->role,
-                        'nip' => $request->nip,
-                        'pangkat' => $request->pangkat,
-                        'jabatan' => $request->jabatan,
-                    ]
-                );
-            }
+        #    if ($request->role == 'superadmin') {
+        #        Atasan::updateOrCreate(
+        #            ['nip' => $nip],
+        #            [
+        #                'nama' => $request->nama,
+        #                'username' => $request->username,
+        #                'password' => Crypt::encryptString($request -> password),
+        #                'role' => $request->role,
+        #                'nip' => $request->nip,
+        #                'pangkat' => $request->pangkat,
+        #                'jabatan' => $request->jabatan,
+        #            ]); 
+        #    } else if ($request->role == 'pegawai') {
+        #        Pegawai::updateOrCreate(
+        #            ['nip' => $nip],
+        #            [
+        #                'nama' => $request->nama,
+        #                'username' => $request->username,
+        #                'password' => Crypt::encryptString($request -> password),
+        #                'role' => $request->role,
+        #                'nip' => $request->nip,
+        #                'pangkat' => $request->pangkat,
+        #                'jabatan' => $request->jabatan,
+        #            ]
+        #        );
+        #    }
 
             DB::commit();
 
-            return redirect()->route('admin.manage-data')->with('success', 'Edit Berhasil!');
+            return redirect()->route('admin-manageData')->with('success', 'Edit Berhasil!');
 
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(['message' => 'Edits gagal', 'error' => $e->getMessage()], 500);
-        }
+    #    } catch (\Exception $e) {
+    #        DB::rollback();
+    #        return response()->json(['message' => 'Edits gagal', 'error' => $e->getMessage()], 500);
+    #    }
     }
 
     #HAPUS DATA
@@ -95,7 +95,7 @@ class editDataController extends Controller
         $data = User::find($nip);
         $data->delete();
 
-        return redirect()->route('admin.manage-data')->with('success', 'Hapus Berhasil!');
+        return redirect()->route('admin-manageData')->with('success', 'Hapus Berhasil!');
     }
 
 }
