@@ -48,7 +48,7 @@
         <p><span>NIP</span>: {{ $atasan['nip'] }}</p>
         <p><span>Pangkat/Gol/Ruang</span>: {{ $atasan['pangkat'] }}</p>
         <p><span>Jabatan</span>: {{ $atasan['jabatan'] }}</p>
-        <p><span>Unit Kerja</span>: {{ $atasan['unit_kerja'] }}</p>
+    <---    <p><span>Unit Kerja</span>: {{ $atasan['unit_kerja'] }}</p>
     </div>
 
     <div class="section">

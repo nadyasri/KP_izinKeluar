@@ -17,7 +17,6 @@
         <div class="bg-green-700 text-white w-64 min-h-screen flex flex-col p-4">
             <div class="text-white flex flex-col items-center">
                 <img src="resources/assets/ppAdm.jpg" alt="Profile Picture" class="p-10 rounded-full w-24 h-24 mb-4">
-
                 <h2 class="text-xl font-bold p-6">{{auth()->user()->namaDepan}}{{auth()->user()->namaBelakang}}</h2>
                 <h3 class="text-sm font-semibold p-6">{{auth()->user()->nip}}</h3>
             </div>
@@ -40,7 +39,7 @@
         <!-- Main content -->
         <div class="flex-grow bg-green-700">
             <div class="bg-white p-10 rounded-tl-3xl rounded-bl-3xl shadow-xl min-h-full">
-                <h1 class="text-green-900 text-4xl font-bold mb-6">Hi, {{auth()->user()->namaDepan}}!</h1>
+                <h1 class="text-green-900 text-4xl font-bold mb-6">Hi, {{auth()->user()->nama}}!</h1>
                 <p class="text-gray-500 mb-12 -mt-5 tracking-wide">Mau pergi ke mana hari ini?</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 

@@ -17,6 +17,7 @@ use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\GuidebookController;
 use App\Http\Controllers\RiwayatSuratAdmController;
+use App\Http\Controllers\SuratIzinController;
 
 
 // Routes for guests (not logged in)
@@ -97,14 +98,21 @@ Route::post('/register', [SesiController::class, 'register'])->name('register.re
 
 
 #form IZIN
-Route::get('/formizin', function () {
-    return view('Formizin.formizin');
-});
+#Route::get('/formizin', function () {
+#    return view('surat.formizin');
+#});
 
-Route::post('/submitform', [IzinController::class, 'submitForm']);
+#Route::post('/submitform', [IzinController::class, 'submitForm']);
 
 #pdfGenerate
 Route::get('/generatePdf', [PdfController::class, 'generatepdf']);
-#buat ngambil data dari form submison pake yang ini?
+#buat ngambil data dari form submission pake yang ini?
 // Route::post('/generatePdf', [PdfController::class, 'generatepdf']);
+
+#formIzin
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cek-surat', [SuratIzinController::class, 'index'])->name('surat.formTerima');
+    Route::get('/ajukan-izin', [SuratIzinController::class, 'create'])->name('surat.formizin');
+    Route::put('/suratizin/{nip}', [SuratIzinController::class, 'update'])->name('surat.update');
+});
 

@@ -25,14 +25,12 @@ class User extends Authenticatable
     protected $fillable = [
         'nip',
         'nama',
-        'jabatan',
+        'Users_groupId',
         'pangkat',
         'username',
         'password',
         'role',
-        #'nip',
-        #'pangkat',
-        #'jabatan',
+        'foto'
     ];
 
 #    public function pegawai()
@@ -45,10 +43,10 @@ class User extends Authenticatable
 #        return $this->hasOne(Atasan::class, 'username', 'username');
 #    }
 
-    public function jabatan()
-    {
-        return $this->belongsTo(Jabatan::class, 'group_id', 'groupId');
-    }
+public function jabatan()
+{
+    return $this->belongsTo(Jabatan::class, 'Users_groupId', 'groupId');
+}
 
     /**
      * The attributes that should be hidden for serialization.

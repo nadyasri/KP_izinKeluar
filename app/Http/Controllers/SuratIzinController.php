@@ -16,7 +16,7 @@ class SuratIzinController extends Controller
             'groupId_penerima' => 'required|exists:jabatan,groupId',
             'tanggal' => 'required|date',
             'keperluan' => 'required|string|max:255',
-            'status' => 'required|string|in:pending,approved,rejected',
+            'status' => 'required|string|in:menungg,disetujui,ditolak',
             'keterangan' => 'required|string|max:255',
             'waktu_keluar' => 'required|date_format:H:i',
             'waktu_kembali' => 'required|date_format:H:i'
@@ -33,29 +33,29 @@ class SuratIzinController extends Controller
             'waktu_kembali' => $request->waktu_kembali,
         ]);
 
-        return redirect()->route('Formizin.formizin')->with('success', 'Leave request sent successfully!');
+        #return redirect()->route('Formizin.formizin')->with('success', 'Leave request sent successfully!');
     }
 
     public function index()
     {
-        $leaveRequests = SuratIzin::where('receiver_group_id', auth()->user()->group_id)
-            ->where('status', 'pending')
+        $leaveRequests = SuratIzin::where('groupId_pengirim', auth()->user()->group_id)
+            ->where('status', 'menunggu')
             ->get();
 
-        return view('leave.index', compact('leaveRequests'));
+        #return view('leave.index', compact('leaveRequests'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:approved,rejected',
+            'status' => 'required|in:disetujui,ditolak',
         ]);
 
-        $leaveRequest = SuratIzin::findOrFail($id);
-        $leaveRequest->update([
+        $ajuIzin = SuratIzin::findOrFail($id);
+        $ajuIzin->update([
             'status' => $request->status,
         ]);
 
-        return redirect()->route('leave.index')->with('success', 'Leave request ' . $request->status . ' successfully!');
+        #return redirect()->route('leave.index')->with('success', 'Leave request ' . $request->status . ' successfully!');
     }
 }

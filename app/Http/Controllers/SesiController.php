@@ -35,7 +35,7 @@ class SesiController extends Controller
             'role' => 'required|in:pegawai,admin,superadmin',
             'nip' => 'required|string|max:20|unique:users',
             'pangkat' => 'required|string|max:255',
-        #    'jabatan' => 'required|string|max:255', //bikin pilihan yang diambil dari 'jabatan' user
+            'Users_groupId' => 'required|exists:jabatan,groupId', //bikin pilihan yang diambil dari 'jabatan' user
             
         ]);
 
@@ -47,7 +47,7 @@ class SesiController extends Controller
 
         DB::beginTransaction();
 
-        #try {
+        try {
             User::create([
                 'nama' => $request->nama,
                 'username' => $request->username,
@@ -55,7 +55,7 @@ class SesiController extends Controller
                 'role' => $request->role,
                 'nip' => $request->nip,
                 'pangkat' => $request->pangkat,
-            #    'jabatan' => $request->jabatan,
+                'Users_groupId' => $request->Users_groupId,
             ]);
 
             if ($request->role == 'superadmin') {
@@ -66,7 +66,7 @@ class SesiController extends Controller
                     'role' => $request->role,
                     'nip' => $request->nip,
                     'pangkat' => $request->pangkat,
-                #    'jabatan' => $request->jabatan,
+                    'Users_groupId' => $request->Users_groupId,
                 ]);
             } else if ($request->role == 'pegawai') { #bagian pegawai tidak bisa masuk ke database kemungkinan karena tidak adanya isi pada foreign key column alias id_atasan
                 Pegawai::create([
@@ -76,7 +76,7 @@ class SesiController extends Controller
                     'role' => $request->role,
                     'nip' => $request->nip,
                     'pangkat' => $request->pangkat,
-                #    'jabatan' => $request->jabatan,
+                    'Users_groupId' => $request->Users_groupId,
                 ]);
             }
 
@@ -84,10 +84,10 @@ class SesiController extends Controller
 
             return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
-        #} catch (\Exception $e) {
+        } catch (\Exception $e) {
         #    DB::rollback();
-        #    return response()->json(['message' => 'Registration failed'], 500);
-        #}
+            return response()->json(['message' => 'Registration failed'], 500);
+        }
 
         //redirect ke halaman login
         #return redirect()->route('login')->with('success', 'Registration successful! Please login.');

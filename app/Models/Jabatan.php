@@ -20,4 +20,10 @@ class Jabatan extends Model
     {
         return $this->hasMany(User::class, 'group_id', 'groupId');
     }
+
+    public function showRegistrationForm()
+{
+    $jabatan = Jabatan::all(); // Fetch all jabatan
+    return view('auth.register', compact('jabatan'));
+}
 }

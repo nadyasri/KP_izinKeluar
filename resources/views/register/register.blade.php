@@ -75,7 +75,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="jabatan" class="form-label">Jabatan</label>
-                        <input type="text" name="jabatan" class="form-control" id="jabatan" required>
+                        <select name="Users_groupId" id="jabatan" class="form-control" required>
+                            @foreach($jabatan as $jab)
+                                <option value="{{ $jab->groupId }}">{{ $jab->jabatan }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
