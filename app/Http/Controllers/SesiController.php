@@ -131,11 +131,9 @@ class SesiController extends Controller
             $role = $user->role;
 
             // Menyimpan informasi user ke session
-            Session([
-                'user_id' => $user->id,
-                'username' => $user->username,
-                'user_role' => $role,
-            ]);
+            Session::put('user_id', $user->id_user);
+            Session::put('username', $user->username);
+            Session::put('user_role', $role);
 
             if ($role === 'superadmin') {
                 return redirect('/superadmin/dashboard');
@@ -149,7 +147,7 @@ class SesiController extends Controller
             }
 
             // Default redirect if no role matched
-            } else {
+        } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
     }
