@@ -23,10 +23,7 @@ class SesiController extends Controller
 
     {
         $jabatan = Jabatan::all(); // Fetch all jabatan
-        return view('register.register', compact('jabatan'));
-
-    { 
-        return view('register.register');
+        return view('admin-register', compact('jabatan'));
 
     }
 
@@ -138,7 +135,7 @@ class SesiController extends Controller
             ]);
 
             if ($role === 'superadmin') {
-                return redirect('/superadmin/dashboard');
+                return redirect('/atasan/dashboard');
                 // yang ini
             } elseif ($role === 'admin') {
                 return redirect('/admin/dashboard');

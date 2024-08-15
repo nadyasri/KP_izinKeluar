@@ -16,7 +16,7 @@ class SuratIzinController extends Controller
             'groupId_penerima' => 'required|exists:jabatan,groupId',
             'tanggal' => 'required|date',
             'keperluan' => 'required|string|max:255',
-            'status' => 'required|string|in:menunggu,disetujui,ditolak',
+            'status' => 'required|in:menunggu,disetujui,ditolak',
             'keterangan' => 'required|string|max:255',
             'waktu_keluar' => 'required|date_format:H:i',
             'waktu_kembali' => 'required|date_format:H:i'
@@ -38,7 +38,7 @@ class SuratIzinController extends Controller
 
     public function index()
     {
-        $ajuIzin = SuratIzin::all();
+        $ajuIzin = SuratIzin::where('groupId_penerima', auth()->user()->groupId)->get();
         return view('atasan-manageIzin', compact('ajuIzin'));
     }
 
