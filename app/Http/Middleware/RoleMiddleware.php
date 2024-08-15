@@ -14,17 +14,17 @@ class RoleMiddleware
      * @param  string  $role
      * @return mixed
      */
-    public function handle($request, Closure $next, ...$roles)
-{
-    if (!Auth::check()) {
-        return redirect('/login')->withErrors('Silakan login terlebih dahulu');
-    }
+    public function handle($request, Closure $next, $role)
+    {
+        if (!Auth::check()) {
+            return redirect('login.login');
+        }
 
-    $user = Auth::user();
+        $user = Auth::user();
 
-    if (in_array($user->role, $roles)) {
-        return $next($request);
-    }
+        if ($user->role == $role) {
+            return $next($request);
+        }
 
     return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
 }

@@ -68,24 +68,12 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/pegawai/dashboard', [StatPegController::class, 'dashboard'])->name('pegawai-dashboard');
 
         #aju-cuti
-        Route::get('/pegawai/ajukan-izin', [SuratIzinController::class, 'create'])->name('pegawaiformIzin');
+        Route::post('/pegawai/ajukan-izin', [SuratIzinController::class, 'create'])->name('pegawai-formIzin');
     });
 
 
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
-
-#dashboard
-Route::get('/admin/dashboard', [StatAdmController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/pegawai/dashboard', [StatPegController::class, 'dashboard_pegawai'])->name('pegawai.dashboard');
-Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard_super'])->name ('superadmin.dashboard');
-=======
-});
-
-
-// Route for logout (only for logged-in users)
-Route::get('/logout', [SesiController::class, 'logout'])->name('logout')->middleware('auth');
-
 
 #guidebook
 Route::get('/guidebook', [GuidebookController::class, 'listGuidebook'])->name('guide.list');
@@ -114,8 +102,11 @@ Route::middleware(['auth'])->group(function () {
 
 // Route::middleware(['auth', 'role:superadmin,pegawai'])->group(function() {
     Route::get('/formizin', function () {
-        return view('Formizin.formizin');
+        return view('pegawai-formIzin');
     })->name('formizin');
+
+    Route::get('/izin/overview', [SuratIzinController::class, 'overview'])->name('izin.overview');
+
 // });
 
 

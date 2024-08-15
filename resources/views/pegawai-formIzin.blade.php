@@ -6,7 +6,7 @@
 
 <h1 class="text-green-900 text-4xl font-bold mb-6">Form Pengajuan Surat Izin Keluar Kantor</h1>
                 
-                <form action="{{ route('surat.formizin') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <form action="{{ route('pegawai-formIzin') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
