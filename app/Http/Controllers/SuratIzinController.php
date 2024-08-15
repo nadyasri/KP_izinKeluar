@@ -21,7 +21,6 @@ class SuratIzinController extends Controller
             'waktu_keluar' => 'required|date_format:H:i',
             'waktu_kembali' => 'required|date_format:H:i'
         ]);
-
         $ajuKeluar = SuratIzin::create([
             'groupId_pengirim' => $request->groupId_penerima,
             'groupId_penerima' => $request->groupId_penerima,
@@ -55,4 +54,10 @@ class SuratIzinController extends Controller
 
         return redirect()->route('atasan-manageIzin')->with('success', 'Leave request ' . $request->status . ' successfully!');
     }
+
+    public function overview()
+{
+    // $izin = SuratIzin::with(['pengirim', 'penerima'])->findOrFail();
+    // return view('izin.overview', compact('izin'));
+}
 }

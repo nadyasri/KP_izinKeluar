@@ -92,18 +92,17 @@ class SesiController extends Controller
         #tch (\Exception $e) {
         #    DB::rollback();
         #s    return response()->json(['message' => 'Registration failed'], 500);
-       # }
+       }
 
         //redirect ke halaman login
         #return redirect()->route('login')->with('success', 'Registration successful! Please login.');
 
-    }
+    
     
     function indexSesi()
     {
         return view('login.login');
     }
-
 
     // bikin session
     function login(Request $request)
@@ -116,17 +115,25 @@ class SesiController extends Controller
             'password.required' => 'Password wajib diisi',
         ]);
 
-        $infologin = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
+        // $infologin = [
+        //     'username' => $request->username,
+        //     'password' => $request->password,
+        // ];
 
-        // bikin choices, mau ke aplikasi surat keluar kantor atau ambil cuti
+        // // bikin choices, mau ke aplikasi surat keluar kantor atau ambil cuti
 
-        if (Auth::attempt($infologin)){
-            $user = Auth::user();
-            $role = $user->role;
+        // if (Auth::attempt($infologin)){
 
+        //     $user = Auth::user();
+        //     $role = $user->role;
+
+        $user = User::where('username', $request->username)->first();
+
+        if ($user && Crypt::decryptString($user->password) === $request->password) {
+        Auth::login($user);
+
+        $role = $user->role;
+        
             // Menyimpan informasi user ke session
             Session::put('user_id', $user->id_user);
             Session::put('username', $user->username);
@@ -144,15 +151,15 @@ class SesiController extends Controller
             }
 
             // Default redirect if no role matched
-        } else {
+            } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
     }
     public function logout()
-{
-    Auth::logout();
-    Session::flush(); // Menghapus semua data dari session
-    return redirect('/')->with('success', 'You have been logged out.');
-}
+    {
+        Auth::logout();
+        Session::flush(); // Menghapus semua data dari session
+        return redirect('/')->with('success', 'You have been logged out.');
+    }
     
 }
