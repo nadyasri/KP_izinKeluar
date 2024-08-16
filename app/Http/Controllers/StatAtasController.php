@@ -13,10 +13,8 @@ class StatAtasController extends Controller
     {
         #return 'Controller is working!';
         $menunggu = SuratIzin::where('status', 'menunggu')
-        ->where('nip', $nip)
         ->count();
-        $konfirmasi = SuratIzin::where('status', 'ditolak' && 'disetujui')
-        ->where('nip', $nip)
+        $konfirmasi = SuratIzin::whereIn('status', ['ditolak', 'disetujui'])
         ->count();
         #$akunNama = Pegawai::where('id', Authenticate::user()->id)->value('Nama_Depan, Nama_Belakang')->get();
         #$namaDepan = Pegawai::select('nip')->get();

@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admin-manageData');
 
         #update-data
-        Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('admin-edit');
+        Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('admin-editAkun');
         Route::put('/admin/{nip}/update', [editDataController::class, 'update']) -> name('admin-update');
 
         #hapus-data

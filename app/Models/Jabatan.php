@@ -21,4 +21,9 @@ class Jabatan extends Model
         return $this->hasMany(User::class, 'group_id', 'groupId');
     }
 
+    public function suratIzinDiterima()
+    {
+        return $this->hasMany(SuratIzin::class, 'groupId_penerima', 'groupId');
+    }
+
 }

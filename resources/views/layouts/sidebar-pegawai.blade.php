@@ -14,10 +14,10 @@
     <nav class="mt-6 flex-grow">
         <ul>
             <li class="mb-2 text-amber-50">
-                <a href="#" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
+                <a href="{{route('pegawai-dashboard')}}" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
             </li>
             <li class="mb-2">
-                <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Buat Pengajuan Surat Izin Keluar Kantor</a>
+                <a href="{{route('pegawai-formIzin')}}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Buat Pengajuan Surat Izin Keluar Kantor</a>
             </li>
         </ul>
     </nav>

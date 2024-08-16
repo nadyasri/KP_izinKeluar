@@ -21,11 +21,13 @@ class SuratIzin extends Model
         'waktu_kembali',
     ];
 
-    public function pengirim() {
-        return $this->belongsTo(User::class);
+    public function pengirim()
+    {
+        return $this->belongsTo(User::class, 'groupId_pengirim', 'Users_groupId');
     }
 
-    public function penerima() {
+    public function penerima()
+    {
         return $this->belongsTo(Jabatan::class, 'groupId_penerima', 'groupId');
     }
 
