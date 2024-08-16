@@ -101,9 +101,11 @@ Route::middleware(['auth'])->group(function () {
 #form IZIN
 
 // Route::middleware(['auth', 'role:superadmin,pegawai'])->group(function() {
-    Route::get('/formizin', function () {
-        return view('pegawai-formIzin');
-    })->name('formizin');
+    // Route::get('/formizin', function () {
+    //     return view('pegawai-formIzin');
+    // })->name('formizin');
+    Route::get('/formizin', [SuratIzinController::class, 'create'])->name('formizin');
+    Route::post('/formizin', [SuratIzinController::class, ''])->name('pegawai.store');
 
     Route::get('/izin/overview', [SuratIzinController::class, 'overview'])->name('izin.overview');
 

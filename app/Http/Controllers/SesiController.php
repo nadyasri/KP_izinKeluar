@@ -114,19 +114,7 @@ class SesiController extends Controller
             'username.required' => 'Username wajib diisi',
             'password.required' => 'Password wajib diisi',
         ]);
-
-        // $infologin = [
-        //     'username' => $request->username,
-        //     'password' => $request->password,
-        // ];
-
-        // // bikin choices, mau ke aplikasi surat keluar kantor atau ambil cuti
-
-        // if (Auth::attempt($infologin)){
-
-        //     $user = Auth::user();
-        //     $role = $user->role;
-
+        
         $user = User::where('username', $request->username)->first();
 
         if ($user && Crypt::decryptString($user->password) === $request->password) {

@@ -5,7 +5,7 @@
 @section('sidebar')
 <div class="bg-green-700 text-white w-64 min-h-screen flex flex-col p-4">
     <div class="text-white flex flex-col items-center">
-        <img src="{{ asset('resources/assets/ppAdm.jpg') }}" alt="Foto Profil" class="p-10 rounded-full w-24 h-24 mb-4">
+        <img src="{('resources/assets/ppAdm.jpg')" alt="Foto Profil" class="p-10 rounded-full w-24 h-24 mb-4">
             @if(auth()->check())
                 <h2 class="text-xl font-bold p-6">{{ auth()->user()->nama }}</h2>
             @else
@@ -21,7 +21,7 @@
                 <a href="{{ route('admin-manageData') }}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Daftar Akun Pengguna Pegawai dan Atasan</a>
             </li>
             <li class="mb-2">
-                <a href="{{ route('admin-manageIzin'}}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Riwayat Pengajuan Izin Keluar Kantor Pegawai</a>
+                <a href="{{ route('admin-manageIzin')}}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Riwayat Pengajuan Izin Keluar Kantor Pegawai</a>
             </li>
         </ul>
     </nav>
