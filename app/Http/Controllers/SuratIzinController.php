@@ -22,6 +22,7 @@ class SuratIzinController extends Controller
             'waktu_kembali' => 'required|date_format:H:i'
         ]);
 
+
         $user = User::where('Users_groupId', $request->groupId_pengirim)->first();
         $jabatan = Jabatan::where('groupId', $request->groupId_penerima)->first();
 
@@ -91,5 +92,12 @@ class SuratIzinController extends Controller
 
         return redirect()->route('atasan-manageIzin')->with('success', 'Leave request ' . $request->status . ' successfully!');
     }
+
+
+    public function overview()
+{
+    // $izin = SuratIzin::with(['pengirim', 'penerima'])->findOrFail();
+    // return view('izin.overview', compact('izin'));
+}
 
 }

@@ -26,7 +26,7 @@ class RoleMiddleware
             return $next($request);
         }
 
-        return redirect('/')->with('error', 'You do not have ' . $role . ' access.');
+    return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+}
 
-    }
 }
