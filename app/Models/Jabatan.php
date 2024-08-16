@@ -26,4 +26,14 @@ class Jabatan extends Model
         return $this->hasMany(SuratIzin::class, 'groupId_penerima', 'groupId');
     }
 
+    public function getBawahan($parentId)
+    {
+        return Jabatan::where('parentId', $parentId)->get();
+    }
+
+    public function getAtasan($groupId)
+    {
+        return Jabatan::where('groupId', $groupId)->value('parentId');
+    }
+
 }

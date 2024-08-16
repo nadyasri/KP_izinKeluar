@@ -36,8 +36,8 @@
                         <td class="py-3 px-3 text-center">{{ $atas->username }}</td>
                         <td class="py-3 px-3 text-center">{{ $atas->decrypted_password}}</td>
                         <td class="py-3 px-3 text-center">
-                            <button type="button" onclick="window.location='{{ route('atasan.edit', ['nip' => $atas->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                            <button type="button" onclick="window.location='{{ route('all.delete', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                            <button type="button" onclick="window.location='{{ route('admin-editAkun', ['nip' => $atas->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
+                            <button type="button" onclick="window.location='{{ route('admin-delete', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                         </td>
                     </tr>
                 @endforeach
@@ -67,7 +67,7 @@
                 @foreach ($pegawai as $peg)
                 <tr>
                     <td class="py-3 px-6 text-center">{{ $loop->iteration }}</td>
-                    <td class="py-3 px-6 text-center">{{ $peg->id_atasan }}</td>
+                    <td class="py-3 px-6 text-center">{{ $peg->id_atasan }}</td> //buat kode untuk ganti variabel ini
                     <td class="py-3 px-6 text-center">{{ $peg->nip }}</td>
                     <td class="py-3 px-6 text-center">{{ $peg->nama}}</td>
                     <td class="py-3 px-6 text-center">{{ $peg->jabatan }}</td>
@@ -76,7 +76,7 @@
                     <td class="py-3 px-6 text-center">{{ $peg->decrypted_password }}</td>
                     <td class="py-3 px-3 text-center">
                         <button type="button" onclick="window.location='{{ route('admin-editAkun', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                        <button type="button" onclick="window.location='{{ route('all.delete', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                        <button type="button" onclick="window.location='{{ route('admin-delete', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                     </td>
                 </tr>
                 @endforeach

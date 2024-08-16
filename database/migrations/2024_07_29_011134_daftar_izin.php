@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal'); // Kolom Tanggal
             $table->string('nip');
             $table->string('keperluan'); // Kolom Keperluan
-            $table->enum('status', ['Menunggu', 'disetujui', 'ditolak'])->default('menunggu'); // Kolom Status
+            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu'); // Kolom Status
             $table->text('keterangan'); // Kolom Keterangan 
             $table->time('waktu_keluar'); // Kolom Waktu Keluar
             $table->time('waktu_kembali'); // Kolom Waktu Masuk
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreign('groupId_pengirim')->references('Users_groupId')->on('users')->onDelete('cascade');
             
             ##idPenerimaFromJabatan
-            $table->foreign('groupId_penerima')->references('groupId')->on('jabatan');
+            $table->foreign('groupId_penerima')->references('parentId')->on('jabatan');
 
         });
     }

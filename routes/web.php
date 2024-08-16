@@ -32,11 +32,14 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/atasan/dashboard', [StatAtasController::class, 'dashboard'])->name('atasan-dashboard');
 
         #verifikasi-surat
+        Route::get('/atasan/kelola-izin', [SuratIzinController::class, 'allIzin'])->name('atasan-manageIzin');
         Route::get('/atasan/verifikasi-surat', [SuratIzinController::class, 'index'])->name('atasan-formVerif');
-        Route::put('/atasan/verifikasi-surat/{nip}', [SuratIzinController::class, 'update'])->name('atasan-update');
+        Route::put('/atasan/verifikasi-surat/{nip}', [SuratIzinController::class, 'respon'])->name('atasan-update');
 
         #aju-cuti
-        Route::get('/atasan/ajukan-izin', [SuratIzinController::class, 'create'])->name('atasan-formIzin');
+        Route::get('/atasan/ajukan-izin', [SuratIzinController::class, 'ambilAtasan'])->name('atasan-formIzin');
+        Route::post('/atasan/kirim', [SuratIzinController::class, 'kirimAtasan'])->name('atasan-kirimIzin');
+
 
     });
 
@@ -68,7 +71,8 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/pegawai/dashboard', [StatPegController::class, 'dashboard'])->name('pegawai-dashboard');
 
         #aju-cuti
-        Route::get('/pegawai/ajukan-izin', [SuratIzinController::class, 'create'])->name('pegawaiformIzin');
+        Route::get('/pegawai/ajukan-izin', [SuratIzinController::class, 'ambilPegawai'])->name('pegawai-formIzin');
+        Route::post('/pegawai/kirim', [SuratIzinController::class, 'kirimPegawai'])->name('pegawai-kirimIzin');
     });
 });
 

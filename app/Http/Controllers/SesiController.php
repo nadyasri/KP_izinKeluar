@@ -116,23 +116,19 @@ class SesiController extends Controller
             'password.required' => 'Password wajib diisi',
         ]);
 
-        $infologin = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
+        $user = User::where('username', $request->username)->first();
+
+        if ($user && Crypt::decryptString($user->password) === $request->password) {
+        Auth::login($user);
+
+        $role = $user->role;
+
+            Session::put('user_id', $user->id_user);
+            Session::put('username', $user->username);
+            Session::put('user_role', $role);
+            Session::put('User_groupId', $user-> User_groupId);
 
         // bikin choices, mau ke aplikasi surat keluar kantor atau ambil cuti
-
-        if (Auth::attempt($infologin)){
-            $user = Auth::user();
-            $role = $user->role;
-
-            // Menyimpan informasi user ke session
-            Session([
-                'user_id' => $user->id,
-                'username' => $user->username,
-                'user_role' => $role,
-            ]);
 
             if ($role === 'superadmin') {
                 return redirect('/atasan/dashboard');

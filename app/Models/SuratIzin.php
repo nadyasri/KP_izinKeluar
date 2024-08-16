@@ -13,6 +13,9 @@ class SuratIzin extends Model
     protected $primaryKey = 'id_izin';
 
     protected $fillable = [
+        'groupId_penerima',
+        'groupId_pengirim',
+        'nip',
         'tanggal',
         'keperluan',
         'status',

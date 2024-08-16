@@ -12,9 +12,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('jabatan', function (Blueprint $table) {
-            $table->id('groupId');
-            $table->integer('parentId')->nullable();
+            $table->unsignedBigInteger('groupId')->primary(); // Primary key
+            $table->unsignedBigInteger('parentId')->nullable(); // Foreign key
             $table->string('jabatan');
+        
+            $table->foreign('parentId')->references('groupId')->on('jabatan');
         });
     }
 

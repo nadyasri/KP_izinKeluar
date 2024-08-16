@@ -14,7 +14,7 @@
     </div>
     <div>
         <h3 class="text-xl font-bold">Belum Dikonfirmasi</h3>
-        <p class="text-gray-600 text-xl font-bold">{{ $ajuSetuju }}</p>
+        <p class="text-gray-600 text-xl font-bold">{{ $menunggu }}</p>
     </div>
 </div>
 
@@ -25,7 +25,7 @@
     </div>
     <div>
         <h3 class="text-xl font-bold">Sudah Dikonfirmasi</h3>
-        <p class="text-gray-600 text-xl font-bold">{{ $ajuTolak }}</p>
+        <p class="text-gray-600 text-xl font-bold">{{ $konfirmasi }}</p>
     </div>
 </div>
 

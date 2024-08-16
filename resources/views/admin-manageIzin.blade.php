@@ -8,7 +8,7 @@
                 <hr class="border-t-2 border-gray-200 my-6">
                 
                 <!-- Filter content -->
-                <form method="GET" action="{{ route('admin.master-izin') }}">
+                <form method="GET" action="{{ route('admin-manageIzin') }}">
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="flex flex-col w-1/3">
                             <input type="text" name="nip" id="nip" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-1.5" placeholder="Masukkan NIP" value="{{ request('nip') }}">
@@ -18,7 +18,7 @@
                         </div>
                         <div>
                             <button type="button" onclick="#" class="h-10 w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Filter </button>
-                            <button type="button" onclick="window.location='{{ route('admin.master-izin') }}'" class="h-10 w-20 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Reset </a>
+                            <button type="button" onclick="window.location='{{ route('admin-manageIzin') }}'" class="h-10 w-20 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Reset </a>
                         </div>
                     </div>
                 </form>
