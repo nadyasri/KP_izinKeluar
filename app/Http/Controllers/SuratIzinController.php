@@ -35,9 +35,15 @@ class SuratIzinController extends Controller
         
         $hierarchy = $this->getHierarchy($request->groupId_penerima);
 
+<<<<<<< HEAD
         if (empty($hierarchy)) {
             return redirect()->back()->withErrors('Parent ID not found.');
         }
+=======
+
+        $user = User::where('Users_groupId', $request->groupId_pengirim)->first();
+        $jabatan = Jabatan::where('groupId', $request->groupId_penerima)->first();
+>>>>>>> 8a0d1d35b49f0de39a38fec4c404760ec5420d3d
 
         $topmostParent = end($hierarchy);
 
@@ -127,5 +133,12 @@ class SuratIzinController extends Controller
 
         return redirect()->route('atasan-manageIzin')->with('success', 'Leave request ' . $request->status . ' successfully!');
     }
+
+
+    public function overview()
+{
+    // $izin = SuratIzin::with(['pengirim', 'penerima'])->findOrFail();
+    // return view('izin.overview', compact('izin'));
+}
 
 }
