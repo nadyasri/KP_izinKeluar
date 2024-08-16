@@ -43,10 +43,16 @@ class User extends Authenticatable
 #        return $this->hasOne(Atasan::class, 'username', 'username');
 #    }
 
-public function jabatan()
-{
-    return $this->belongsTo(Jabatan::class, 'Users_groupId', 'groupId');
-}
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'Users_groupId', 'groupId');
+    }
+
+    public function suratIzinDikirim()
+    {
+        return $this->hasMany(SuratIzin::class, 'groupId_pengirim', 'Users_groupId');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

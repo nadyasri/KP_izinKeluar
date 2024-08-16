@@ -103,7 +103,7 @@
                         </select>
                     </div>
                     <div class="d-grid">
-                        <button name="submit" type="submit" onclick="window.location='{{ route('register') }}'" value="submit" class="btn btn-success">Change data</button>
+                        <button name="submit" type="submit" onclick="window.location='{{ route('register.register') }}'" value="submit" class="btn btn-success">Change data</button>
                     </div>
                 </form>
             </div>

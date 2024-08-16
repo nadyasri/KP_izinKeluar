@@ -6,7 +6,7 @@
 
 <h1 class="text-green-900 text-4xl font-bold mb-6">Verifikasi Pengajuan Surat Izin Keluar Kantor</h1>
                 
-<form action="{{ route('surat.formTerima') }}" method="GET" class="bg-gray-100 p-6 rounded-lg shadow-md">
+<form action="{{ route('atasan-formVerif') }}" method="GET" class="bg-gray-100 p-6 rounded-lg shadow-md">
 @csrf
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
@@ -43,5 +43,20 @@
         <button type="button" class="bg-red-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-700 ml-2">Batal</button>
     </div>
 </form>
+
+<td>
+    <form action="{{ route('atasan-update', $izin->id_izin) }}" method="POST" style="display: inline;">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="status" value="approved">
+        <button type="submit" class="btn btn-success">Setuju</button>
+    </form>
+    <form action="{{ route('surat.update', $izin->id_izin) }}" method="POST" style="display: inline;">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="status" value="rejected">
+        <button type="submit" class="btn btn-danger">Tolak</button>
+    </form>
+</td>
 
 @endsection

@@ -31,22 +31,8 @@
                 <td class="py-3 px-6 text-center">{{ $izin->jabatan }}</td>
                 <td class="py-3 px-6 text-center">{{ $izin->pangkat }}</td>
                 <td class="py-3 px-3 text-center">
-                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button> //ganti jadi tombol review surat
-                    <button type="button" onclick="window.location='{{ route('all.delete', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button> ganti jadi tombol download surat
-                </td>
-                <td>
-                    <form action="{{ route('surat.update', $izin->id_izin) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="status" value="approved">
-                        <button type="submit" class="btn btn-success">Approve</button>
-                    </form>
-                    <form action="{{ route('surat.update', $izin->id_izin) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="status" value="rejected">
-                        <button type="submit" class="btn btn-danger">Reject</button>
-                    </form>
+                    <button type="button" onclick="window.location='{{ route('admin.edit', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Lihat Pengajuan </button> //ganti jadi tombol review surat
+                    <button type="button" onclick="window.location='{{ route('', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Download Surat </button> ganti jadi tombol download surat
                 </td>
             </tr>
             @endforeach
@@ -54,50 +40,8 @@
     </table>
 </div>
 
-<div class="container">
-    <h2>Pending Leave Requests</h2>
-
-    @if(session('success'))
+@if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Employee</th>
-                <th>Reason</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($leaveRequests as $leaveRequest)
-                <tr>
-                    <td>{{ $leaveRequest->id }}</td>
-                    <td>{{ $leaveRequest->employee->employee_name }}</td>
-                    <td>{{ $leaveRequest->reason }}</td>
-                    <td>
-                        <form action="{{ route('leave.update', $leaveRequest->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="status" value="approved">
-                            <button type="submit" class="btn btn-success">Approve</button>
-                        </form>
-                        <form action="{{ route('leave.update', $leaveRequest->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="status" value="rejected">
-                            <button type="submit" class="btn btn-danger">Reject</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4">No pending leave requests.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>

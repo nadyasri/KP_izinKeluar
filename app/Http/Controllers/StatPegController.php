@@ -12,11 +12,11 @@ class StatPegController extends Controller
     public function dashboard(Request $request, $nip)
     {
         #return 'Controller is working!';
-        $ajuSetuju = SuratIzin::where('status', 'Disetujui')
-        ->where('nip', $nip)
+        $ajuSetuju = SuratIzin::where('nip', $nip)
+        ->where('status', 'disetujui')
         ->count();
-        $ajuTolak = SuratIzin::where('status', 'Ditolak')
-        ->where('nip', $nip)
+        $ajuTolak = SuratIzin::where('nip', $nip)
+        ->where('status', 'ditolak')
         ->count();
         #$akunNama = Pegawai::where('id', Authenticate::user()->id)->value('Nama_Depan, Nama_Belakang')->get();
         #$namaDepan = Pegawai::select('nip')->get();

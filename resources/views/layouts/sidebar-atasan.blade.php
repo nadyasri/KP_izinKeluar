@@ -16,13 +16,13 @@
     <nav class="mt-6 flex-grow">
         <ul>
             <li class="mb-2 text-amber-50">
-                <a href="#" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
+                <a href="{{route('atasan-dashboard')}}" class="font-semibold text-amber-100 block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Dashboard</a>
             </li>
             <li class="mb-2">
-                <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Buat Pengajuan Surat Izin Keluar Kantor</a>
+                <a href="{{route('atasan-formIzin')}}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Buat Pengajuan Surat Izin Keluar Kantor</a>
             </li>
             <li class="mb-2">
-                <a href="#" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Verifikasi Pengajuan Surat Izin Keluar Kantor</a>
+                <a href="{{route('atasan-manageIzin')}}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Verifikasi Pengajuan Surat Izin Keluar Kantor</a>
             </li>
             </li>
         </ul>
