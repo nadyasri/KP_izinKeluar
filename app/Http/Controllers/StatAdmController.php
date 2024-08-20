@@ -16,7 +16,7 @@ class StatAdmController extends Controller
         $jumlahIzin = SuratIzin::count();
         $izinSetuju = SuratIzin::where('status', 'disetujui')->count();
         $izinTolak = SuratIzin::where('status', 'ditolak')->count();
-
+        
         return view('admin-dashboard', compact('jumlahAkun', 'jumlahIzin', 'izinSetuju', 'izinTolak'));
 
     }

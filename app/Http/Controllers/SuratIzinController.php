@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\SuratIzin;
 use App\Models\User;
 use App\Models\Jabatan;
+#use Exception;
 
 class SuratIzinController extends Controller
 {
@@ -21,6 +22,7 @@ class SuratIzinController extends Controller
     $user = auth()->user();  // Get the currently authenticated user
     return view('atasan-formIzin', compact('user'));
     }
+
     public function kirimAtasan(Request $request)
     {
         $request->validate([
@@ -33,23 +35,28 @@ class SuratIzinController extends Controller
             'keperluan' => 'required|string|max:255',
         ]);
         
-        $hierarchy = $this->getHierarchy($request->groupId_penerima);
+        $recipientGroupId = $this -> findAvailableRecipient($request->groupId_penerima, $request->tanggal);
 
-<<<<<<< HEAD
+    if (!$recipientGroupId) {
+        return redirect()->back()->withErrors('No available recipient found.');
+    }
+        
+        /*$hierarchy = $this->getHierarchy($request->groupId_penerima);
+
+
         if (empty($hierarchy)) {
             return redirect()->back()->withErrors('Parent ID not found.');
-        }
-=======
+        }*/
 
-        $user = User::where('Users_groupId', $request->groupId_pengirim)->first();
+
+        /*$user = User::where('Users_groupId', $request->groupId_pengirim)->first();
         $jabatan = Jabatan::where('groupId', $request->groupId_penerima)->first();
->>>>>>> 8a0d1d35b49f0de39a38fec4c404760ec5420d3d
 
-        $topmostParent = end($hierarchy);
+        $topmostParent = end($hierarchy);*/
 
         SuratIzin::create([
             'groupId_pengirim' => auth()->user()->Users_groupId,
-            'groupId_penerima' => $topmostParent->groupId,
+            'groupId_penerima' => $recipientGroupId,
             'nip' => auth()->user()->nip,
             'tanggal' => $request->tanggal,
             'waktu_keluar' => $request->waktu_keluar,
@@ -62,7 +69,43 @@ class SuratIzinController extends Controller
         return redirect()->route('atasan-kirimIzin')->with ('success', 'Izin berhasil diajukan.');
     }
 
-    public function getHierarchy($groupId)
+    public function findAvailableRecipient($groupId, $date)
+{
+    // Start with the initial recipient (parentId of the sender)
+    $recipientGroupId = $this->getSubmissionRecipient($groupId);
+
+    // Traverse up the hierarchy until a non-absent recipient is found
+    while ($this->isGroupAbsent($recipientGroupId, $date)) {
+        // If absent, move to the next parentId
+        $recipientGroupId = $this->getSubmissionRecipient($recipientGroupId);
+
+        // If no parentId found (top of hierarchy), return null
+        if (!$recipientGroupId) {
+            return null;
+        }
+    }
+
+    return $recipientGroupId;
+}
+
+public function getSubmissionRecipient($groupId)
+{
+    // Find the parentId for the given groupId
+    return DB::table('jabatan')
+                ->where('groupId', $groupId)
+                ->value('parentId');
+}
+
+public function isGroupAbsent($groupId, $date)
+{
+    // Check if the groupId is marked absent on the given date
+    return DB::table('presensi')
+                ->where('user_groupId', $groupId)
+                ->whereDate('tanggal_absen', $date)
+                ->exists();
+}
+
+        /*public function getHierarchy($groupId)
     {
         $query = "
             WITH RECURSIVE hierarchy AS (
@@ -80,7 +123,7 @@ class SuratIzinController extends Controller
         ";
 
         return DB::select($query, [$groupId]);
-    }
+    }*/
 
     // Method to show all incoming permission requests for the logged-in "atasan"
     #public function incoming()

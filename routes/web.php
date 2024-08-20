@@ -71,12 +71,10 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/pegawai/dashboard', [StatPegController::class, 'dashboard'])->name('pegawai-dashboard');
 
         #aju-cuti
-<<<<<<< HEAD
         Route::get('/pegawai/ajukan-izin', [SuratIzinController::class, 'ambilPegawai'])->name('pegawai-formIzin');
         Route::post('/pegawai/kirim', [SuratIzinController::class, 'kirimPegawai'])->name('pegawai-kirimIzin');
-=======
         Route::post('/pegawai/ajukan-izin', [SuratIzinController::class, 'create'])->name('pegawai-formIzin');
->>>>>>> 8a0d1d35b49f0de39a38fec4c404760ec5420d3d
+
     });
 
 
@@ -109,9 +107,11 @@ Route::middleware(['auth'])->group(function () {
 #form IZIN
 
 // Route::middleware(['auth', 'role:superadmin,pegawai'])->group(function() {
-    Route::get('/formizin', function () {
-        return view('pegawai-formIzin');
-    })->name('formizin');
+    // Route::get('/formizin', function () {
+    //     return view('pegawai-formIzin');
+    // })->name('formizin');
+    Route::get('/formizin', [SuratIzinController::class, 'create'])->name('formizin');
+    Route::post('/formizin', [SuratIzinController::class, ''])->name('pegawai.store');
 
     Route::get('/izin/overview', [SuratIzinController::class, 'overview'])->name('izin.overview');
 

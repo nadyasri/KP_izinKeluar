@@ -13,10 +13,21 @@ return new class extends Migration
     {
         Schema::create('presensi', function (Blueprint $table) {
             $table->id('id_presensi');
-            $table->unsignedBigInteger('id_users');
-            $table->foreign('id_users')->references('id_user')->on('users')->onDelete('cascade');
+            $table->string('nip_users');
+            $table->unsignedBigInteger('presensi_groupId');
+            $table->date('tanggal_absen');
             $table->boolean('kehadiran')->default(1);
             $table->timestamps();
+
+            #FOREIGN KEY
+            #nipFromUser
+            $table->foreign('nip_users')->references('nip')->on('users')->onDelete('cascade');
+
+            #groupidFromUser
+            $table->foreign('presensi_groupId')->references('User_groupId')->on('users')->onDelete('cascade');
+
+
+
         });
     }
 
