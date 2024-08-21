@@ -7,6 +7,7 @@ use App\Models\Atasan;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -115,13 +116,13 @@ class SesiController extends Controller
 
         if ($user && Crypt::decryptString($user->password) === $request->password) {
         Auth::login($user);
-
+        $judul="test";
         $role = $user->role;
 
             Session::put('user_id', $user->id_user);
             Session::put('username', $user->username);
             Session::put('user_role', $role);
-            Session::put('User_groupId', $user-> User_groupId);
+            Session::put('Users_groupId', $user-> Users_groupId);
 
         // $infologin = [
         //     'username' => $request->username,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\Models\SuratIzin;
 use App\Models\User;
 use App\Models\Jabatan;
@@ -14,7 +15,8 @@ class SuratIzinController extends Controller
     public function ambilPegawai()
     {
     $user = auth()->user();  // Get the currently authenticated user
-    return view('pegawai-formIzin', compact('user'));
+    $groupid_pengirim = Session::get('Users_groupId');
+    return view('pegawai-formIzin', compact('user','groupid_pengirim'));
     }
 
     public function ambilAtasan()
@@ -35,104 +37,166 @@ class SuratIzinController extends Controller
             'keperluan' => 'required|string|max:255',
         ]);
         
-        $recipientGroupId = $this -> findAvailableRecipient($request->groupId_penerima, $request->tanggal);
+        $recipientGroupId = $this -> findAvailableRecipient($request->groupId_penerima, $request->tanggal, $request->nip);
 
-    if (!$recipientGroupId) {
-        return redirect()->back()->withErrors('No available recipient found.');
-    }
+        if (!$recipientGroupId) {
+            return redirect()->back()->withErrors('No available recipient found.');
+        }
+
+        try {
+            SuratIzin::create([
+                'groupId_pengirim' => $request->groupId_pengirim,
+                'groupId_penerima' => $recipientGroupId,
+                'nip' => auth()->user()->nip,
+                'tanggal' => $request->tanggal,
+                'waktu_keluar' => $request->waktu_keluar,
+                'waktu_kembali' => $request->waktu_kembali,
+                'keperluan' => $request->keperluan,
+                'status' => 'menunggu',
+                'keterangan' => " ",
+            ]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
         
-        /*$hierarchy = $this->getHierarchy($request->groupId_penerima);
 
+        #return redirect()->route('atasan-kirimIzin')->with ('success', 'Izin berhasil diajukan.');
+    }
 
-        if (empty($hierarchy)) {
-            return redirect()->back()->withErrors('Parent ID not found.');
+    public function findAvailableRecipient($groupId, $date, $nip)
+    {
+        // Start with the initial recipient (parentId of the sender)
+        $recipientGroupId = $this->getSubmissionRecipient($groupId);
+
+        // Traverse up the hierarchy until a non-absent recipient is found
+        while ($this->isGroupAbsent($recipientGroupId, $date, $nip)) {
+            // If absent, move to the next parentId
+            $recipientGroupId = $this->getSubmissionRecipient($recipientGroupId);
+
+            // If no parentId found (top of hierarchy), return null
+            if (!$recipientGroupId) {
+                return null;
+            }
+        }
+        return $recipientGroupId;
+    }
+
+    public function getSubmissionRecipient($groupId)
+    {
+        // Find the parentId for the given groupId
+        return DB::table('jabatan')
+                    ->where('groupId', $groupId)
+                    ->value('parentId');
+    }
+
+    public function isGroupAbsent($groupId, $date, $nip)
+    {
+        // Check if the groupId is marked absent on the given date
+        return DB::table('presensi')
+                    ->where('presensi_groupId', $groupId)
+                    ->where('nip_users', $nip)
+                    ->whereDate('tanggal_absen', $date)
+                    ->exists();
+    }
+
+    public function kirimPegawai(Request $request)
+    {
+        //echo"test";exit;
+        /*$request->validate([
+            'groupId_pengirim' => 'required|exists:users,Users_groupId',
+            'groupId_penerima' => 'required|exists:jabatan,groupId',
+            'nip' => 'required|exists:users,nip',
+            'tanggal' => 'required|date',
+            'waktu_keluar' => 'required|date_format:H:i',
+            'waktu_kembali' => 'required|date_format:H:i',
+            'keperluan' => 'required|string|max:255',
+        ]);*/
+        
+        
+        $GroupIdPenerima = $this -> cariPenerima($request->groupId_pengirim, $request->tanggal);
+        echo $GroupIdPenerima;
+        /*if (!$GroupIdPenerima) {
+            return redirect()->back()->withErrors('No available recipient found.');
         }*/
 
+        //try {
+          /* SuratIzin::create([
+                'groupId_pengirim' => $request->groupId_pengirim,
+                'groupId_penerima' => $GroupIdPenerima,
+                'nip' => auth()->user()->nip,
+                'tanggal' => $request->tanggal,
+                'waktu_keluar' => $request->waktu_keluar,
+                'waktu_kembali' => $request->waktu_kembali,
+                'keperluan' => $request->keperluan,
+                'status' => 'menunggu',
+                'keterangan' => " ",
+            ]);*/
+            exit;
+       // } catch (\Exception $e) {
+            //dd($e->getMessage());
+       // }
 
-        /*$user = User::where('Users_groupId', $request->groupId_pengirim)->first();
-        $jabatan = Jabatan::where('groupId', $request->groupId_penerima)->first();
-
-        $topmostParent = end($hierarchy);*/
-
-        SuratIzin::create([
-            'groupId_pengirim' => auth()->user()->Users_groupId,
-            'groupId_penerima' => $recipientGroupId,
-            'nip' => auth()->user()->nip,
-            'tanggal' => $request->tanggal,
-            'waktu_keluar' => $request->waktu_keluar,
-            'waktu_kembali' => $request->waktu_kembali,
-            'keperluan' => $request->keperluan,
-            'status' => 'menunggu',
-            'keterangan' => " ",
-        ]);
-
-        return redirect()->route('atasan-kirimIzin')->with ('success', 'Izin berhasil diajukan.');
+        #return redirect()->route('pegawai-kirimIzin')->with ('success', 'Izin berhasil diajukan.');
     }
 
-    public function findAvailableRecipient($groupId, $date)
-{
-    // Start with the initial recipient (parentId of the sender)
-    $recipientGroupId = $this->getSubmissionRecipient($groupId);
-
-    // Traverse up the hierarchy until a non-absent recipient is found
-    while ($this->isGroupAbsent($recipientGroupId, $date)) {
-        // If absent, move to the next parentId
-        $recipientGroupId = $this->getSubmissionRecipient($recipientGroupId);
-
-        // If no parentId found (top of hierarchy), return null
-        if (!$recipientGroupId) {
-            return null;
-        }
-    }
-
-    return $recipientGroupId;
-}
-
-public function getSubmissionRecipient($groupId)
-{
-    // Find the parentId for the given groupId
-    return DB::table('jabatan')
-                ->where('groupId', $groupId)
-                ->value('parentId');
-}
-
-public function isGroupAbsent($groupId, $date)
-{
-    // Check if the groupId is marked absent on the given date
-    return DB::table('presensi')
-                ->where('user_groupId', $groupId)
-                ->whereDate('tanggal_absen', $date)
-                ->exists();
-}
-
-        /*public function getHierarchy($groupId)
+    public function cariPenerima($groupId, $date)
     {
-        $query = "
-            WITH RECURSIVE hierarchy AS (
-                SELECT groupId, parentId, jabatan
-                FROM jabatan
-                WHERE groupId = ?
+        
+        //return 7;
+        // Start with the initial recipient (parentId of the sender)
+        $GroupIdPenerima = $this->dapatPenerima($groupId);
+        //return $GroupIdPenerima;
+        // Traverse up the hierarchy until a non-absent recipient is found
+        if ($this->statusPresensi($GroupIdPenerima, $date)) {
+            return $GroupIdPenerima;
+        } else {
+            //return 4;
+            $this->cariPenerima($GroupIdPenerima, $date);
+        }
+        /*while ($this->statusPresensi($GroupIdPenerima, $date, $nip)) {
 
-                UNION ALL
+            // If absent, move to the next parentId
+            $GroupIdPenerima = $this->dapatPenerima($GroupIdPenerima);
 
-                SELECT j.groupId, j.parentId, j.jabatan
-                FROM jabatan j
-                INNER JOIN hierarchy h ON j.parentId = h.groupId
-            )
-            SELECT * FROM hierarchy;
-        ";
+            // If no parentId found (top of hierarchy), return null
+            if (!$GroupIdPenerima) {
+                return null;
+            }
+        }*/
 
-        return DB::select($query, [$groupId]);
+        //return $GroupIdPenerima;
+    }
+
+    public function dapatPenerima($groupId)
+    {
+        // Find the parentId for the given groupId
+        return DB::table('jabatan')
+                    ->where('groupId', $groupId)
+                    ->value('parentId');
+    }
+
+    /*public function dapatPenerima2($groupId)
+    {
+        // Find the parentId for the given groupId
+        return DB::table('jabatan')
+                    ->where('groupId', $groupId)
+                    ->value('parentId');
     }*/
 
-    // Method to show all incoming permission requests for the logged-in "atasan"
-    #public function incoming()
-    #{
-    #    $user = auth()->user();
-    #    $izinMasuk = SuratIzin::where('groupId_penerima', $user->Users_groupId)->get();
+    public function statusPresensi($groupId, $date)
+    {
+        // Check if the groupId is marked absent on the given date
+        return DB::table('presensi')
+                    ->where('presensi_groupId', $groupId)
+                    ->where('kehadiran',1)
+                    //->where('nip_users', $nip)
+                    ->whereDate('tanggal_absen', $date)
+                    //->where('kehadiran' == 1)
+                    ->exists();
+    }
 
-    #    return view('izin.incoming', compact('izinMasuk'));
-    #}
+    
 
     // menampilkan semua izin yang dikirim pada user tertentu (more complex)
     public function allIzin()
@@ -151,6 +215,8 @@ public function isGroupAbsent($groupId, $date)
     #    $ajuIzin = SuratIzin::where('groupId_penerima', auth()->user()->groupId)->get();
     #    return view('atasan-manageIzin', compact('ajuIzin'));
     #}
+
+    // BAAAAAAAAATAAAAAAAAAAAS SUUUUUUUUUUUUUUUUUUCIIIIIIIIIIIIIIIIIII
 
     public function show($id_izin)
     {

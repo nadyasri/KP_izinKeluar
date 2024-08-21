@@ -27,11 +27,12 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($atasan as $atas)
+                @foreach ($jabat as $jbt)
                     <tr>
                         <td class="py-2 px-2 text-center">{{ $loop->iteration }}</td>
                         <td class="py-3 px-3 text-center">{{ $atas->nip }}</td>
                         <td class="py-3 px-3 text-center">{{ $atas->nama }}</td>
-                        <td class="py-3 px-3 text-center">{{ $atas->jabatan }}</td>
+                        <td class="py-3 px-3 text-center">{{ $jbt }}</td>
                         <td class="py-3 px-3 text-center">{{ $atas->pangkat }}</td>
                         <td class="py-3 px-3 text-center">{{ $atas->username }}</td>
                         <td class="py-3 px-3 text-center">{{ $atas->decrypted_password}}</td>
@@ -40,6 +41,7 @@
                             <button type="button" onclick="window.location='{{ route('admin-delete', ['nip' => $atas->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                         </td>
                     </tr>
+                @endforeach
                 @endforeach
             </tbody>
         </table>
@@ -75,8 +77,8 @@
                     <td class="py-3 px-6 text-center">{{ $peg->username }}</td>
                     <td class="py-3 px-6 text-center">{{ $peg->decrypted_password }}</td>
                     <td class="py-3 px-3 text-center">
-                        <button type="button" onclick="window.location='{{ route('admin-editAkun', ['nip' => $peg->nip]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
-                        <button type="button" onclick="window.location='{{ route('admin-delete', ['nip' => $peg->nip]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
+                        <button type="button" onclick="window.location='{{ route('admin-editAkun', ['nip' => $peg->username]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Ubah </button>
+                        <button type="button" onclick="window.location='{{ route('admin-delete', ['nip' => $peg->username]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"> Hapus </button>
                     </td>
                 </tr>
                 @endforeach

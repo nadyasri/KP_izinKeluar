@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class StatPegController extends Controller
 {
-    public function dashboard(Request $request, $nip)
+    public function dashboard(Request /*$request*/ $nip)
     {
         #return 'Controller is working!';
         $ajuSetuju = SuratIzin::where('nip', $nip)

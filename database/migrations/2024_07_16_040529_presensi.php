@@ -23,10 +23,11 @@ return new class extends Migration
             #nipFromUser
             $table->foreign('nip_users')->references('nip')->on('users')->onDelete('cascade');
 
+            // Indexes for faster search queries
+            //$table->index('nip_users'); 
+
             #groupidFromUser
-            $table->foreign('presensi_groupId')->references('User_groupId')->on('users')->onDelete('cascade');
-
-
+            #$table->foreign('presensi_groupId')->references('User_groupId')->on('users')->onDelete('cascade');
 
         });
     }

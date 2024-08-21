@@ -21,11 +21,7 @@
                 <a href="{{ route('admin-manageData') }}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Daftar Akun Pengguna Pegawai dan Atasan</a>
             </li>
             <li class="mb-2">
-<<<<<<< HEAD
                 <a href="{{ route('admin-manageIzin') }}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Riwayat Pengajuan Izin Keluar Kantor Pegawai</a>
-=======
-                <a href="{{ route('admin-manageIzin')}}" class="font-semibold block py-2.5 px-4 rounded transition duration-200 hover:bg-black">Riwayat Pengajuan Izin Keluar Kantor Pegawai</a>
->>>>>>> 1a1c45c890a2b9317ae52df29bc1f32a5fbdc650
             </li>
         </ul>
     </nav>
