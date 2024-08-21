@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SuratIzin extends Model
+class SuratCuti extends Model
 {
     use HasFactory;
 
-    protected $table = 'daftar_izin';
+    protected $table = 'daftar_cuti';
     protected $primaryKey = 'id_izin';
 
     protected $fillable = [
@@ -23,15 +23,4 @@ class SuratIzin extends Model
         'waktu_keluar',
         'waktu_kembali',
     ];
-
-    public function pengirim()
-    {
-        return $this->belongsTo(User::class, 'groupId_pengirim', 'Users_groupId');
-    }
-
-    public function penerima()
-    {
-        return $this->belongsTo(Jabatan::class, 'groupId_penerima', 'groupId');
-    }
-
 }

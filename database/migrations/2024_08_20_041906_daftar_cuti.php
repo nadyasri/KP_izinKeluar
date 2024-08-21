@@ -9,10 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('daftar_izin', function (Blueprint $table) {
-            $table->id('id_izin'); // Kolom ID Izin
+            $table->id('id_cuti'); // Kolom ID Izin
             $table->unsignedBigInteger('groupId_pengirim');  //pengirim
             $table->unsignedBigInteger('groupId_penerima');  //penerima
             $table->date('tanggal'); // Kolom Tanggal
@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('keperluan'); // Kolom Keperluan
             $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu'); // Kolom Status
             $table->text('keterangan'); // Kolom Keterangan 
-            $table->time('waktu_keluar'); // Kolom Waktu Keluar
-            $table->time('waktu_kembali'); // Kolom Waktu Masuk
+            $table->time('tanggal_mulai'); // Kolom Waktu Keluar
+            $table->time('tanggal_kembali'); // Kolom Waktu Masuk
             $table->timestamps(); // Kolom timestamps untuk created_at dan updated_at
 
             #FOREIGN KEY
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daftar_izin');
+        //
     }
 };

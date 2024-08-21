@@ -18,7 +18,7 @@
                         </div>
                         <div>
                             <button type="button" onclick="#" class="h-10 w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Filter </button>
-                            <button type="button" onclick="window.location='{{ route('admin-manageIzin') }}' "class="h-10 w-20 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Reset </a>
+                            <button type="button" onclick="window.location='{{ route('admin-manageIzin') }}'" class="h-10 w-20 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mb-4 mt-1"> Reset </button>
                         </div>
                     </div>
                 </form>

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class StatAtasController extends Controller
 {
-    public function dashboard(Request $request, $nip)
+    public function dashboard(Request $request)
     {
         #return 'Controller is working!';
         $menunggu = SuratIzin::where('status', 'menunggu')
@@ -22,7 +22,6 @@ class StatAtasController extends Controller
         
 
         return view('atasan-dashboard', compact('menunggu', 'konfirmasi'));
-
     }
     
 }

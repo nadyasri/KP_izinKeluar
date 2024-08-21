@@ -7,6 +7,7 @@ use App\Models\Atasan;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -20,18 +21,14 @@ class SesiController extends Controller
 {
     
     public function showRegistrationForm()
-
     {
         $jabatan = Jabatan::all(); // Fetch all jabatan
         return view('admin-register', compact('jabatan'));
-
     }
 
     public function register(Request $request)
     {
-
         // dd($request);
-
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
@@ -92,7 +89,7 @@ class SesiController extends Controller
         #tch (\Exception $e) {
         #    DB::rollback();
         #s    return response()->json(['message' => 'Registration failed'], 500);
-       }
+    }
 
         //redirect ke halaman login
         #return redirect()->route('login')->with('success', 'Registration successful! Please login.');
@@ -114,18 +111,30 @@ class SesiController extends Controller
             'username.required' => 'Username wajib diisi',
             'password.required' => 'Password wajib diisi',
         ]);
-        
+
         $user = User::where('username', $request->username)->first();
 
         if ($user && Crypt::decryptString($user->password) === $request->password) {
         Auth::login($user);
-
+        $judul="test";
         $role = $user->role;
-        
-            // Menyimpan informasi user ke session
+
             Session::put('user_id', $user->id_user);
             Session::put('username', $user->username);
             Session::put('user_role', $role);
+            Session::put('Users_groupId', $user-> Users_groupId);
+
+        // $infologin = [
+        //     'username' => $request->username,
+        //     'password' => $request->password,
+        // ];
+
+        // // bikin choices, mau ke aplikasi surat keluar kantor atau ambil cuti
+
+        // if (Auth::attempt($infologin)){
+
+        //     $user = Auth::user();
+        //     $role = $user->role;
 
             if ($role === 'superadmin') {
                 return redirect('/atasan/dashboard');
@@ -142,12 +151,12 @@ class SesiController extends Controller
             } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
             }
-    }
+        }
+
     public function logout()
     {
         Auth::logout();
         Session::flush(); // Menghapus semua data dari session
         return redirect('/')->with('success', 'You have been logged out.');
-    }
-    
+    }   
 }
