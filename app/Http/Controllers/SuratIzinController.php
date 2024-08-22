@@ -102,8 +102,7 @@ class SuratIzinController extends Controller
 
     public function kirimPegawai(Request $request)
     {
-        //echo"test";exit;
-        /*$request->validate([
+        $request->validate([
             'groupId_pengirim' => 'required|exists:users,Users_groupId',
             'groupId_penerima' => 'required|exists:jabatan,groupId',
             'nip' => 'required|exists:users,nip',
@@ -111,17 +110,16 @@ class SuratIzinController extends Controller
             'waktu_keluar' => 'required|date_format:H:i',
             'waktu_kembali' => 'required|date_format:H:i',
             'keperluan' => 'required|string|max:255',
-        ]);*/
+        ]);
         
         
         $GroupIdPenerima = $this -> cariPenerima($request->groupId_pengirim, $request->tanggal);
-        echo $GroupIdPenerima;
-        /*if (!$GroupIdPenerima) {
-            return redirect()->back()->withErrors('No available recipient found.');
-        }*/
+        //echo $GroupIdPenerima;
+        if (!$GroupIdPenerima) {
+            return redirect()->back()->withErrors('Pada cuti, bos');
+        }
 
-        //try {
-          /* SuratIzin::create([
+        SuratIzin::create([
                 'groupId_pengirim' => $request->groupId_pengirim,
                 'groupId_penerima' => $GroupIdPenerima,
                 'nip' => auth()->user()->nip,
@@ -131,11 +129,7 @@ class SuratIzinController extends Controller
                 'keperluan' => $request->keperluan,
                 'status' => 'menunggu',
                 'keterangan' => " ",
-            ]);*/
-            exit;
-       // } catch (\Exception $e) {
-            //dd($e->getMessage());
-       // }
+            ]);
 
         #return redirect()->route('pegawai-kirimIzin')->with ('success', 'Izin berhasil diajukan.');
     }
@@ -147,8 +141,9 @@ class SuratIzinController extends Controller
         // Start with the initial recipient (parentId of the sender)
         $GroupIdPenerima = $this->dapatPenerima($groupId);
         //return $GroupIdPenerima;
+
         // Traverse up the hierarchy until a non-absent recipient is found
-        if ($this->statusPresensi($GroupIdPenerima, $date)) {
+        if ($this->statusPresensi($GroupIdPenerima, $date) == 1) {
             return $GroupIdPenerima;
         } else {
             //return 4;

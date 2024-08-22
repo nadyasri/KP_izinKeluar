@@ -116,7 +116,7 @@ class SesiController extends Controller
 
         if ($user && Crypt::decryptString($user->password) === $request->password) {
         Auth::login($user);
-        $judul="test";
+        //$judul="test";
         $role = $user->role;
 
             Session::put('user_id', $user->id_user);
