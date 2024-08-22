@@ -124,18 +124,6 @@ class SesiController extends Controller
             Session::put('user_role', $role);
             Session::put('Users_groupId', $user-> Users_groupId);
 
-        // $infologin = [
-        //     'username' => $request->username,
-        //     'password' => $request->password,
-        // ];
-
-        // // bikin choices, mau ke aplikasi surat keluar kantor atau ambil cuti
-
-        // if (Auth::attempt($infologin)){
-
-        //     $user = Auth::user();
-        //     $role = $user->role;
-
             if ($role === 'superadmin') {
                 return redirect('/atasan/dashboard');
                 // yang ini
