@@ -34,4 +34,9 @@ class SuratIzin extends Model
         return $this->belongsTo(Jabatan::class, 'groupId_penerima', 'groupId');
     }
 
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'groupId_pengirim', 'groupId');
+    }
+
 }

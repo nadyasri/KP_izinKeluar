@@ -7,10 +7,8 @@
 <h1 class="text-green-900 text-4xl font-bold mb-6">Form Pengajuan Surat Izin Keluar Kantor</h1>
 <form action="{{ route('atasan-kirimIzin') }}" method="POST" class="bg-gray-100 p-6 rounded-lg shadow-md">
     @csrf
+    <input type="hidden" name="groupId_pengirim" value="{{ $groupid_pengirim}}">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <div>
-            <input type="hidden" name="groupId_pengirim" value="{{ auth()->user()->Users_groupId }}">
-        </div>
         <div>
             <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
             <input type="text" name="nama" id="nama" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ $user->nama ?? '' }}" readonly>
