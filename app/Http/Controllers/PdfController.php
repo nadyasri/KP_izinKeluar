@@ -26,7 +26,7 @@ class PdfController extends Controller
             ],
         ];
         
-        $pdf = Pdf::loadView('Formizin.Pdf', $data);
+        $pdf = Pdf::loadView('surat.Pdf', $data);
 
         return $pdf->download('Surat_Izin_Keluar.pdf');
     }

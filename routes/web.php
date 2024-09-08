@@ -33,8 +33,8 @@ Route::middleware(['auth'])->group(function() {
 
         #verifikasi-surat
         Route::get('/atasan/kelola-izin', [SuratIzinController::class, 'allIzin'])->name('atasan-manageIzin');
-        Route::get('/atasan/verifikasi-surat', [SuratIzinController::class, 'index'])->name('atasan-formVerif');
-        Route::put('/atasan/verifikasi-surat/{nip}', [SuratIzinController::class, 'respon'])->name('atasan-update');
+        Route::get('/atasan/verifikasi-surat/{id_izin}', [SuratIzinController::class, 'show'])->name('atasan-formVerif');
+        Route::put('/atasan/verifikasi-surat', [SuratIzinController::class, 'respon'])->name('atasan-update');
 
         #aju-cuti
         Route::get('/atasan/ajukan-izin', [SuratIzinController::class, 'ambilAtasan'])->name('atasan-formIzin');
@@ -51,6 +51,10 @@ Route::middleware(['auth'])->group(function() {
 
         #show-data
         Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admin-manageData');
+
+        #add-data
+        Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
+        Route::post('/register', [SesiController::class, 'register'])->name('register.register');
 
         #update-data
         Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('admin-editAkun');
@@ -86,7 +90,8 @@ Route::get('/guidebook', [GuidebookController::class, 'listGuidebook'])->name('g
 Route::get('/guidebook-download', [GuidebookController::class, 'downloadGuidebook'])->name('download.guidebook');
 
 #pdfGenerate(Surat)
-Route::get('/generatePdf', [PdfController::class, 'generatepdf']);
+Route::get('/generatePdf', [PdfController::class, 'generatepdf'])->name('generate.pdf');
+
 #buat ngambil data dari form submission pake yang ini?
 
 #formIzin
