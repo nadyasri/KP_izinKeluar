@@ -44,9 +44,20 @@
                     <td class="py-2 px-2 text-center">{{ $loop->iteration }}</td>
                     <td class="py-2 px-2 text-center">{{ $d->tanggal }}</td>
                     <td class="py-3 px-3 text-center">{{ $d->nip }}</td>
-                    <td class="py-3 px-3 text-center">{{ $d->namaDepan }}</td>
+                    <td class="py-3 px-3 text-center">{{ $d->nama }}</td>
                     <td class="py-3 px-3 text-center">{{ $d->keperluan }}</td>
-                    <td class="py-3 px-3 text-center">{{ $d->status }}</td>
+
+                    <!-- Conditional Status -->
+                    <td class="py-3 px-3 text-center">
+                        @if ($d->status == 'menunggu')
+                            <span class="block text-purple-600 bg-purple-100 rounded-full px-2 py-1">Menunggu</span>
+                        @elseif ($d->status == 'diterima')
+                            <span class="block text-green-600 bg-green-100 rounded-full px-2 py-1">Diterima</span>
+                        @elseif ($d->status == 'ditolak')
+                            <span class="block text-red-600 bg-red-100 rounded-full px-2 py-1">Ditolak</span>
+                        @endif
+                    </td>
+
                     <td class="py-3 px-3 text-center">
                         <button type="button" onclick="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"> Lihat </button>
                     </td>

@@ -11,15 +11,15 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
-            <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ auth()->user()->nama?? '' }}" readonly>
+            <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ $ajuIzin->nama?? '' }}" readonly>
         </div>
         <div>
             <label for="nip" class="block text-sm font-medium text-gray-700">NIP</label>
-            <input type="text" name="nip" id="nip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ auth()->user()->nip ?? '' }}" readonly>
+            <input type="text" name="nip" id="nip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ $ajuIzin->nip ?? '' }}" readonly>
         </div>
         <div>
             <label for="pangkat" class="block text-sm font-medium text-gray-700">Pangkat/Gol/Ruang</label>
-            <input type="text" name="pangkat" id="pangkat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ auth()->user()->pangkat ?? '' }}" readonly>
+            <input type="text" name="pangkat" id="pangkat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" value="{{ $ajuIzin->pangkat ?? '' }}" readonly>
         </div>
         <div>
             <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
@@ -41,13 +41,13 @@
 </form>
 
 <td>
-    <form action="{{ route('atasan-update', $izin->id_izin) }}" method="POST" style="display: inline;">
+    <form action="{{ route('atasan-update', $ajuIzin->id_izin) }}" method="POST" style="display: inline;">
         @csrf
         @method('PUT')
         <input type="hidden" name="status" value="approved">
         <button type="submit" class="btn btn-success">Setuju</button>
     </form>
-    <form action="{{ route('surat.update', $izin->id_izin) }}" method="POST" style="display: inline;">
+    <form action="{{ route('surat.update', $ajuIzin->id_izin) }}" method="POST" style="display: inline;">
         @csrf
         @method('PUT')
         <input type="hidden" name="status" value="rejected">
