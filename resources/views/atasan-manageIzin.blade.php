@@ -31,8 +31,8 @@
                     <td class="py-3 px-6 text-center">{{ $i->keperluan }}</td>
                     <td class="py-3 px-6 text-center text-green-900">{{ $i->status }}</td>
                     <td class="py-3 px-3 text-center">
-                        <button type="button" onclick="window.location='{{ route('atasan-formVerif', ['id_izin' => $i->id_izin]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded fa-solid fa-file"> Lihat Pengajuan </button>
-                        <button type="button" onclick="window.location='{{ route('generate.pdf', ['id_izin' => $i->id_izin]) }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded fa-solid fa-download"> Download Surat </button> 
+                        <button type="button" onclick="window.location='{{ route('atasan-formVerif', ['id_izin' => $i->id_izin]) }}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Lihat Pengajuan </button>
+                        <button type="button" onclick="window.location='{{ route('generate.pdf', ['id_izin' => $i->id_izin]) }}'" class="bg-red-500 text-white py-2 px-4 rounded font-bold"> Download Surat </button> 
                     </td>
                 </tr>
                 @endforeach
