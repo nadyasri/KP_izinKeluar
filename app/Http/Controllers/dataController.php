@@ -55,7 +55,7 @@ class dataController extends Controller
             }
         }
         
-        return view('admin-manageData', ['atasan' => $atasan, 'pegawai' => $pegawai, 'jabat' => $jabat]);
+        return view('admin-manageData', ['atasan' => $atasan, 'pegawai' => $pegawai, 'jabat' => $jabat, 'jbt'=> $jbt]);
     }
 
 }
