@@ -37,7 +37,7 @@
             margin-bottom: 20px;
         }
     </style>
-    <title>SIKAN</title>
+    <title>SIKAN | Edit Akun</title>
 </head>
 <body>
     <header>

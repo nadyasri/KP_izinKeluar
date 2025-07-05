@@ -2,11 +2,10 @@
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\StatAdmController;
-use App\Http\Controllers\StatAtasController;
-use App\Http\Controllers\StatPegController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\dataController;
 use App\Http\Controllers\editDataController;
+use App\Http\Controllers\profileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\PdfController;
@@ -25,11 +24,12 @@ Route::middleware(['guest'])->group(function() {
 
 // Routes for logged-in users
 Route::middleware(['auth'])->group(function() {
+
     // Routes for superadmin
     Route::middleware(['role:superadmin'])->group(function() {
         
         #dashboard
-        Route::get('/atasan/dashboard', [StatAtasController::class, 'dashboard'])->name('atasan-dashboard');
+        Route::get('/atasan/dashboard', [StatisticController::class, 'dashboardSuperadmin'])->name('atasan-dashboard');
 
         #verifikasi-surat
         Route::get('/atasan/kelola-izin', [SuratIzinController::class, 'allIzin'])->name('atasan-manageIzin');
@@ -47,14 +47,17 @@ Route::middleware(['auth'])->group(function() {
     Route::middleware(['role:admin'])->group(function() {
         
         #dashboard
-        Route::get('/admin/dashboard', [StatAdmController::class, 'dashboard'])->name('admin-dashboard');
+        Route::get('/admin/dashboard', [StatisticController::class, 'dashboardAdmin'])->name('admin-dashboard');
+
+        #edit-profile
+        Route::get('/admin/edit-profile', [profileController::class, 'editProfile'])->name('editProfile');
 
         #show-data
         Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admin-manageData');
 
         #add-data
-        Route::get('/register', [SesiController::class, 'showRegistrationForm'])->name('register');
-        Route::post('/register', [SesiController::class, 'register'])->name('register.register');
+        Route::get('/admin/register', [SesiController::class, 'showRegistrationForm'])->name('register');
+        Route::post('/admin/register/store', [SesiController::class, 'register'])->name('register.register');
 
         #update-data
         Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('admin-editAkun');
@@ -72,7 +75,7 @@ Route::middleware(['auth'])->group(function() {
     Route::middleware(['role:pegawai'])->group(function() {
         
         #dashboard
-        Route::get('/pegawai/dashboard', [StatPegController::class, 'dashboard'])->name('pegawai-dashboard');
+        Route::get('/pegawai/dashboard', [StatisticController::class, 'dashboardPegawai'])->name('pegawai-dashboard');
 
         #aju-cuti
         Route::get('/pegawai/ajukan-izin', [SuratIzinController::class, 'ambilPegawai'])->name('pegawai-formIzin');
@@ -80,7 +83,6 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/pegawai/ajukan-izin', [SuratIzinController::class, 'create'])->name('pegawai-formIzin');
 
     });
-
 
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
@@ -118,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/formizin', [SuratIzinController::class, 'create'])->name('formizin');
     Route::post('/formizin', [SuratIzinController::class, ''])->name('pegawai.store');
 
-    Route::get('/izin/overview', [SuratIzinController::class, 'overview'])->name('izin.overview');
+    Route::get('/izin/overview', [SuratIzinController::class, 'overview'])->name('admin-overviewIzin');
 
 // });
 

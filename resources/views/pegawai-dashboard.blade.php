@@ -1,6 +1,6 @@
 @extends('layouts.sidebar-pegawai')
 
-@section('title', 'Dashboard Pegawai')
+@section('title', 'SIKAN | Dashboard Pegawai')
 
 @section('pegawai-content')
     <h1 class="text-green-900 text-4xl font-bold mb-6">Hi, {{auth()->user()->nama}}!</h1>

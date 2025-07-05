@@ -1,6 +1,6 @@
 @extends('layouts.sidebar-atasan')
 
-@section('title', 'Form Izin Atasan')
+@section('title', 'SIKAN | Form Izin Atasan')
 
 @section('atasan-content')
 

@@ -37,7 +37,7 @@
             margin-bottom: 20px;
         }
     </style>
-    <title>SIKAN</title>
+    <title>SIKAN | Tambahkan Akun</title>
 </head>
 <body>
     <header>
@@ -47,8 +47,7 @@
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <div class="login-container col-md-6 col-lg-4 p-4">
                 <div class="text-center mb-4">
-                    <h1 class="h3 login-title mb-8">SIKAN</h1>
-                    <p>Create an account</p>
+                    <h4><b>Create an account</b></h4>
                 </div>
                 @if($errors->any())
                     <div class="alert alert-danger">

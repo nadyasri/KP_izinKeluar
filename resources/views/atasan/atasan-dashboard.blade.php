@@ -1,6 +1,6 @@
 @extends('layouts.sidebar-atasan')
 
-@section('title', 'Dashboard Atasan')
+@section('title', 'SIKAN | Dashboard Atasan')
 
 @section('atasan-content')
 <h1 class="text-green-900 text-4xl font-bold mb-6">Hi, {{auth()->user()->nama}}!</h1>
