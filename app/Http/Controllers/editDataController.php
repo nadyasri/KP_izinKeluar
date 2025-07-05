@@ -13,14 +13,20 @@ use Illuminate\Support\Facades\Validator;
 class editDataController extends Controller
 {
     #UBAH DATA ATASAN
-    public function edit (Request $request, $nip)
+    public function edit(Request $request, $nip)
     {
-        $user = User::where('nip', $nip)->first();
-        if ($user) {
-            $user->decrypted_password = Crypt::decryptString($user->password);
-        }
+        //$user = User::where('nip', $nip)->first();
 
-        return view('admin-manageData', compact ('user'));
+        $akun = User::where('nip', $nip)
+                ->with(['jabatan', 'jabatan.getAtasan'])
+                ->first();
+        /*if ($user) {
+            $user->decrypted_password = Crypt::decryptString($user->password);
+        }*/
+
+        return view('admin-manageData', compact ('akun'));
+
+        
     }
     public function update(Request $request, $nip)
     {

@@ -1,6 +1,6 @@
 @extends('layouts.sidebar-atasan')
 
-@section('title', 'Form Verifikasi Pengajuan ')
+@section('title', 'SIKAN | Form Verifikasi Pengajuan ')
 
 @section('atasan-content')
 

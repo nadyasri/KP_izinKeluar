@@ -1,6 +1,6 @@
 @extends('layouts.sidebar-admin')
 
-@section('title', 'Kelola Data Perizinan')
+@section('title', 'SIKAN | Kelola Data Perizinan')
 
 @section('admin-content')
 

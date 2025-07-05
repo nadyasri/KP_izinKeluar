@@ -1,6 +1,6 @@
 @extends('layouts.sidebar-pegawai')
 
-@section('title', 'Form Izin Pegawai')
+@section('title', 'SIKAN | Form Izin Pegawai')
 
 @section('pegawai-content')
 

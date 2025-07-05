@@ -1,6 +1,6 @@
 @extends('layouts.sidebar-admin')
 
-@section('title', 'overview')
+@section('title', 'SIKAN | Overview Surat Izin')
 
 <div class="container">
     <h1 class="text-green-900 text-4xl font-bold mb-6">Riwayat Pengajuan Surat Izin Keluar Kantor</h1>

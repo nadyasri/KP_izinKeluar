@@ -84,7 +84,7 @@ class SesiController extends Controller
 
             DB::commit();
 
-            return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+            return redirect()->route('admin-dashboard')->with('success', 'Registration successful! Please login.');
 
         #tch (\Exception $e) {
         #    DB::rollback();
@@ -116,7 +116,6 @@ class SesiController extends Controller
 
         if ($user && Crypt::decryptString($user->password) === $request->password) {
             Auth::login($user);
-            //$judul="test";
             $role = $user->role;
 
             Session::put('user_id', $user->id_user);
@@ -126,13 +125,10 @@ class SesiController extends Controller
 
             if ($role === 'superadmin') {
                 return redirect('/atasan/dashboard');
-                // yang ini
             } elseif ($role === 'admin') {
                 return redirect('/admin/dashboard');
-                // yang ini
             } elseif ($role === 'pegawai') {
                 return redirect('/pegawai/dashboard');
-                // yang ini
             }
 
             // Default redirect if no role matched
