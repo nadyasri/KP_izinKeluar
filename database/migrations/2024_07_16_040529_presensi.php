@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('presensi', function (Blueprint $table) {
             $table->id('id_presensi');
-            $table->string('nip_users');
+            $table->unsignedBigInteger('idUser_presensi')->nullable();;
             $table->unsignedBigInteger('presensi_groupId');
             $table->date('tanggal_absen');
             $table->boolean('kehadiran')->default(1);
@@ -21,10 +21,7 @@ return new class extends Migration
 
             #FOREIGN KEY
             #nipFromUser
-            $table->foreign('nip_users')->references('nip')->on('users')->onDelete('cascade');
-
-            // Indexes for faster search queries
-            //$table->index('nip_users'); 
+            $table->foreign('idUser_presensi')->references('id_user')->on('users')->onDelete('set null');
 
             #groupidFromUser
             #$table->foreign('presensi_groupId')->references('User_groupId')->on('users')->onDelete('cascade');

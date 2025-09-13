@@ -13,7 +13,7 @@ class IzinUsersSeeders extends Seeder
      */
     public function run(): void
     {
-        $userData = [
+        /* $userData = [
             [
                 'nama' => 'Admin1',
                 'username' => 'ad123',
@@ -47,6 +47,6 @@ class IzinUsersSeeders extends Seeder
 
         foreach ($userData as $key => $val) {
             User::create($val);
-        }
+        }*/
     }
 }

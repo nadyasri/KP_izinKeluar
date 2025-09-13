@@ -59,51 +59,54 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('admin.update', ['nip' => $user->nip]) }}" method="POST">
+                <form action="{{ route('admin-update', ['username' => $akun->username]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
                         <label for="nip" class="form-label">NIP</label>
-                        <input type="text" value="{{$user->nip}}" name="nip" class="form-control" id="nip" required>
+                        <input type="text" value="{{ old('nip', $akun->nip) }}" name="nip" class="form-control" id="nip" required>
                     </div>
                     <div class="mb-3">
-                        <label for="namaDepan" class="form-label">Nama Lengkap</label>
-                        <input type="text" value="{{$user->nama}}" name="namaDepan" class="form-control" id="namaDepan" required>
+                        <label for="nama" class="form-label">Nama Lengkap</label>
+                        <input type="text" value="{{old('nama', $akun->nama)}}" name="nama" class="form-control" id="nama" required>
                     </div>
                     <div class="mb-3">
                         <label for="pangkat" class="form-label">Pangkat</label>
-                        <input type="text" value="{{$user->pangkat}}" name="pangkat" class="form-control" id="pangkat" required>
+                        <input type="text" value="{{old('pangkat', $akun->pangkat)}}" name="pangkat" class="form-control" id="pangkat" required>
                     </div>
                     <div class="mb-3">
                         <label for="jabatan" class="form-label">Jabatan</label>
-                        <select name="Users_groupId" id="jabatan" class="form-control" required>
+                        <select name="jabatan" id="jabatan" class="form-control" required>
                             @foreach($jabatan as $jab)
-                                <option value="{{ $jab->groupId }}">{{ $jab->jabatan }}</option>
+                                <option value="{{ $jab->groupId }}" {{ old('jabatan', $akun->Users_groupId) == $jab->groupId ? 'selected' : ''}}>
+                                    {{ $jab->jabatan }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" value="{{$user->username}}" name="username" class="form-control" id="username" required>
+                        <input type="text" value="{{old('username', $akun->username)}}" name="username" class="form-control" id="username" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" value="{{Crypt::decryptString($user->password)}}" name="password" class="form-control" id="password" required>
+                        <input type="password" name="password" class="form-control" id="password">
                     </div>
+                    <!-- make the condition if the admin change the password -->
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                        <input type="text" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                        <input type="text" name="password_confirmation" class="form-control" id="password_confirmation">
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
                         <select id="role" name="role" class="form-select" required>
-                            <option value="pegawai" @if($user->role == 'pegawai') selected @endif>Pegawai</option>
-                            <option value="admin" @if($user->role == 'admin') selected @endif>Admin</option>
-                            <option value="superadmin" @if($user->role == 'superadmin') selected @endif>Superadmin</option>
+                            <option value="pegawai" @if($akun->role == 'pegawai') selected @endif>Pegawai</option>
+                            <option value="admin" @if($akun->role == 'admin') selected @endif>Admin</option>
+                            <option value="superadmin" @if($akun->role == 'superadmin') selected @endif>Superadmin</option>
                         </select>
                     </div>
                     <div class="d-grid">
-                        <button name="submit" type="submit" onclick="window.location='{{ route('register.register') }}'" value="submit" class="btn btn-success">Change data</button>
+                        <button name="submit" type="submit" value="submit" class="btn btn-success">Change data</button>
                     </div>
                 </form>
             </div>

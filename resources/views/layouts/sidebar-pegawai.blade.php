@@ -5,17 +5,17 @@
     <div class="text-white flex flex-col items-center">
         <h3 class="text-xl text-white font-bold mt-2 mb-2">SIKAN</h3>
         <div class="relative">
-            <img src="{{ asset('assets/pfpPegawai.jpg') }}" alt="Foto Profil" class="p-10 rounded-full w-24 h-24 mb-4">
+            <img src="{{ asset('public/profile/' . ($user->foto ?? 'default-' . strtolower($user->role) . '.jpg')) }}" alt="Foto Profil" class="p-2 rounded-full w-32 h-32 flex">
             <a href={{ route('editProfile') }}>
                 <img src="{{ asset('assets/userEdit.png') }}" alt="edit profil" class="absolute bottom-2 right-2 bg-black rounded-full p-1 shadow-md w-8 h-8">
             </a>
         </div>
             @if(auth()->check())
-                <h2 class="text-xl font-bold p-6">{{ auth()->user()->nama }}</h2>
-                <h3 class="text-sm font-semibold p-6">{{auth()->user()->nip}}</h3>
+                <h2 class="text-xl font-bold p-3">{{ auth()->user()->nama }}</h2>
+                <h3 class="text-sm font-semibold p-1">{{auth()->user()->nip}}</h3>
             @else
-                <h2 class="text-xl font-bold p-6">Nama tidak muncul</h2>
-                <h3 class="text-sm font-semibold p-6">NIP tidak muncul</h3>
+                <h2 class="text-xl font-bold p-3">Nama tidak muncul</h2>
+                <h3 class="text-sm font-semibold p-1">NIP tidak muncul</h3>
             @endif
     </div>
     <nav class="mt-6 flex-grow">

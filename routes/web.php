@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function() {
 
     // Routes for superadmin
     Route::middleware(['role:superadmin'])->group(function() {
-        
+
         #dashboard
         Route::get('/atasan/dashboard', [StatisticController::class, 'dashboardSuperadmin'])->name('atasan-dashboard');
 
@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/admin/dashboard', [StatisticController::class, 'dashboardAdmin'])->name('admin-dashboard');
 
         #edit-profile
-        Route::get('/admin/edit-profile', [profileController::class, 'editProfile'])->name('editProfile');
+        Route::get('/admin/edit-profile', [profileController::class, 'editProfile'])->name('admin-editProfile');
 
         #show-data
         Route::get('/admin/manage-data', [dataController::class, 'index']) -> name('admin-manageData');
@@ -60,11 +60,11 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/admin/register/store', [SesiController::class, 'register'])->name('register.register');
 
         #update-data
-        Route::get('/admin/{nip}/edit', [editDataController::class, 'edit']) -> name('admin-editAkun');
-        Route::put('/admin/{nip}/update', [editDataController::class, 'update']) -> name('admin-update');
+        Route::get('/admin/{username}/edit', [editDataController::class, 'edit']) -> name('admin-editAkun');
+        Route::put('/admin/{username}/update', [editDataController::class, 'update']) -> name('admin-update');
 
         #hapus-data
-        Route::delete('/admin/{nip}/delete', [editDataController::class, 'destroy']) -> name('admin-delete'); 
+        Route::delete('/admin/{username}/delete', [editDataController::class, 'destroy']) -> name('admin-delete'); 
 
         #master-izinAdm
         Route::get('/admin/master-izin', [RiwayatSuratAdmController::class, 'riwayatSurat']) -> name('admin-manageIzin');

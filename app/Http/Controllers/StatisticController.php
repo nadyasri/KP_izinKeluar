@@ -36,13 +36,13 @@ class StatisticController extends Controller
         return view('admin-dashboard', compact('jumlahAkun', 'jumlahIzin', 'izinSetuju', 'izinTolak'));
     }
 
-    public function dashboardPegawai(Request /*$request*/ $nip)
+    public function dashboardPegawai(Request /*$request*/ $id_user)
     {
         #return 'Controller is working!';
-        $ajuSetuju = SuratIzin::where('nip', $nip)
+        $ajuSetuju = SuratIzin::where('idUser', $id_user)
         ->where('status', 'disetujui')
         ->count();
-        $ajuTolak = SuratIzin::where('nip', $nip)
+        $ajuTolak = SuratIzin::where('idUser', $id_user)
         ->where('status', 'ditolak')
         ->count();
         #$akunNama = Pegawai::where('id', Authenticate::user()->id)->value('Nama_Depan, Nama_Belakang')->get();
