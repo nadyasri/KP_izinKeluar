@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('groupId_pengirim');  //pengirim
             $table->unsignedBigInteger('groupId_penerima');  //penerima
             $table->date('tanggal'); // Kolom Tanggal
-            $table->string('nip');
+            $table->unsignedBigInteger('idUser');
             $table->string('keperluan'); // Kolom Keperluan
             $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu'); // Kolom Status
             $table->text('keterangan'); // Kolom Keterangan 
@@ -30,6 +30,8 @@ return new class extends Migration
             
             ##idPenerimaFromJabatan
             $table->foreign('groupId_penerima')->references('parentId')->on('jabatan');
+
+            $table->foreign('idUser')->references('id_user')->on('users');
 
         });
     }

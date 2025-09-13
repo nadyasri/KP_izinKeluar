@@ -5,3 +5,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
+.label-field {
+  @apply block ml-4 font-semibold;
+}
+
+.input-field {
+  @apply border-gray-700 bg-gray-200 outline-none focus:bg-white focus:ring-2 focus:ring-green-500 rounded-md px-3 py-2 mt-2;
+}
+
+.regist-button {
+  @apply px-5 py-2 rounded-full bg-green-600 text-white;
+}
+.regist-button:hover { @apply bg-green-700; }

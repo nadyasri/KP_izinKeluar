@@ -40,7 +40,7 @@ class User extends Authenticatable
         'username',
         'password',
         'role',
-        'foto'
+        'photo'
     ];
 
     /**
@@ -97,5 +97,4 @@ class User extends Authenticatable
             return 'Invalid encrypted data';              
         }
     }
-
 }

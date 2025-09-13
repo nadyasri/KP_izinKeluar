@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('id_user');
-            $table->string('nip')->unique();
+            $table->string('nip')->nullable();
             $table->string('nama'); // Kolom Nama
-            $table->string('pangkat'); // Kolom Pangkat
+            $table->string('pangkat')->nullable(); // Kolom Pangkat
             $table->unsignedBigInteger('Users_groupId');
             $table->string('username')->unique();
             $table->string('password');
             $table->enum('role',['pegawai','admin','superadmin'] )-> default('admin');
-            $table->string('foto')->nullable();
+            $table->string('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

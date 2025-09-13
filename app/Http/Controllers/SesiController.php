@@ -11,6 +11,7 @@ use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
@@ -35,7 +36,7 @@ class SesiController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:pegawai,admin,superadmin',
-            'nip' => 'required|string|max:20|unique:users',
+            'nip' => 'string|max:20|unique:users',
             'pangkat' => 'required|string|max:255',
             'Users_groupId' => 'required|exists:jabatan,groupId', //bikin pilihan yang diambil dari 'jabatan' user
             
@@ -49,52 +50,20 @@ class SesiController extends Controller
 
         DB::beginTransaction();
 
-        #try {
-            User::create([
-                'nama' => $request->nama,
-                'username' => $request->username,
-                'password' => Crypt::encryptString($request -> password),
-                'role' => $request->role,
-                'nip' => $request->nip,
-                'pangkat' => $request->pangkat,
-                'Users_groupId' => $request->Users_groupId,
-            ]);
+        User::create([
+            'nama' => $request->input('nama'),
+            'username' => $request->input('username'),
+            'password' => Crypt::encryptString($request ->input('password')),
+            'role' => $request->input('role'),
+            'nip' => $request->input('nip'),
+            'pangkat' => $request->input('pangkat'),
+            'Users_groupId' => $request->input('Users_groupId'),
+        ]);
 
-            #if ($request->role == 'superadmin') {
-            #    Atasan::create([
-            #        'nama' => $request->nama,
-            #        'username' => $request->username,
-            #        'password' => Crypt::encryptString($request -> password),
-            #        'role' => $request->role,
-            #        'nip' => $request->nip,
-            #        'pangkat' => $request->pangkat,
-            #        'Users_groupId' => $request->Users_groupId,
-            #    ]);
-            #} else if ($request->role == 'pegawai') { #bagian pegawai tidak bisa masuk ke database kemungkinan karena tidak adanya isi pada foreign key column alias id_atasan
-            #    Pegawai::create([
-            #        'nama' => $request->nama,
-            #        'username' => $request->username,
-            #        'password' => Crypt::encryptString($request -> password),
-            #        'role' => $request->role,
-            #        'nip' => $request->nip,
-            #        'pangkat' => $request->pangkat,
-            #        'Users_groupId' => $request->Users_groupId,
-            #    ]);
-            #}
+        DB::commit();
 
-            DB::commit();
-
-            return redirect()->route('admin-dashboard')->with('success', 'Registration successful! Please login.');
-
-        #tch (\Exception $e) {
-        #    DB::rollback();
-        #s    return response()->json(['message' => 'Registration failed'], 500);
+        return redirect()->route('admin-dashboard')->with('success', 'Registration successful! Please login.');
     }
-
-        //redirect ke halaman login
-        #return redirect()->route('login')->with('success', 'Registration successful! Please login.');
-
-    
     
     function indexSesi()
     {
@@ -112,16 +81,19 @@ class SesiController extends Controller
             'password.required' => 'Password wajib diisi',
         ]);
 
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('username', $request->input('username'))->first();
 
-        if ($user && Crypt::decryptString($user->password) === $request->password) {
+        if ($user && (
+            Hash::check($request->input('password'), $user->password) || ((Crypt::decrypt($user->password) === $request->input('password')) === $request->input('password'))))
+        {
             Auth::login($user);
+
             $role = $user->role;
 
             Session::put('user_id', $user->id_user);
             Session::put('username', $user->username);
             Session::put('user_role', $role);
-            Session::put('Users_groupId', $user-> Users_groupId);
+            Session::put('Users_groupId', $user->Users_groupId);
 
             if ($role === 'superadmin') {
                 return redirect('/atasan/dashboard');
@@ -130,14 +102,14 @@ class SesiController extends Controller
             } elseif ($role === 'pegawai') {
                 return redirect('/pegawai/dashboard');
             }
-
-            // Default redirect if no role matched
-            } else {
+                // Default redirect if no role matched
+                return redirect('/')->withErrors('Role tidak dikenali')->withInput();
+        } else {
                 return redirect('/')->withErrors('Username dan password tidak sesuai')->withInput();
-            }
         }
+    }
 
-    public function logout()
+    function logout()
     {
         Auth::logout();
         Session::flush(); // Menghapus semua data dari session
